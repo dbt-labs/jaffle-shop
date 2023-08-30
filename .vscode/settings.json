@@ -1,0 +1,9 @@
+{
+  "python.analysis.typeCheckingMode": "basic",
+  "sqlfluff.dialect": "snowflake",
+  "sqlfluff.experimental.format.executeInTerminal": true,
+  "[jinja-sql]": {
+    "editor.defaultFormatter": "dorzey.vscode-sqlfluff",
+    "editor.formatOnSave": false
+  }
+}

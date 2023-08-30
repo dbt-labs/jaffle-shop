@@ -1,0 +1,9 @@
+duckdb:
+  outputs:
+    dev:
+      type: duckdb
+      path: "./jaffle_shop.duckdb"
+      database: jaffle_shop
+      schema: analytics
+      threads: 4
+  target: dev

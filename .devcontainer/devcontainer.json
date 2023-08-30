@@ -1,0 +1,23 @@
+{
+  "name": "Python 3",
+  "image": "mcr.microsoft.com/devcontainers/python:0-3.9-bullseye",
+  "features": {
+    "ghcr.io/devcontainers-contrib/features/black:2.0.9": {},
+    "ghcr.io/meaningful-ooo/devcontainer-features/homebrew:2": {},
+    "ghcr.io/devcontainers/features/node:1": {},
+    "ghcr.io/eitsupi/devcontainer-features/go-task:1": {}
+  },
+  "postCreateCommand": "task install",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh"
+      },
+      "extensions": [
+        "dorzey.vscode-sqlfluff",
+        "esbenp.prettier-vscode",
+        "GitHub.codespaces"
+      ]
+    }
+  }
+}
