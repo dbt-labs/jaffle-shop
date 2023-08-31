@@ -4,7 +4,6 @@ tasks:
   venv:
     cmds:
       - python -m venv .venv
-      - source .venv/bin/activate
 
   install-cloud:
     cmds:
