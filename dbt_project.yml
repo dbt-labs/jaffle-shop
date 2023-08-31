@@ -2,11 +2,6 @@ name: "jaffle_shop"
 version: "2.1.0"
 config-version: 2
 
-# If you're using the local Core path leave this as duckdb.
-# If not, you should set your connection via dbt Cloud.
-# If you're working with dbt Core and a cloud warehouse you'll need to setup a profile and configure it below.
-# https://docs.getdbt.com/docs/core/connect-data-platform/connection-profiles
-# The profiles.yml file is committed to the repo, DO NOT commit your credentials, use environment variables and a .env file
 profile: "duckdb"
 require-dbt-version: ">=1.6.0"
 
