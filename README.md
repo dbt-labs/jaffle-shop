@@ -2,6 +2,8 @@
 
 I love to eat jaffles every day!
 
+## Setup
+
 <details>
-<summary>## Testing</summary>
+<summary>**dbt Core**</summary>
 </details>
