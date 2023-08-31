@@ -1,3 +1,7 @@
 # 🥪 The Jaffle Shop 🦘
 
-Sandwiches, beb.
+I love to eat jaffles every day!
+
+<details>
+<summary>## Testing</summary>
+</details>
