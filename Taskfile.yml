@@ -11,7 +11,8 @@ tasks:
       - brew install dbt-cloud-cli
       - python -m pip install --upgrade pip
       - python -m pip install --progress-bar off -r requirements-cloud.txt
-      - if [ -f profiles.yml ]; then rm -f profiles.yml; fi
+      # until SL is in the dbt Cloud CLI mf needs a profile to run
+      # - if [ -f profiles.yml ]; then rm -f profiles.yml; fi
 
   install-core:
     cmds:

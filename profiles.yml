@@ -1,0 +1,22 @@
+duckdb:
+  outputs:
+    dev:
+      type: duckdb
+      path: ./jaffle_shop.duckdb
+      database: jaffle_shop
+      schema: analytics
+      threads: 4
+  target: dev
+
+snowflake:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_SANDBOX_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_SANDBOX_USER') }}"
+      authenticator: externalbrowser
+      database: analytics
+      warehouse: transforming
+      schema: dbt_winnie
+      threads: 8
