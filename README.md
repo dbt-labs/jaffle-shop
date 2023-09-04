@@ -35,7 +35,7 @@ If you know what you're doing, you can use this repo with any local or cloud dat
 3. Run `task venv`.
 4. Run `source `.venv/bin/activate && exec $SHELL`
 5. Run `task install-core`.
-6. [Live your life](https://www.youtube.com/watch?v=koVHN6eO4Xg&t=72s)https://www.youtube.com/watch?v=koVHN6eO4Xg&t=72s!
+6. [Live your life](https://www.youtube.com/watch?v=koVHN6eO4Xg&t=72s)!
 
 ## Project setup
 
@@ -44,4 +44,4 @@ Once your project is set up, use the following steps to get the project ready fo
 1. Run a `dbt seed` to load the sample raw data into your developer schema.
 2. Delete the `jaffle-data` directory to remove the now loaded data from your project codebase.
 3. Run a `dbt build` to build your project.
-4. [Party up](https://www.youtube.com/watch?v=thIVtEOtlWM)https://www.youtube.com/watch?v=thIVtEOtlWM!
+4. [Party up](https://www.youtube.com/watch?v=thIVtEOtlWM)!
