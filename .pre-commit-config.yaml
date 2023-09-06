@@ -1,36 +1,26 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.3.0
+    rev: v4.4.0
     hooks:
       - id: check-yaml
       - id: end-of-file-fixer
       - id: trailing-whitespace
       - id: requirements-txt-fixer
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.0.245
+    rev: v0.0.287
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]
-  - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v8.34.0
-    hooks:
-      - id: eslint
   - repo: https://github.com/sqlfluff/sqlfluff
-    rev: "2.0.0a4"
+    rev: "2.3.1"
     hooks:
       - id: sqlfluff-lint
         additional_dependencies:
-          [
-            "dbt-metricflow[snowflake]~=0.2.0",
-            "sqlfluff-templater-dbt==2.0.0a4",
-          ]
+          ["dbt-metricflow[snowflake]~=0.2.0", "sqlfluff-templater-dbt~=2.3.1"]
       - id: sqlfluff-fix
         additional_dependencies:
-          [
-            "dbt-metricflow[snowflake]~=0.2.0",
-            "sqlfluff-templater-dbt==2.0.0a4",
-          ]
+          ["dbt-metricflow[snowflake]~=0.2.0", "sqlfluff-templater-dbt~=2.3.1"]
   - repo: https://github.com/psf/black
-    rev: "23.1.0"
+    rev: "23.7.0"
     hooks:
       - id: black
