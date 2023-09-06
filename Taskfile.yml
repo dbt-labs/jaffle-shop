@@ -18,7 +18,7 @@ tasks:
     cmds:
       - python -m pip install --upgrade pip
       - python -m pip install --progress-bar off -r requirements-core.txt
-      - if [ -f dbt_cloud.yml ]; then rm -f dbt_cloud.yml; fi
+      # - if [ -f dbt_cloud.yml ]; then rm -f dbt_cloud.yml; fi
 
   setup:
     cmds:
