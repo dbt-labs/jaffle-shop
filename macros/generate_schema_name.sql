@@ -2,8 +2,8 @@
 
     {% set default_schema = target.schema %}
 
-    {# seeds go in a global `raw` schema #}
-    {% if node.resource_type == 'seed' %}
+    {# seeds go in a global `jaffle_shop_raw` schema #}
+    {% if node.resource_type == 'seed' and custom_schema_name is not none %}
         {{ custom_schema_name | trim }}
 
     {# non-specified schemas go to the default target schema #}

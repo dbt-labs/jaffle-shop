@@ -16,10 +16,10 @@ repos:
     hooks:
       - id: sqlfluff-lint
         additional_dependencies:
-          ["dbt-metricflow[snowflake]~=0.2.0", "sqlfluff-templater-dbt~=2.3.1"]
+          ["dbt-metricflow[duckdb]~=0.3.0", "sqlfluff-templater-dbt~=2.3.1"]
       - id: sqlfluff-fix
         additional_dependencies:
-          ["dbt-metricflow[snowflake]~=0.2.0", "sqlfluff-templater-dbt~=2.3.1"]
+          ["dbt-metricflow[duckdb]~=0.3.0", "sqlfluff-templater-dbt~=2.3.1"]
   - repo: https://github.com/psf/black
     rev: "23.7.0"
     hooks:
