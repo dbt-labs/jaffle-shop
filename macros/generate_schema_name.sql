@@ -10,9 +10,14 @@
     {% elif custom_schema_name is none %}
         {{ default_schema }}
 
-    {# specified custom schemas go to the default target schema concatenated with the custom_schema_name #}
+
+    {# specified custom schema names go to the schema name by itself in prod #}
+    {% elif target.name == 'prod' %}
+        {{ custom_schema_name | trim }}
+
+    {# specified custom schemas go to the default target schema for non-prod targets #}
     {% else %}
-        {{ default_schema }}_{{ custom_schema_name | trim }}
+        {{ default_schema }}
     {% endif %}
 
 {% endmacro %}
