@@ -6,4 +6,10 @@ duckdb:
       database: jaffle_shop
       schema: analytics
       threads: 4
+    prod:
+      type: duckdb
+      path: md:jaffle_shop
+      database: jaffle_shop
+      schema: analytics
+      threads: 4
   target: dev
