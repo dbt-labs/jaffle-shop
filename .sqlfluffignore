@@ -1,3 +1,4 @@
 target
 dbt_packages
 macros
+.venv

@@ -23,15 +23,9 @@ renamed as (
         (price / 100.0) as product_price,
 
         ---------- booleans
-        case
-            when type = 'jaffle' then 1
-            else 0
-        end as is_food_item,
+        coalesce(type = 'jaffle', false) as is_food_item,
 
-        case
-            when type = 'beverage' then 1
-            else 0
-        end as is_drink_item
+        coalesce(type = 'beverage', false) as is_drink_item
 
     from source
 

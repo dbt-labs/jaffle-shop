@@ -1,4 +1,4 @@
-with 
+with
 
 order_items as (
 
@@ -8,8 +8,8 @@ order_items as (
 
 
 orders as (
-    
-    select * from {{ ref('stg_orders')}}
+
+    select * from {{ ref('stg_orders') }}
 ),
 
 products as (
@@ -20,19 +20,19 @@ products as (
 
 supplies as (
 
-  select * from {{ ref('stg_supplies') }}
+    select * from {{ ref('stg_supplies') }}
 
 ),
 
 order_supplies_summary as (
 
-  select
-    product_id,
-    sum(supply_cost) as supply_cost
+    select
+        product_id,
+        sum(supply_cost) as supply_cost
 
-  from supplies
+    from supplies
 
-  group by 1
+    group by 1
 ),
 
 joined as (
@@ -46,12 +46,14 @@ joined as (
 
     from order_items
 
-    left join orders on order_items.order_id  = orders.order_id
-    
+    left join orders on order_items.order_id = orders.order_id
+
     left join products on order_items.product_id = products.product_id
-    
-    left join order_supplies_summary on order_items.product_id = order_supplies_summary.product_id
-    
+
+    left join
+        order_supplies_summary
+        on order_items.product_id = order_supplies_summary.product_id
+
 )
 
 select * from joined

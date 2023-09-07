@@ -59,20 +59,3 @@ semantic_models:
       - name: lifetime_spend
         agg: sum
         description: Gross customer lifetime spend inclusive of taxes.
-
-metrics:
-  # Simple metrics
-  - name: customers_with_orders
-    description: "Distict count of customers placing orders"
-    type: simple
-    label: Customers w/ Orders
-    type_params:
-      measure: customers_with_orders
-  - name: new_customer
-    description: Unique count of new customers.
-    label: New Customers
-    type: simple
-    type_params:
-      measure: customers_with_orders
-    filter: |
-      {{ Dimension('customer__customer_type') }}  = 'new'

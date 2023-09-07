@@ -20,7 +20,7 @@ order_items_table as (
 order_summary as (
 
     select
-        customer_id,
+        orders.customer_id,
 
         count(distinct orders.order_id) as count_lifetime_orders,
         count(distinct orders.order_id) > 1 as is_repeat_buyer,
@@ -30,9 +30,11 @@ order_summary as (
         sum(orders.order_total) as lifetime_spend
 
     from orders_table as orders
-    
-    left join order_items_table as order_items on orders.order_id = order_items.order_id
-    
+
+    left join
+        order_items_table as order_items
+        on orders.order_id = order_items.order_id
+
     group by 1
 
 ),
