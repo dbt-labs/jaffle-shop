@@ -21,6 +21,10 @@ vars:
   truncate_timespan_to: "{{ current_timestamp() }}"
   "dbt_date:time_zone": "America/Los_Angeles"
 
+seeds:
+  jaffle_shop:
+    +schema: jaffle_shop_raw
+
 models:
   jaffle_shop:
     staging:

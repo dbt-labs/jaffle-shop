@@ -24,3 +24,4 @@ tasks:
     cmds:
       - dbt deps
       - dbt seed
+      # - rm -rf jaffle-data

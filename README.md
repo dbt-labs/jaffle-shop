@@ -7,9 +7,9 @@ This is a sandbox project for exploring the basic functionality and latest featu
 
 ## Create new repo from template
 
-1. <details> 
+1. <details>
    <summary>Click the green "Use this template" button at the top of the page to create a new repository from this template.</summary>
-   
+
    ![Click 'Use this template'](/.github/static/use-template.gif)
    </details>
 3. Follow the steps to create a new repository.
@@ -25,7 +25,7 @@ This is a sandbox project for exploring the basic functionality and latest featu
 
 1. <details>
    <summary>In the new repository, click the green "Code" button and select "Open with Codespaces" from the dropdown. If possible, open in VSCode locally rather than the web version, performance is significantly better.</summary>
-     
+
    ![Create codespace on main](.github/static/open-codespace.gif)
    </details>
 2. Install the recommend extensions when prompted unless you have set preferences here.
@@ -35,7 +35,7 @@ This is a sandbox project for exploring the basic functionality and latest featu
 
 1. <details>
    <summary>In the new repository, click the green "Code" button and select "Open with Codespaces" from the dropdown. If possible, open in VSCode locally rather than the web version, performance is significantly better.</summary>
-     
+
    ![Create codespace on main](.github/static/open-codespace.gif)
    </details>
 2. Install the recommend extensions when prompted unless you have set preferences here.
@@ -55,7 +55,14 @@ If you know what you're doing, you can use this repo with any local or cloud dat
 
 Once your project is set up, use the following steps to get the project ready for whatever you'd like to do with it.
 
-1. Run `task load-data`.[^4]
+### dbt Cloud IDE
+
+1. Run `dbt seed` to load the sample data into your raw schema.
+2. Delete the `jaffle-data` directory now that the raw data is loaded into the warehouse.
+
+### All other paths
+
+1. Run `task setup`.[^4]
 2. Run a `dbt build` to build your project.
 3. [Party up](https://www.youtube.com/watch?v=thIVtEOtlWM)!
 
