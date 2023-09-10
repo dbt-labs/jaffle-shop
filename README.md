@@ -64,7 +64,7 @@ Once your project is set up, use the following steps to get the project ready fo
 
 1. Run `task setup`.[^4]
 2. Run a `dbt build` to build your project.
-3. [Party up](https://www.youtube.com/watch?v=thIVtEOtlWM)!
+3. [Ready to run](https://www.youtube.com/watch?v=Wu4_zVxmufY&t=234s) whatever you want!
 
 ---
 
