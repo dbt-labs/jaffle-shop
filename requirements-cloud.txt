@@ -1,4 +1,4 @@
-dbt-metricflow[snowflake]~=0.2.0
+dbt-metricflow[snowflake]~=0.3.0
 pre-commit~=3.0.4
-sqlfluff-templater-dbt~=2.3.1
 sqlfluff~=2.3.1
+sqlfluff-templater-dbt~=2.3.1
