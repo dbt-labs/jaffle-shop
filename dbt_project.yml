@@ -2,7 +2,7 @@ name: "jaffle_shop"
 version: "2.1.0"
 config-version: 2
 
-profile: "postgres"
+profile: "snowflake"
 require-dbt-version: ">=1.6.0"
 
 model-paths: ["models"]
