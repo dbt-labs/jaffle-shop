@@ -13,9 +13,6 @@ sources:
           warn_after:
             count: 24
             period: hour
-          # error_after:
-          #   count: 48
-          #   period: hour
         loaded_at_field: ordered_at
       - name: raw_items
         description: Items included in an order
@@ -24,9 +21,6 @@ sources:
           warn_after:
             count: 24
             period: hour
-          # error_after:
-          #   count: 48
-          #   period: hour
         loaded_at_field: opened_at
       - name: raw_products
         description: One record per SKU for items sold in stores

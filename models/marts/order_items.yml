@@ -1,3 +1,11 @@
+models:
+  - name: order_items
+    columns:
+      - name: order_item_id
+        tests:
+          - not_null
+          - unique
+
 semantic_models:
   - name: order_item
     defaults:
