@@ -17,7 +17,7 @@ renamed as (
 
 
         ---------- numerics
-        (cost / 100.0) as supply_cost,
+        (cost / 100) as supply_cost,
 
         ---------- text
         name as supply_name,

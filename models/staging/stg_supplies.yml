@@ -1,5 +1,7 @@
 models:
   - name: stg_supplies
+    config: 
+      unique_key: supply_uuid
     description: >
       List of our supply expenses data with basic cleaning and transformation applied.
 

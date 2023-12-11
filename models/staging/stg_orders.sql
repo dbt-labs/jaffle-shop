@@ -1,3 +1,9 @@
+{{
+  config(
+    unique_key = 'order_id',
+    )
+}}
+
 with
 
 source as (
