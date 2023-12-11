@@ -1,3 +1,9 @@
+{{
+  config(
+    unique_key = 'order_id',
+    )
+}}
+
 with
 
 source as (
@@ -23,7 +29,8 @@ renamed as (
         (tax_paid / 100.0) as tax_paid,
 
         ---------- timestamps
-        {{ dbt.date_trunc('day','ordered_at') }} as ordered_at
+        {{ dbt.date_trunc('day','ordered_at') }} as ordered_at,
+        'dave' as friend
 
     from source
 

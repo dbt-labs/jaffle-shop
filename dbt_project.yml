@@ -17,6 +17,9 @@ clean-targets:
   - "target"
   - "dbt_packages"
 
+dbt-cloud: 
+  project-id: 283328
+
 vars:
   truncate_timespan_to: "{{ current_timestamp() }}"
   "dbt_date:time_zone": "America/Los_Angeles"
