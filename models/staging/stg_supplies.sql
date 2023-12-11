@@ -15,12 +15,12 @@ renamed as (
         id as supply_id,
         sku as product_id,
 
-        ---------- text
-        name as supply_name,
 
         ---------- numerics
         (cost / 100.0) as supply_cost,
 
+        ---------- text
+        name as supply_name,
         ---------- booleans
         perishable as is_perishable_supply
 
