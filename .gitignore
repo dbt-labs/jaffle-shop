@@ -13,3 +13,6 @@ logs/
 *.duckdb-wal
 *.db
 *.db-wal
+
+package-lock.yml
+state/manifest.json

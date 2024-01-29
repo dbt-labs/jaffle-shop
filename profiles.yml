@@ -1,0 +1,63 @@
+duckdb:
+  outputs:
+    dev:
+      type: duckdb
+      path: ./jaffle_shop.duckdb
+      database: jaffle_shop
+      schema: analytics
+      threads: 4
+  target: dev
+
+snowflake:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_SANDBOX_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_SANDBOX_USER') }}"
+      authenticator: externalbrowser
+      database: analytics
+      warehouse: transforming
+      schema: dbt_winnie
+      threads: 8
+    prod:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_SANDBOX_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_SANDBOX_USER') }}"
+      authenticator: externalbrowser
+      database: analytics
+      warehouse: transforming
+      schema: dx_sandbox_prod
+      threads: 8
+
+postgres:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: "{{ env_var('DX_SANDBOX_POSTGRES_HOST') }}"
+      port: 5432
+      user: winnie
+      role: transformer
+      password: "{{ env_var('DX_SANDBOX_POSTGRES_PASSWORD') }}"
+      database: jaffle_shop
+      schema: dbt_winnie
+      threads: 1
+    blue:
+      type: postgres
+      dbname: 'postgres'
+      host: 'localhost'
+      port: 5432
+      schema: dbt_blue
+      threads: 5
+      user: 'root'
+      password: 'password'
+    green:
+      type: postgres
+      dbname: 'postgres'
+      host: 'localhost'
+      port: 5432
+      schema: dbt_green
+      threads: 5
+      user: 'root'
+      password: 'password'
