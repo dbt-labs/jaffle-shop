@@ -1,0 +1,42 @@
+name: Replicate dbt Cloud Jobs from YAML
+run-name: Running dbt-jobs-as-code to replicate dbt Cloud jobs from YAML
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+
+jobs:
+  run-python-script:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9.x"
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-in-project: true
+
+      # Optional
+      # You can do a git clone every time or you can just download the repo in your project and commit it
+      # If you saved the files in your repo, you can comment the 2 lines below
+      - name: Clone the repo with dbt-jobs-as-code
+        run: git clone -b v0.2.0 --depth 1 https://github.com/dbt-labs/dbt-jobs-as-code.git
+
+      - name: Install dbt-jobs-as-code package
+        run: poetry install -C dbt-jobs-as-code --no-interaction -vvv
+
+      - name: Run dbt-jobs-as-code
+        run: poetry run -C dbt-jobs-as-code dbt-jobs-as-code sync jobs/jobs.yml
+        env: 
+          DBT_API_KEY: "${{secrets.DBT_API_KEY}}"
+          # DBT_BASE_URL is optional
+          # DBT_BASE_URL: "${{secrets.DBT_BASE_URL}}"

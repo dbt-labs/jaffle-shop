@@ -1,0 +1,30 @@
+jobs:
+  job1:
+    account_id: 222529
+    project_id: 176941
+    environment_id: 278734
+
+    dbt_version: null
+    deferring_job_definition_id: null
+
+    execute_steps:
+    - "dbt run --select model1"
+
+    execution:
+      timeout_seconds: 0
+    generate_docs: false
+    name: "My Job created from Git Action"
+
+    run_generate_sources: true
+    schedule:
+      cron: "0 */2 * * *"
+    settings:
+      target_name: production
+      threads: 4
+    state: 1
+    triggers:
+      custom_branch_only: true
+      git_provider_webhook: false
+      github_webhook: false
+      schedule: true
+    custom_environment_variables: null
