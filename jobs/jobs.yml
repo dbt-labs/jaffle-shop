@@ -23,7 +23,7 @@ jobs:
       threads: 4
     state: 1
     triggers:
-      custom_branch_only: true
+      custom_branch_only: false
       git_provider_webhook: false
       github_webhook: false
       schedule: true
