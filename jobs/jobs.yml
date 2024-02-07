@@ -1,7 +1,7 @@
 jobs:
   job1:
     account_id: 222529
-    project_id: 176941
+    project_id: 319573
     environment_id: 278734
 
     dbt_version: null
