@@ -3,25 +3,17 @@ version: "3"
 tasks:
   venv:
     cmds:
-      - python -m venv .venv
+      - python3 -m venv .venv
 
-  install-cloud:
+  install:
     cmds:
-      - brew tap dbt-labs/dbt-cli
-      - brew install dbt-cloud-cli
-      - python -m pip install --upgrade pip
-      - python -m pip install --progress-bar off -r requirements-cloud.txt
-      # until SL is in the dbt Cloud CLI mf needs a profile to run
-      # - if [ -f profiles.yml ]; then rm -f profiles.yml; fi
-
-  install-core:
-    cmds:
-      - python -m pip install --upgrade pip
-      - python -m pip install --progress-bar off -r requirements-core.txt
-      # - if [ -f dbt_cloud.yml ]; then rm -f dbt_cloud.yml; fi
+      - python3 -m pip install --upgrade pip
+      - python3 -m pip install --progress-bar off -- -r requirements.txt
 
   setup:
     cmds:
       - dbt deps
       - dbt seed
-      # - rm -rf jaffle-data
+      - rm -rf jaffle-data
+      - dbt run
+      - dbt test

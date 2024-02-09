@@ -1,9 +1,11 @@
-name: "jaffle_shop"
-version: "2.1.0"
 config-version: 2
 
-profile: "snowflake"
-require-dbt-version: ">=1.6.0"
+name: "jaffle_shop"
+version: "3.0.0"
+require-dbt-version: ">=1.7.1"
+
+dbt-cloud:
+  project-id: 283328 # Put your project id here
 
 model-paths: ["models"]
 analysis-paths: ["analyses"]

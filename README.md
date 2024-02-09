@@ -2,9 +2,6 @@
 
 This is a sandbox project for exploring the basic functionality and latest features of dbt. It's based on a fictional restaurant called the Jaffle Shop that serves [jaffles](https://en.wikipedia.org/wiki/Pie_iron). Enjoy!
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/dbt-labs/jaffle-shop?quickstart=1)  
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/dbt-labs/jaffle-shop)
-
 ## Create new repo from template
 
 1. <details>
@@ -12,63 +9,57 @@ This is a sandbox project for exploring the basic functionality and latest featu
 
    ![Click 'Use this template'](/.github/static/use-template.gif)
    </details>
-3. Follow the steps to create a new repository.
+
+2. Follow the steps to create a new repository.
 
 ## Platform setup
 
 ### dbt Cloud IDE (most beginner friendly)
+
 1. Set up a dbt Cloud account and follow Step 4 in the [Quickstart instructions for your data platform](https://docs.getdbt.com/quickstarts), to connect your platform to dbt Cloud.
+
 2. Choose the repo you created in Step 1 as the repository for your dbt Project code.
+
 3. Click `Develop` in the top nav, you should be prompted to run a `dbt deps`, which you should do.
 
-### dbt Cloud in GitHub Codespaces (more customizable)
+### dbt Cloud CLI (if you prefer to work locally)
 
-1. <details>
-   <summary>In the new repository, click the green "Code" button and select "Open with Codespaces" from the dropdown. If possible, open in VSCode locally rather than the web version, performance is significantly better.</summary>
+> If you'd like to use the dbt Cloud CLI, but are a little intimidated by the terminal, we've included a task runner called, fittingly, `task`. It's a simple way to run the commands you need to get started with dbt. You can install it by following the instructions [here](https://taskfile.dev/#/installation). We'll call out the `task` based alternative to each command below.
 
-   ![Create codespace on main](.github/static/open-codespace.gif)
-   </details>
-2. Install the recommend extensions when prompted unless you have set preferences here.
-3. Run `task install-cloud`[^1] in the integrated terminal.
+1. Run `git clone [new repo name]` to clone your new repo to your local machine.
 
-### dbt Core with DuckDB in GitHub Codespaces (think local, act global)
+2. Set up a virtual environment and activate it. I like to call my virtual environment `.venv` and add it to my `.gitignore` file (we've already done this if you name your virtual environment '.venv') so that I don't accidentally commit it to the repository, but you can call it whatever you want.
 
-1. <details>
-   <summary>In the new repository, click the green "Code" button and select "Open with Codespaces" from the dropdown. If possible, open in VSCode locally rather than the web version, performance is significantly better.</summary>
+   ```shell
+   python3 -m venv .venv # create a virtual environment
+   OR
+   task venv # create a virtual environment
 
-   ![Create codespace on main](.github/static/open-codespace.gif)
-   </details>
-2. Install the recommend extensions when prompted unless you have set preferences here.
-3. Run `task install-core`[^2] in the integrated terminal.
+   source .venv/bin/activate # activate the virtual environment
+   ```
 
-### dbt Core with other platforms (choose your own adventure)
+3. Install the project's requirements into your virtual environment.
 
-If you know what you're doing, you can use this repo with any local or cloud database with a dbt adapter. We can't offer support for this setup, but the general steps should be as follows:
+   ```shell
+   python3 -m pip install -r requirements.txt # install the project's requirements
+   OR
+   task install # install the project's requirements
+   ```
 
-1. Clone the new repository to your local machine or open it in a GitHub Codespace.
-2. Run `task venv`.[^3]
-3. Run `source .venv/bin/activate && exec $SHELL`
-4. Run `task install-core`.[^2]
-5. [Live your life](https://www.youtube.com/watch?v=koVHN6eO4Xg&t=72s)!
+4. [Follow steps 2 and 3 on this page](https://cloud.getdbt.com/cloud-cli) to setup dbt Cloud CLI's connection to dbt Cloud, only if you haven't already done so (we handled step 1 above and will do step 4 together next).
+
+5. Double check that your `dbt_project.yml` is set up correctly by running `dbt list`. You should get back a list of models and tests in your project.
 
 ## Project setup
 
-Once your project is set up, use the following steps to get the project ready for whatever you'd like to do with it.
+Once your development platform of choice is set up, use the following steps to get the project ready for whatever you'd like to do with it.
 
-### dbt Cloud IDE
+1. Run `task setup`.
 
-1. Run `dbt seed` to load the sample data into your raw schema.
+#### OR
+
+1. Run `dbt build` to load the sample data into your raw schema, build your models, and test your project.
+
 2. Delete the `jaffle-data` directory now that the raw data is loaded into the warehouse.
 
-### All other paths
-
-1. Run `task setup`.[^4]
-2. Run a `dbt build` to build your project.
-3. [Ready to run](https://www.youtube.com/watch?v=Wu4_zVxmufY&t=234s) whatever you want!
-
----
-
-[^1]: This will install the dbt Cloud CLI [currently in beta] as well as the python packages necessary for running MetricFlow queries, linting your code, and other tasks.
-[^2]: This will install dbt Core and the DuckDB adapter as well as the python packages necessary for running MetricFlow queries, linting your code, and other tasks.
-[^3]: This will create a virtual environment called `.venv`.
-[^4]: This will run a `dbt seed` then `rm -rf jaffle-data`, deleting the sample data now that it's loaded into your raw schema.
+Have fun exploring dbt! 🎉
