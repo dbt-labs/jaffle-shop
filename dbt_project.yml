@@ -23,6 +23,7 @@ vars:
 
 seeds:
   jaffle_shop:
+    +enabled: "{{ target.name != 'prod' }}"
     +schema: jaffle_shop_raw
 
 models:
