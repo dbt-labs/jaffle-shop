@@ -17,59 +17,39 @@ This is a sandbox project for exploring the basic functionality and latest featu
 ### dbt Cloud IDE (most beginner friendly)
 
 1. Set up a dbt Cloud account and follow Step 4 in the [Quickstart instructions for your data platform](https://docs.getdbt.com/quickstarts), to connect your platform to dbt Cloud.
+
 2. Choose the repo you created in Step 1 as the repository for your dbt Project code.
+
 3. Click `Develop` in the top nav, you should be prompted to run a `dbt deps`, which you should do.
 
-### dbt Cloud in GitHub Codespaces (more customizable)
+### dbt Cloud CLI (if you prefer to work locally)
 
-1. <details>
-   <summary>In the new repository, click the green "Code" button and select "Open with Codespaces" from the dropdown. If possible, open in VSCode locally rather than the web version, performance is significantly better.</summary>
+1. Run `git clone [new repo name]` to clone your new repo to your local machine.
 
-   ![Create codespace on main](.github/static/open-codespace.gif)
-   </details>
+2. Set up a virtual environment and activate it. I like to call my virtual environment `.venv` and add it to my `.gitignore` file so that I don't accidentally commit it to the repository, but you can call it whatever you want.
 
-2. Install the recommend extensions when prompted unless you have set preferences here.
-3. Run `task install-cloud`[^1] in the integrated terminal.
+   ```shell
+   python3 -m venv .venv
 
-### dbt Core with DuckDB in GitHub Codespaces (think local, act global)
+   source .venv/bin/activate
+   ```
 
-1. <details>
-   <summary>In the new repository, click the green "Code" button and select "Open with Codespaces" from the dropdown. If possible, open in VSCode locally rather than the web version, performance is significantly better.</summary>
+3. Install the project's requirements into your virtual environment.
 
-   ![Create codespace on main](.github/static/open-codespace.gif)
-   </details>
+   ```shell
+   python3 -m pip install -r requirements.txt
+   ```
 
-2. Install the recommend extensions when prompted unless you have set preferences here.
-3. Run `task install-core`[^2] in the integrated terminal.
+4. Follow steps 2 and 3 to setup dbt Cloud CLI's connection to dbt Cloud, only if you haven't already done so (we handled step 1 above and will do step 4 together next).
 
-### dbt Core with other platforms (choose your own adventure)
-
-If you know what you're doing, you can use this repo with any local or cloud database with a dbt adapter. We can't offer support for this setup, but the general steps should be as follows:
-
-1. Clone the new repository to your local machine or open it in a GitHub Codespace.
-2. Run `task venv`.[^3]
-3. Run `source .venv/bin/activate && exec $SHELL`
-4. Run `task install-core`.[^2]
-5. [Live your life](https://www.youtube.com/watch?v=koVHN6eO4Xg&t=72s)!
+5. Double check that your `dbt_project.yml` is set up correctly by running `dbt list`. You should get back a list of models and tests in your project.
 
 ## Project setup
 
-Once your project is set up, use the following steps to get the project ready for whatever you'd like to do with it.
+Once your development platform of choice is set up, use the following steps to get the project ready for whatever you'd like to do with it.
 
-### dbt Cloud IDE
+1. Run `dbt build` to load the sample data into your raw schema, build your models, and test your project.
 
-1. Run `dbt seed` to load the sample data into your raw schema.
 2. Delete the `jaffle-data` directory now that the raw data is loaded into the warehouse.
 
-### All other paths
-
-1. Run `task setup`.[^4]
-2. Run a `dbt build` to build your project.
-3. [Ready to run](https://www.youtube.com/watch?v=Wu4_zVxmufY&t=234s) whatever you want!
-
----
-
-[^1]: This will install the dbt Cloud CLI [currently in beta] as well as the python packages necessary for running MetricFlow queries, linting your code, and other tasks.
-[^2]: This will install dbt Core and the DuckDB adapter as well as the python packages necessary for running MetricFlow queries, linting your code, and other tasks.
-[^3]: This will create a virtual environment called `.venv`.
-[^4]: This will run a `dbt seed` then `rm -rf jaffle-data`, deleting the sample data now that it's loaded into your raw schema.
+3. Have fun!
