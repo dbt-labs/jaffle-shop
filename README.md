@@ -46,7 +46,7 @@ This is a sandbox project for exploring the basic functionality and latest featu
    task install # install the project's requirements
    ```
 
-4. Follow steps 2 and 3 to setup dbt Cloud CLI's connection to dbt Cloud, only if you haven't already done so (we handled step 1 above and will do step 4 together next).
+4. [Follow steps 2 and 3 on this page](https://cloud.getdbt.com/cloud-cli) to setup dbt Cloud CLI's connection to dbt Cloud, only if you haven't already done so (we handled step 1 above and will do step 4 together next).
 
 5. Double check that your `dbt_project.yml` is set up correctly by running `dbt list`. You should get back a list of models and tests in your project.
 
