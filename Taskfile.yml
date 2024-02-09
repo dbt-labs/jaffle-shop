@@ -3,15 +3,17 @@ version: "3"
 tasks:
   venv:
     cmds:
-      - python -m venv .venv
+      - python3 -m venv .venv
 
   install:
     cmds:
-      - python -m pip install --upgrade pip
-      - python -m pip install --progress-bar off -- -r requirements.txt
+      - python3 -m pip install --upgrade pip
+      - python3 -m pip install --progress-bar off -- -r requirements.txt
 
   setup:
     cmds:
       - dbt deps
       - dbt seed
-      # - rm -rf jaffle-data
+      - rm -rf jaffle-data
+      - dbt run
+      - dbt test

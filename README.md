@@ -24,20 +24,26 @@ This is a sandbox project for exploring the basic functionality and latest featu
 
 ### dbt Cloud CLI (if you prefer to work locally)
 
+> If you'd like to use the dbt Cloud CLI, but are a little intimidated by the terminal, we've included a task runner called, fittingly, `task`. It's a simple way to run the commands you need to get started with dbt. You can install it by following the instructions [here](https://taskfile.dev/#/installation). We'll call out the `task` based alternative to each command below.
+
 1. Run `git clone [new repo name]` to clone your new repo to your local machine.
 
-2. Set up a virtual environment and activate it. I like to call my virtual environment `.venv` and add it to my `.gitignore` file so that I don't accidentally commit it to the repository, but you can call it whatever you want.
+2. Set up a virtual environment and activate it. I like to call my virtual environment `.venv` and add it to my `.gitignore` file (we've already done this if you name your virtual environment '.venv') so that I don't accidentally commit it to the repository, but you can call it whatever you want.
 
    ```shell
-   python3 -m venv .venv
+   python3 -m venv .venv # create a virtual environment
+   OR
+   task venv # create a virtual environment
 
-   source .venv/bin/activate
+   source .venv/bin/activate # activate the virtual environment
    ```
 
 3. Install the project's requirements into your virtual environment.
 
    ```shell
-   python3 -m pip install -r requirements.txt
+   python3 -m pip install -r requirements.txt # install the project's requirements
+   OR
+   task install # install the project's requirements
    ```
 
 4. Follow steps 2 and 3 to setup dbt Cloud CLI's connection to dbt Cloud, only if you haven't already done so (we handled step 1 above and will do step 4 together next).
@@ -48,8 +54,12 @@ This is a sandbox project for exploring the basic functionality and latest featu
 
 Once your development platform of choice is set up, use the following steps to get the project ready for whatever you'd like to do with it.
 
+1. Run `task setup`.
+
+#### OR
+
 1. Run `dbt build` to load the sample data into your raw schema, build your models, and test your project.
 
 2. Delete the `jaffle-data` directory now that the raw data is loaded into the warehouse.
 
-3. Have fun!
+Have fun exploring dbt! 🎉
