@@ -4,6 +4,10 @@ sources:
   - name: ecom
     schema: jaffle_shop_raw
     description: E-commerce data for the Jaffle Shop
+    freshness:
+      warn_after:
+        count: 10
+        period: day
     tables:
       - name: raw_customers
         description: One record per person who has purchased one or more items
