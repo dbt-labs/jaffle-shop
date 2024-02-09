@@ -2,9 +2,6 @@
 
 This is a sandbox project for exploring the basic functionality and latest features of dbt. It's based on a fictional restaurant called the Jaffle Shop that serves [jaffles](https://en.wikipedia.org/wiki/Pie_iron). Enjoy!
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/dbt-labs/jaffle-shop?quickstart=1)  
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/dbt-labs/jaffle-shop)
-
 ## Create new repo from template
 
 1. <details>
@@ -12,11 +9,13 @@ This is a sandbox project for exploring the basic functionality and latest featu
 
    ![Click 'Use this template'](/.github/static/use-template.gif)
    </details>
-3. Follow the steps to create a new repository.
+
+2. Follow the steps to create a new repository.
 
 ## Platform setup
 
 ### dbt Cloud IDE (most beginner friendly)
+
 1. Set up a dbt Cloud account and follow Step 4 in the [Quickstart instructions for your data platform](https://docs.getdbt.com/quickstarts), to connect your platform to dbt Cloud.
 2. Choose the repo you created in Step 1 as the repository for your dbt Project code.
 3. Click `Develop` in the top nav, you should be prompted to run a `dbt deps`, which you should do.
@@ -28,6 +27,7 @@ This is a sandbox project for exploring the basic functionality and latest featu
 
    ![Create codespace on main](.github/static/open-codespace.gif)
    </details>
+
 2. Install the recommend extensions when prompted unless you have set preferences here.
 3. Run `task install-cloud`[^1] in the integrated terminal.
 
@@ -38,6 +38,7 @@ This is a sandbox project for exploring the basic functionality and latest featu
 
    ![Create codespace on main](.github/static/open-codespace.gif)
    </details>
+
 2. Install the recommend extensions when prompted unless you have set preferences here.
 3. Run `task install-core`[^2] in the integrated terminal.
 
