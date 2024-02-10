@@ -7,9 +7,12 @@ require-dbt-version: ">=1.7.1"
 dbt-cloud:
   project-id: 283328 # Put your project id here
 
+# This is for SQLFluff's dbt templater to use
+profile: snowflake
+
 model-paths: ["models"]
 analysis-paths: ["analyses"]
-test-paths: ["tests"]
+test-paths: ["data-tests"]
 seed-paths: ["jaffle-data"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
