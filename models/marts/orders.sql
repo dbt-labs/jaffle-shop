@@ -6,7 +6,7 @@ orders as (
 
 ),
 
-order_items_table as (
+order_items as (
 
     select * from {{ ref('order_items') }}
 
@@ -24,7 +24,7 @@ order_items_summary as (
 
         sum(supply_cost) as order_cost
 
-    from order_items_table
+    from order_items
 
     group by 1
 

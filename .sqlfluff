@@ -1,6 +1,6 @@
 [sqlfluff]
 dialect = snowflake
-templater = dbt
+templater = jinja
 runaway_limit = 10
 max_line_length = 80
 indent_unit = space
@@ -12,7 +12,7 @@ tab_space_size = 4
 spacing_before = touch
 line_position = trailing
 
-[sqlfluff:rules:capitalisation.keywords] 
+[sqlfluff:rules:capitalisation.keywords]
 capitalisation_policy = lower
 
 [sqlfluff:rules:aliasing.table]

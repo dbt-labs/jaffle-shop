@@ -24,6 +24,38 @@ models:
       - name: is_drink_order
         description: A boolean indicating if this order included any drink items.
 
+unit_tests:
+  - name: test_order_items_compute_to_bools_correctly
+    description: "Test that the counts of drinks and food orders convert to booleans properly."
+    model: orders
+    given:
+      - input: ref('stg_orders')
+        rows:
+          - {
+              order_id: 1,
+              store_id: 1,
+              customer_id: 1,
+              order_total: 35.67,
+              tax_paid: 1.02,
+              ordered_at: 2022-01-01,
+            }
+          - {
+              order_id: 2,
+              store_id: 2,
+              customer_id: 2,
+              order_total: 12.34,
+              tax_paid: 3.02,
+              ordered_at: 2023-01-01,
+            }
+      - input: ref('order_items')
+        rows:
+          - {
+              fixture_field_1: fixture_value_1,
+              fixture_field_2: fixture_value_2,
+            }
+    expect:
+      rows:
+        - { output_field_1: output_value_1, output_field_2: output_value_2 }
 semantic_models:
   - name: orders
     defaults:
