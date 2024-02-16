@@ -29,33 +29,46 @@ unit_tests:
     description: "Test that the counts of drinks and food orders convert to booleans properly."
     model: orders
     given:
-      - input: ref('stg_orders')
-        rows:
-          - {
-              order_id: 1,
-              store_id: 1,
-              customer_id: 1,
-              order_total: 35.67,
-              tax_paid: 1.02,
-              ordered_at: 2022-01-01,
-            }
-          - {
-              order_id: 2,
-              store_id: 2,
-              customer_id: 2,
-              order_total: 12.34,
-              tax_paid: 3.02,
-              ordered_at: 2023-01-01,
-            }
       - input: ref('order_items')
         rows:
           - {
-              fixture_field_1: fixture_value_1,
-              fixture_field_2: fixture_value_2,
+              order_id: 1,
+              order_item_id: 1,
+              is_drink_item: false,
+              is_food_item: true,
             }
+          - {
+              order_id: 1,
+              order_item_id: 2,
+              is_drink_item: true,
+              is_food_item: false,
+            }
+          - {
+              order_id: 2,
+              order_item_id: 3,
+              is_drink_item: false,
+              is_food_item: true,
+            }
+      - input: ref('stg_orders')
+        rows:
+          - { order_id: 1 }
+          - { order_id: 2 }
     expect:
       rows:
-        - { output_field_1: output_value_1, output_field_2: output_value_2 }
+        - {
+            order_id: 1,
+            count_food_items: 1,
+            count_drink_items: 1,
+            is_drink_order: true,
+            is_food_order: true,
+          }
+        - {
+            order_id: 2,
+            count_food_items: 1,
+            count_drink_items: 0,
+            is_drink_order: false,
+            is_food_order: true,
+          }
 semantic_models:
   - name: orders
     defaults:
