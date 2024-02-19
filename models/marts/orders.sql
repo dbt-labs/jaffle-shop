@@ -31,8 +31,8 @@ order_items_summary as (
 ),
 
 compute_booleans as (
-    select
 
+    select
         orders.*,
         order_items_summary.order_cost,
         order_items_summary.count_food_items > 0 as is_food_order,
@@ -43,6 +43,7 @@ compute_booleans as (
     left join
         order_items_summary
         on orders.order_id = order_items_summary.order_id
+
 )
 
 select * from compute_booleans
