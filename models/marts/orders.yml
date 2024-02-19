@@ -69,6 +69,7 @@ unit_tests:
             is_drink_order: false,
             is_food_order: true,
           }
+
 semantic_models:
   - name: orders
     defaults:
