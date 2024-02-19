@@ -15,7 +15,6 @@ order_items as (
 order_items_summary as (
 
     select
-
         order_id,
         sum(case when is_food_item then 1 else 0 end)
             as count_food_items,
@@ -29,7 +28,6 @@ order_items_summary as (
     group by 1
 
 ),
-
 
 compute_booleans as (
     select
