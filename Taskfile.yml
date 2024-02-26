@@ -11,17 +11,9 @@ tasks:
       - python3 -m pip install --progress-bar off -- -r requirements.txt
 
   setup:
-    desc: initial project setup
     cmds:
       - dbt deps
       - dbt seed
       - rm -rf jaffle-data
       - dbt run
       - dbt test
-
-  t:
-    desc: transform the data
-    cmds:
-      - dbt build --exclude resource_type:seed
-      # we don't need to reseed the sample data,
-      # this is much faster without them
