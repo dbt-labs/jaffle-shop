@@ -1,7 +1,6 @@
-![Jaffle](https://github.com/dbt-labs/jaffle-shop/assets/91998347/bfba27af-04bf-48fb-8a2d-99a1965a9a25)
-
-
 # 🥪 The Jaffle Shop 🦘
+
+![Jaffle Shop Logo](https://github.com/dbt-labs/jaffle-shop/assets/91998347/bfba27af-04bf-48fb-8a2d-99a1965a9a25)
 
 This is a sandbox project for exploring the basic functionality and latest features of dbt. It's based on a fictional restaurant called the Jaffle Shop that serves [jaffles](https://en.wikipedia.org/wiki/Pie_iron). Enjoy!
 
@@ -63,6 +62,6 @@ Once your development platform of choice is set up, use the following steps to g
 
 1. Run `dbt build` to load the sample data into your raw schema, build your models, and test your project.
 
-2. Delete the `jaffle-data` directory now that the raw data is loaded into the warehouse.
+2. Delete the `jaffle-data` directory now that the raw data is loaded into the warehouse. It will be loaded into a `raw_jaffle_shop` schema in your warehouse. That both `dev` and `prod` targets are set up to use. Take a look at the `generate_schema_name` macro in the `macros` directory to if you're curious how this is done.
 
 Have fun exploring dbt! 🎉

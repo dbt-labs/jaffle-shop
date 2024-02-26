@@ -120,10 +120,10 @@ metrics:
     label: Order Total
     type_params:
       measure: order_total
-  - name: large_orders
+  - name: large_order
     description: "Count of orders with order total over 20."
     type: simple
-    label: Large Orders
+    label: "Large Orders"
     type_params:
       measure: order_count
     filter: |
