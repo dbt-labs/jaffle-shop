@@ -24,6 +24,52 @@ models:
       - name: is_drink_order
         description: A boolean indicating if this order included any drink items.
 
+unit_tests:
+  - name: test_order_items_compute_to_bools_correctly
+    description: "Test that the counts of drinks and food orders convert to booleans properly."
+    model: orders
+    given:
+      - input: ref('order_items')
+        rows:
+          - {
+              order_id: 1,
+              order_item_id: 1,
+              is_drink_item: false,
+              is_food_item: true,
+            }
+          - {
+              order_id: 1,
+              order_item_id: 2,
+              is_drink_item: true,
+              is_food_item: false,
+            }
+          - {
+              order_id: 2,
+              order_item_id: 3,
+              is_drink_item: false,
+              is_food_item: true,
+            }
+      - input: ref('stg_orders')
+        rows:
+          - { order_id: 1 }
+          - { order_id: 2 }
+    expect:
+      rows:
+        - {
+            order_id: 1,
+            count_food_items: 1,
+            count_drink_items: 1,
+            is_drink_order: true,
+            is_food_order: true,
+          }
+        - {
+            order_id: 2,
+            count_food_items: 1,
+            count_drink_items: 0,
+            is_drink_order: false,
+            is_food_order: true,
+          }
+
 semantic_models:
   - name: orders
     defaults:
@@ -74,10 +120,10 @@ metrics:
     label: Order Total
     type_params:
       measure: order_total
-  - name: large_order
+  - name: large_orders
     description: "Count of orders with order total over 20."
     type: simple
-    label: "Large Orders"
+    label: Large Orders
     type_params:
       measure: order_count
     filter: |
