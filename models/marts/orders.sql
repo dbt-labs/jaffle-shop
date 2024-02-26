@@ -30,6 +30,7 @@ order_items_summary as (
 
 ),
 
+
 compute_booleans as (
     select
 
