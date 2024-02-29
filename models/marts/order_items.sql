@@ -36,6 +36,7 @@ order_supplies_summary as (
 ),
 
 joined as (
+
     select
         order_items.*,
         products.product_name,

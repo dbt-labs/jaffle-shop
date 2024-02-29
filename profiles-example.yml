@@ -1,0 +1,19 @@
+# dbt Cloud CLI does not use a profiles.yml file.
+# We need one for sqlfluff to run the dbt templater in CI,
+# which utilizes dbt-core internally.
+
+your-profile-name:
+  target: dev # this is the default if no target is specified
+  # since this is just for the linter we'll just have one default dev target
+  outputs:
+    dev:
+      type: # snowflake, bigquery, etc
+      account: # if you're going to commit your profile make this an env var like below
+      user: #"{{ env_var('SNOWFLAKE_SANDBOX_USER') }}"
+      authenticator: externalbrowser # prefer not using a password, if you do make it an env var
+      database: analytics # database to target
+      warehouse: transforming # the compute if needed for your platform
+      # you can find more about the configs for your platform here:
+      # https://docs.getdbt.com/docs/trusted-adapters
+      schema: # give this a descriptive name like dbt_your_name
+      threads: 8 # generally go as high as your platform will support, this would be fine much higher
