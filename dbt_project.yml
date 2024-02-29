@@ -8,7 +8,7 @@ dbt-cloud:
   project-id: 283328 # Put your project id here
 # dbt Cloud CLI does not use a profiles.yml, this is for
 # SQLFluff's dbt templater
-profile: snowflake
+profile: snowflake #Put your profile name here
 
 model-paths: ["models"]
 analysis-paths: ["analyses"]
