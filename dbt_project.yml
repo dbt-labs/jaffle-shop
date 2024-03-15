@@ -9,7 +9,7 @@ dbt-cloud:
 
 model-paths: ["models"]
 analysis-paths: ["analyses"]
-test-paths: ["tests"]
+test-paths: ["data-tests"]
 seed-paths: ["jaffle-data"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
