@@ -7,26 +7,26 @@ repos:
       - id: trailing-whitespace
       - id: requirements-txt-fixer
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.2.1
+    rev: v0.3.3
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]
   - repo: https://github.com/sqlfluff/sqlfluff
-    rev: "2.3.5"
+    rev: "3.0.1"
     hooks:
       - id: sqlfluff-lint
         additional_dependencies:
           [
-            "dbt-metricflow[duckdb,snowflake,postgres]~=0.5.0",
-            "sqlfluff-templater-dbt~=2.3.5",
+            "dbt-metricflow[duckdb,snowflake,postgres]~=0.6.0",
+            "sqlfluff-templater-dbt~=3.0.1",
           ]
       - id: sqlfluff-fix
         additional_dependencies:
           [
-            "dbt-metricflow[duckdb,snowflake,postgres]~=0.5.0",
-            "sqlfluff-templater-dbt~=2.3.5",
+            "dbt-metricflow[duckdb,snowflake,postgres]~=0.6.0",
+            "sqlfluff-templater-dbt~=3.0.1",
           ]
   - repo: https://github.com/psf/black
-    rev: "24.2.0"
+    rev: "24.3.0"
     hooks:
       - id: black
