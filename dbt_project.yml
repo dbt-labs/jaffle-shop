@@ -20,7 +20,7 @@ clean-targets:
   - "dbt_packages"
 
 vars:
-  truncate_timespan_to: "{{ current_timestamp() }}"
+  truncate_timespan_to: "cast({{ dbt_date.now() }} as datetime)"
   "dbt_date:time_zone": "America/Los_Angeles"
 
 seeds:
