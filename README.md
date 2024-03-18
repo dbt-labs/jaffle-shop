@@ -16,13 +16,13 @@ This is a sandbox project for exploring the basic functionality and latest featu
 
 ## Platform setup
 
+1. Set up a dbt Cloud account and follow Step 4 in the [Quickstart instructions for your data platform](https://docs.getdbt.com/quickstarts), to connect your platform to dbt Cloud, then follow one of the two paths below to set up your development environment.
+
 ### dbt Cloud IDE (most beginner friendly)
 
-1. Set up a dbt Cloud account and follow Step 4 in the [Quickstart instructions for your data platform](https://docs.getdbt.com/quickstarts), to connect your platform to dbt Cloud.
+1. Choose the repo you created in Step 1 as the repository for your dbt Project code.
 
-2. Choose the repo you created in Step 1 as the repository for your dbt Project code.
-
-3. Click `Develop` in the top nav, you should be prompted to run a `dbt deps`, which you should do.
+2. Click `Develop` in the top nav, you should be prompted to run a `dbt deps`, which you should do.
 
 ### dbt Cloud CLI (if you prefer to work locally)
 
@@ -31,7 +31,9 @@ This is a sandbox project for exploring the basic functionality and latest featu
 
 1. Run `git clone [new repo name]` to clone your new repo to your local machine.
 
-2. Set up a virtual environment and activate it. I like to call my virtual environment `.venv` and add it to my `.gitignore` file (we've already done this if you name your virtual environment '.venv') so that I don't accidentally commit it to the repository, but you can call it whatever you want.
+2. [Follow Step 1 on this page](https://cloud.getdbt.com/cloud-cli) to install the dbt Cloud CLI, we'll do the other steps in a second.
+
+3. Set up a virtual environment and activate it. I like to call my virtual environment `.venv` and add it to my `.gitignore` file (we've already done this if you name your virtual environment '.venv') so that I don't accidentally commit it to the repository, but you can call it whatever you want.
 
    ```shell
    python3 -m venv .venv # create a virtual environment
@@ -41,7 +43,7 @@ This is a sandbox project for exploring the basic functionality and latest featu
    source .venv/bin/activate # activate the virtual environment
    ```
 
-3. Install the project's requirements into your virtual environment.
+4. Install the project's requirements into your virtual environment.
 
    ```shell
    python3 -m pip install -r requirements.txt # install the project's requirements
@@ -49,9 +51,9 @@ This is a sandbox project for exploring the basic functionality and latest featu
    task install # install the project's requirements
    ```
 
-4. [Follow steps 2 and 3 on this page](https://cloud.getdbt.com/cloud-cli) to setup dbt Cloud CLI's connection to dbt Cloud, only if you haven't already done so (we handled step 1 above and will do step 4 together next).
+5. [Follow steps 2 and 3 on this page](https://cloud.getdbt.com/cloud-cli) to setup dbt Cloud CLI's connection to dbt Cloud, only if you haven't already done so (we handled step 1 above and will do step 4 together next).
 
-5. Double check that your `dbt_project.yml` is set up correctly by running `dbt list`. You should get back a list of models and tests in your project.
+6. Double check that your `dbt_project.yml` is set up correctly by running `dbt list`. You should get back a list of models and tests in your project.
 
 ## Project setup
 
