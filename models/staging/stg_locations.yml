@@ -25,7 +25,7 @@ unit_tests:
               id: 2,
               name: "San Andreas",
               tax_rate: 0.1,
-              opened_at: "2079-10-27T23:59:59.999999999",
+              opened_at: "2079-10-27T23:59:59.9999",
             }
     expect:
       rows:
