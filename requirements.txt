@@ -2,7 +2,6 @@
 #    uv pip compile requirements.in -o requirements.txt
 cfgv==3.4.0
     # via pre-commit
-dbt==1.0.0.36.13
 distlib==0.3.8
     # via virtualenv
 filelock==3.13.1
@@ -17,8 +16,6 @@ pre-commit==3.6.2
 pyyaml==6.0.1
     # via pre-commit
 setuptools==69.2.0
-    # via
-    #   dbt
-    #   nodeenv
+    # via nodeenv
 virtualenv==20.25.1
     # via pre-commit
