@@ -7,13 +7,19 @@ tasks:
 
   install:
     cmds:
-      - python3 -m pip install --upgrade pip
-      - python3 -m pip install --progress-bar off -- -r requirements.txt
+      - source .venv/bin/activate && python3 -m pip install --upgrade pip
+      - source .venv/bin/activate && python3 -m pip install -r requirements.txt --progress-bar off
+
+  build:
+    cmds:
+      - source .venv/bin/activate && dbt deps
+      - source .venv/bin/activate && dbt seed
+      - rm -rf jaffle-data
+      - source .venv/bin/activate && dbt run
+      - source .venv/bin/activate && dbt test
 
   setup:
     cmds:
-      - dbt deps
-      - dbt seed
-      - rm -rf jaffle-data
-      - dbt run
-      - dbt test
+      - task: venv
+      - task: install
+      - task: build
