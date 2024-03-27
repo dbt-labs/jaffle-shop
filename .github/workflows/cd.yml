@@ -1,4 +1,4 @@
-name: Run dbt Cloud CI job
+name: Run dbt Cloud Deploy to Prod
 
 on:
   push:
