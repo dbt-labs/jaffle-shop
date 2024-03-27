@@ -14,7 +14,7 @@ jobs:
       DBT_ACCOUNT_ID: 188483
       DBT_PROJECT_ID: 283328
       DBT_PR_JOB_ID: 552843
-      DBT_API_KEY: ${{ secrets.DBT_API_KEY }}
+      DBT_API_KEY: ${{ secrets.DBT_CLOUD_API_KEY }}
       DBT_JOB_CAUSE: "GitHub Actions Request"
       DBT_JOB_BRANCH: ${{ github.ref_name }}
 
@@ -28,7 +28,7 @@ jobs:
       - name: Install deps
         run: uv pip install -r requirements.txt --system
       - name: Run dbt Cloud job
-        run: python3 .github/workflows/scripts/dbt_cloud_run_deploy.py
+        run: python3 .github/workflows/scripts/dbt_cloud_run_job.py
 
   run_bigquery:
     name: dbt Cloud PR CI BigQuery
@@ -38,7 +38,7 @@ jobs:
       DBT_ACCOUNT_ID: 188483
       DBT_PROJECT_ID: 275557
       DBT_PR_JOB_ID: 561096
-      DBT_API_KEY: ${{ secrets.DBT_API_KEY }}
+      DBT_API_KEY: ${{ secrets.DBT_CLOUD_API_KEY }}
       DBT_JOB_CAUSE: "GitHub Actions Request"
       DBT_JOB_BRANCH: ${{ github.ref_name }}
 
@@ -52,4 +52,4 @@ jobs:
       - name: Install deps
         run: uv pip install -r requirements.txt --system
       - name: Run dbt Cloud job
-        run: python3 .github/workflows/scripts/dbt_cloud_run_deploy.py
+        run: python3 .github/workflows/scripts/dbt_cloud_run_job.py
