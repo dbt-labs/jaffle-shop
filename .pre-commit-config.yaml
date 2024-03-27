@@ -11,6 +11,7 @@ repos:
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]
+      - id: ruff-format
   - repo: https://github.com/sqlfluff/sqlfluff
     rev: "3.0.1"
     hooks:
@@ -26,7 +27,3 @@ repos:
             "dbt-metricflow[duckdb,snowflake,postgres]~=0.6.0",
             "sqlfluff-templater-dbt~=3.0.1",
           ]
-  - repo: https://github.com/psf/black
-    rev: "24.3.0"
-    hooks:
-      - id: black
