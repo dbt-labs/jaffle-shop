@@ -3,7 +3,7 @@ name: Run dbt Cloud CI job
 on:
   pull_request:
     branches:
-      - "main"
+      - main
 
 jobs:
   run_snowflake:
