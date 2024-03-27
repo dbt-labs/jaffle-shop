@@ -17,7 +17,7 @@ jobs:
       DBT_API_KEY: ${{ secrets.DBT_CLOUD_API_KEY }}
       DBT_JOB_CAUSE: "GitHub Actions Request"
       DBT_JOB_BRANCH: ${{ github.head_ref }}
-      DBT_JOB_SCHEMA_OVERRIDE: dbt_pr_${{ github.head_ref}}
+      DBT_JOB_SCHEMA_OVERRIDE: dbt_jsdx__pr_${{ github.head_ref}}
 
     steps:
       - uses: "actions/checkout@v4"
@@ -42,7 +42,7 @@ jobs:
       DBT_API_KEY: ${{ secrets.DBT_CLOUD_API_KEY }}
       DBT_JOB_CAUSE: "GitHub Actions Request"
       DBT_JOB_BRANCH: ${{ github.head_ref }}
-      DBT_JOB_SCHEMA_OVERRIDE: dbt_pr_${{ github.head_ref}}
+      DBT_JOB_SCHEMA_OVERRIDE: dbt_jsdx__pr_${{ github.head_ref}}
 
     steps:
       - uses: "actions/checkout@v4"
