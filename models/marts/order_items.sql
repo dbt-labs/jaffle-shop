@@ -10,6 +10,7 @@ order_items as (
 orders as (
 
     select * from {{ ref('stg_orders') }}
+
 ),
 
 products as (
@@ -33,6 +34,7 @@ order_supplies_summary as (
     from supplies
 
     group by 1
+
 ),
 
 joined as (
