@@ -69,7 +69,9 @@ def run_job(
     ):  # starts with '$(' indicates a valid branch name was not provided
         req_payload["git_branch"] = branch.replace("refs/heads/", "")
     if schema_override:
-        req_payload["schema_override"] = schema_override.replace("-", "_")
+        req_payload["schema_override"] = schema_override.replace("-", "_").replace(
+            "/", "_"
+        )
 
     # trigger job
     print(f"Triggering job:\n\turl: {url}\n\tpayload: {req_payload}")
