@@ -17,7 +17,6 @@ renamed as (
 
     from source
 
-    where order_id in (select order_id from {{ ref('stg_orders') }})
 )
 
 select * from renamed
