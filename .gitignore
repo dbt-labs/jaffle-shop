@@ -12,3 +12,6 @@ profiles.yml
 
 .user.yml
 *.hurl
+
+.ruff_cache
+__pycache__
