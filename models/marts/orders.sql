@@ -34,7 +34,6 @@ order_items_summary as (
 compute_booleans as (
 
     select
-
         orders.*,
         order_items_summary.order_cost,
         order_items_summary.order_total_pretax,
