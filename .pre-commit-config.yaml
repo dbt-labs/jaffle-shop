@@ -7,13 +7,13 @@ repos:
       - id: trailing-whitespace
       - id: requirements-txt-fixer
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.3.3
+    rev: v0.3.4
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]
       - id: ruff-format
   - repo: https://github.com/sqlfluff/sqlfluff
-    rev: "3.0.1"
+    rev: "3.0.3"
     hooks:
       - id: sqlfluff-lint
         additional_dependencies:

@@ -17,8 +17,13 @@ models:
         description: The timestamp of a customer's most recent order.
       - name: lifetime_spend_pretax
         description: The sum of all the pre-tax subtotals of every order a customer has placed.
+      - name: lifetime_tax_paid
+        description: The sum of all the tax portion of every order a customer has placed.
       - name: lifetime_spend
         description: The sum of all the order totals (including tax) that a customer has ever placed.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: "lifetime_spend_pretax + lifetime_tax_paid = lifetime_spend"
       - name: customer_type
         description: Options are 'new' or 'returning', indicating if a customer has ordered more than once or has only placed their first order to date.
         tests:

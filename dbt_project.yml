@@ -2,10 +2,13 @@ config-version: 2
 
 name: "jaffle_shop"
 version: "3.0.0"
-require-dbt-version: ">=1.7.1"
+require-dbt-version: ">=1.5.0"
 
 dbt-cloud:
   project-id: 283328 # Put your project id here
+
+# If you want to run SQLFluff pre-commit hooks you'll need a profile
+profile: default
 
 model-paths: ["models"]
 analysis-paths: ["analyses"]

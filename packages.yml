@@ -4,4 +4,6 @@ packages:
   - package: calogica/dbt_date
     version: 0.10.0
   - package: dbt-labs/audit_helper
-    version: 0.10.0
+    version: 0.11.0
+  - package: calogica/dbt_expectations
+    version: 0.10.3

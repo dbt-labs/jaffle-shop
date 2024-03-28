@@ -6,7 +6,7 @@ orders as (
 
 ),
 
-order_items_table as (
+order_items as (
 
     select * from {{ ref('order_items') }}
 
@@ -21,9 +21,10 @@ order_items_summary as (
         sum(case when is_drink_item then 1 else 0 end)
             as count_drink_items,
 
-        sum(supply_cost) as order_cost
+        sum(supply_cost) as order_cost,
+        sum(product_price) as order_total_pretax
 
-    from order_items_table
+    from order_items
 
     group by 1
 
@@ -36,6 +37,7 @@ compute_booleans as (
 
         orders.*,
         order_items_summary.order_cost,
+        order_items_summary.order_total_pretax,
         order_items_summary.count_food_items,
         order_items_summary.count_drink_items,
         order_items_summary.count_food_items > 0 as is_food_order,
