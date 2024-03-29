@@ -7,3 +7,10 @@ models:
         tests:
           - not_null
           - unique
+      - name: order_id
+        description: The corresponding order each order item belongs to
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_orders')
+              field: order_id

@@ -1,6 +1,9 @@
 models:
   - name: customers
     description: Customer overview data mart, offering key details for each unique customer. One row per customer.
+    tests:
+      - dbt_utils.expression_is_true:
+          expression: "lifetime_spend_pretax + lifetime_tax_paid = lifetime_spend"
     columns:
       - name: customer_id
         description: The unique key of the orders mart.
@@ -17,6 +20,8 @@ models:
         description: The timestamp of a customer's most recent order.
       - name: lifetime_spend_pretax
         description: The sum of all the pre-tax subtotals of every order a customer has placed.
+      - name: lifetime_tax_paid
+        description: The sum of all the tax portion of every order a customer has placed.
       - name: lifetime_spend
         description: The sum of all the order totals (including tax) that a customer has ever placed.
       - name: customer_type

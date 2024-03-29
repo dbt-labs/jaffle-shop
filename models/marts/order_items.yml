@@ -5,6 +5,11 @@ models:
         tests:
           - not_null
           - unique
+      - name: order_id
+        tests:
+          - relationships:
+              to: ref('orders')
+              field: order_id
 
 unit_tests:
   - name: test_supply_costs_sum_correctly

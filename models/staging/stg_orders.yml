@@ -1,6 +1,9 @@
 models:
   - name: stg_orders
     description: Order data with basic cleaning and transformation applied, one row per order.
+    tests:
+      - dbt_utils.expression_is_true:
+          expression: "order_total - tax_paid = subtotal"
     columns:
       - name: order_id
         description: The unique key for each order.

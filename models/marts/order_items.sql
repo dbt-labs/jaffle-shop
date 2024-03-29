@@ -29,6 +29,7 @@ order_supplies_summary as (
 
     select
         product_id,
+
         sum(supply_cost) as supply_cost
 
     from supplies
