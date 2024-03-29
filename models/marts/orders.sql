@@ -16,13 +16,13 @@ order_items_summary as (
 
     select
         order_id,
+
+        sum(supply_cost) as order_cost,
+        sum(product_price) as order_total_pretax,
         sum(case when is_food_item then 1 else 0 end)
             as count_food_items,
         sum(case when is_drink_item then 1 else 0 end)
-            as count_drink_items,
-
-        sum(supply_cost) as order_cost,
-        sum(product_price) as order_total_pretax
+            as count_drink_items
 
     from order_items
 
