@@ -21,7 +21,7 @@ customer_orders_summary as (
         count(distinct orders.order_id) > 1 as is_repeat_buyer,
         min(orders.ordered_at) as first_ordered_at,
         max(orders.ordered_at) as last_ordered_at,
-        sum(orders.order_total_pretax) as lifetime_spend_pretax,
+        sum(orders.subtotal) as lifetime_spend_pretax,
         sum(orders.tax_paid) as lifetime_tax_paid,
         sum(orders.order_total) as lifetime_spend
 

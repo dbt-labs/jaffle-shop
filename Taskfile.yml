@@ -12,11 +12,11 @@ tasks:
 
   build:
     cmds:
-      - source .venv/bin/activate && dbt deps
-      - source .venv/bin/activate && dbt seed
+      - dbt deps
+      - dbt seed
       - rm -rf jaffle-data
-      - source .venv/bin/activate && dbt run
-      - source .venv/bin/activate && dbt test
+      - dbt run
+      - dbt test
 
   setup:
     cmds:

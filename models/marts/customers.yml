@@ -1,6 +1,9 @@
 models:
   - name: customers
     description: Customer overview data mart, offering key details for each unique customer. One row per customer.
+    tests:
+      - dbt_utils.expression_is_true:
+          expression: "lifetime_spend_pretax + lifetime_tax_paid = lifetime_spend"
     columns:
       - name: customer_id
         description: The unique key of the orders mart.
