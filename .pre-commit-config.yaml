@@ -15,15 +15,9 @@ repos:
   - repo: https://github.com/sqlfluff/sqlfluff
     rev: "3.0.3"
     hooks:
-      - id: sqlfluff-lint
-        additional_dependencies:
-          [
-            "dbt-metricflow[duckdb,snowflake,postgres]~=0.6.0",
-            "sqlfluff-templater-dbt~=3.0.1",
-          ]
       - id: sqlfluff-fix
         additional_dependencies:
           [
-            "dbt-metricflow[duckdb,snowflake,postgres]~=0.6.0",
-            "sqlfluff-templater-dbt~=3.0.1",
+            "dbt-metricflow[snowflake,bigquery,postgres]~=0.6.0",
+            "sqlfluff-templater-dbt~=3.0.3",
           ]
