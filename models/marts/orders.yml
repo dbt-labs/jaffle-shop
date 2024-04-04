@@ -104,6 +104,8 @@ semantic_models:
         type: categorical
       - name: is_drink_order
         type: categorical
+      - name: customer_order_number
+        type: categorical
     measures:
       - name: order_total
         description: The total amount for each order including taxes.
@@ -125,6 +127,14 @@ metrics:
     label: Order Total
     type_params:
       measure: order_total
+  - name: new_customer_orders
+    description: New customer's first order count
+    label: New Customers
+    type: simple
+    type_params:
+      measure: order_count
+    filter: |
+      {{ Dimension('order_id__customer_order_number') }} = 1
   - name: large_orders
     description: "Count of orders with order total over 20."
     type: simple
@@ -155,3 +165,19 @@ metrics:
       measure: order_count
     filter: |
       {{ Dimension('order_id__is_drink_order') }} = true
+
+saved_queries:
+  - name: order_metrics
+    query_params:
+      metrics:
+        - orders
+        - new_customer_orders
+        - order_total
+        - food_orders
+        - drink_orders
+      group_by:
+        - TimeDimension('metric_time', 'day')
+    exports:
+      - name: order_metrics
+        config:
+          export_as: table
