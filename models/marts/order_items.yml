@@ -111,8 +111,14 @@ metrics:
     type: simple
     type_params:
       measure: food_revenue
+  - name: drink_revenue
+    description: The revenue from drinks in each order
+    label: Drink Revenue
+    type: simple
+    type_params:
+      measure: drink_revenue
 
-  #Ratio Metrics
+  # Ratio Metrics
   - name: food_revenue_pct
     description: The % of order revenue from food.
     label: Food Revenue %
@@ -120,8 +126,15 @@ metrics:
     type_params:
       numerator: food_revenue
       denominator: revenue
+  - name: drink_revenue_pct
+    description: The % of order revenue from drinks.
+    label: Drink Revenue %
+    type: ratio
+    type_params:
+      numerator: drink_revenue
+      denominator: revenue
 
-  #Derived Metrics
+  # Derived Metrics
   - name: revenue_growth_mom
     description: "Percentage growth of revenue compared to 1 month ago. Excluded tax"
     type: derived
@@ -152,3 +165,17 @@ metrics:
     type: cumulative
     type_params:
       measure: revenue
+
+saved_queries:
+  - name: revenue_metrics
+    query_params:
+      metrics:
+        - revenue
+        - food_revenue
+        - drink_revenue
+      group_by:
+        - TimeDimension('metric_time', 'day')
+    exports:
+      - name: revenue_metrics
+        config:
+          export_as: table

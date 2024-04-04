@@ -30,7 +30,6 @@ order_items_summary as (
 
 ),
 
-
 compute_booleans as (
 
     select
@@ -49,6 +48,19 @@ compute_booleans as (
         order_items_summary
         on orders.order_id = order_items_summary.order_id
 
+),
+
+add_customer_order_count as (
+
+    select
+        *,
+        row_number() over (
+            partition by customer_id
+            order by ordered_at asc
+        ) as customer_order_number
+
+    from compute_booleans
+
 )
 
-select * from compute_booleans
+select * from add_customer_order_count
