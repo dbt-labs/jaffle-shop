@@ -1,0 +1,55 @@
+name: Run dbt Cloud Deploy to Prod
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run_snowflake:
+    name: dbt Cloud Deploy Prod Snowflake
+    runs-on: macos-latest
+
+    env:
+      DBT_ACCOUNT_ID: 188483
+      DBT_PROJECT_ID: 283328
+      DBT_PR_JOB_ID: 409009
+      DBT_API_KEY: ${{ secrets.DBT_CLOUD_API_KEY }}
+      DBT_JOB_CAUSE: "GitHub Actions Request"
+      DBT_JOB_BRANCH: main
+
+    steps:
+      - uses: "actions/checkout@v4"
+      - uses: "actions/setup-python@v5"
+        with:
+          python-version: "3.12"
+      - name: Install uv
+        run: python3 -m pip install uv
+      - name: Install deps
+        run: uv pip install -r requirements.txt --system
+      - name: Run dbt Cloud job
+        run: python3 .github/workflows/scripts/dbt_cloud_run_job.py
+
+  run_bigquery:
+    name: dbt Cloud Deploy Prod BigQuery
+    runs-on: macos-latest
+
+    env:
+      DBT_ACCOUNT_ID: 188483
+      DBT_PROJECT_ID: 275557
+      DBT_PR_JOB_ID: 553247
+      DBT_API_KEY: ${{ secrets.DBT_CLOUD_API_KEY }}
+      DBT_JOB_CAUSE: "GitHub Actions Request"
+      DBT_JOB_BRANCH: main
+
+    steps:
+      - uses: "actions/checkout@v4"
+      - uses: "actions/setup-python@v5"
+        with:
+          python-version: "3.12"
+      - name: Install uv
+        run: python3 -m pip install uv
+      - name: Install deps
+        run: uv pip install -r requirements.txt --system
+      - name: Run dbt Cloud job
+        run: python3 .github/workflows/scripts/dbt_cloud_run_job.py
