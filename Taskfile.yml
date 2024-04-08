@@ -9,6 +9,7 @@ tasks:
     cmds:
       - source .venv/bin/activate && python3 -m pip install --upgrade pip
       - source .venv/bin/activate && python3 -m pip install -r requirements.txt --progress-bar off
+      - source .venv/bin/activate && jafgen 5
 
   build:
     cmds:
