@@ -1,24 +1,22 @@
-name: dbt Cloud CI
+name: dbt Cloud Deploy
 
 on:
-  pull_request:
+  push:
     branches:
       - main
-      - staging
 
 jobs:
   run_snowflake:
-    name: dbt Cloud PR CI Snowflake
+    name: dbt Cloud Deploy Prod Snowflake
     runs-on: macos-latest
 
     env:
       DBT_ACCOUNT_ID: 188483
       DBT_PROJECT_ID: 283328
-      DBT_PR_JOB_ID: 552843
+      DBT_PR_JOB_ID: 409009
       DBT_API_KEY: ${{ secrets.DBT_CLOUD_API_KEY }}
       DBT_JOB_CAUSE: "GitHub Actions Request"
-      DBT_JOB_BRANCH: ${{ github.head_ref }}
-      DBT_JOB_SCHEMA_OVERRIDE: dbt_jsdx__pr_${{ github.head_ref}}
+      DBT_JOB_BRANCH: main
 
     steps:
       - uses: "actions/checkout@v4"
@@ -33,17 +31,16 @@ jobs:
         run: python3 .github/workflows/scripts/dbt_cloud_run_job.py
 
   run_bigquery:
-    name: dbt Cloud PR CI BigQuery
+    name: dbt Cloud Deploy Prod BigQuery
     runs-on: macos-latest
 
     env:
       DBT_ACCOUNT_ID: 188483
       DBT_PROJECT_ID: 275557
-      DBT_PR_JOB_ID: 561096
+      DBT_PR_JOB_ID: 553247
       DBT_API_KEY: ${{ secrets.DBT_CLOUD_API_KEY }}
       DBT_JOB_CAUSE: "GitHub Actions Request"
-      DBT_JOB_BRANCH: ${{ github.head_ref }}
-      DBT_JOB_SCHEMA_OVERRIDE: dbt_jsdx__pr_${{ github.head_ref}}
+      DBT_JOB_BRANCH: main
 
     steps:
       - uses: "actions/checkout@v4"
