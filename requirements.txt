@@ -6,24 +6,59 @@ cfgv==3.4.0
     # via pre-commit
 charset-normalizer==3.3.2
     # via requests
+click==8.1.7
+    # via typer
 distlib==0.3.8
     # via virtualenv
-filelock==3.13.1
+faker==24.7.1
+    # via jafgen
+filelock==3.13.3
     # via virtualenv
 identify==2.5.35
     # via pre-commit
 idna==3.6
     # via requests
+jafgen==0.4.11
+markdown-it-py==3.0.0
+    # via rich
+mdurl==0.1.2
+    # via markdown-it-py
 nodeenv==1.8.0
     # via pre-commit
+numpy==1.26.4
+    # via
+    #   jafgen
+    #   pandas
+pandas==2.2.1
+    # via jafgen
 platformdirs==4.2.0
     # via virtualenv
-pre-commit==3.6.2
+pre-commit==3.7.0
+pygments==2.17.2
+    # via rich
+python-dateutil==2.9.0.post0
+    # via
+    #   faker
+    #   pandas
+pytz==2024.1
+    # via pandas
 pyyaml==6.0.1
     # via pre-commit
 requests==2.31.0
+rich==13.7.1
+    # via typer
 setuptools==69.2.0
     # via nodeenv
+shellingham==1.5.4
+    # via typer
+six==1.16.0
+    # via python-dateutil
+typer==0.12.2
+    # via jafgen
+typing-extensions==4.11.0
+    # via typer
+tzdata==2024.1
+    # via pandas
 urllib3==2.2.1
     # via requests
 virtualenv==20.25.1
