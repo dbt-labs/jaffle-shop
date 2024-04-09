@@ -20,10 +20,19 @@ order_items_summary as (
         sum(supply_cost) as order_cost,
         sum(product_price) as order_items_subtotal,
         count(order_item_id) as count_order_items,
-        sum(case when is_food_item then 1 else 0 end)
-            as count_food_items,
-        sum(case when is_drink_item then 1 else 0 end)
-            as count_drink_items
+        sum(
+            case
+                when is_food_item then 1
+                else 0
+            end
+        ) as count_food_items,
+        sum(
+            case
+                when is_drink_item then 1
+                else 0
+            end
+        ) as count_drink_items
+
     from order_items
 
     group by 1
@@ -34,6 +43,7 @@ compute_booleans as (
 
     select
         orders.*,
+
         order_items_summary.order_cost,
         order_items_summary.order_items_subtotal,
         order_items_summary.count_food_items,
@@ -50,10 +60,11 @@ compute_booleans as (
 
 ),
 
-add_customer_order_count as (
+customer_order_count as (
 
     select
         *,
+
         row_number() over (
             partition by customer_id
             order by ordered_at asc
@@ -63,4 +74,4 @@ add_customer_order_count as (
 
 )
 
-select * from add_customer_order_count
+select * from customer_order_count
