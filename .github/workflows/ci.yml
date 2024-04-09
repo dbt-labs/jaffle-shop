@@ -1,11 +1,9 @@
 name: dbt Cloud CI
-
 on:
   pull_request:
     branches:
       - main
       - staging
-
 jobs:
   run_snowflake:
     name: dbt Cloud PR CI Snowflake

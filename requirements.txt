@@ -10,9 +10,9 @@ click==8.1.7
     # via typer
 distlib==0.3.8
     # via virtualenv
-faker==24.7.1
+faker==24.8.0
     # via jafgen
-filelock==3.13.3
+filelock==3.13.4
     # via virtualenv
 identify==2.5.35
     # via pre-commit
@@ -53,7 +53,7 @@ shellingham==1.5.4
     # via typer
 six==1.16.0
     # via python-dateutil
-typer==0.12.2
+typer==0.12.3
     # via jafgen
 typing-extensions==4.11.0
     # via typer

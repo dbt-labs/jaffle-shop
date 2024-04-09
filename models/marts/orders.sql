@@ -32,6 +32,7 @@ order_items_summary as (
                 else 0
             end
         ) as count_drink_items
+
     from order_items
 
     group by 1
