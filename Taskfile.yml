@@ -4,23 +4,35 @@ tasks:
   venv:
     cmds:
       - python3 -m venv .venv
+    silent: true
 
   install:
     cmds:
-      - source .venv/bin/activate && python3 -m pip install --upgrade pip
-      - source .venv/bin/activate && python3 -m pip install -r requirements.txt --progress-bar off
-      - source .venv/bin/activate && jafgen 5
+      - source .venv/bin/activate && python3 -m pip install --upgrade pip --progress-bar off > /dev/null
+      - source .venv/bin/activate && python3 -m pip install -r requirements.txt --progress-bar off > /dev/null
+    silent: true
+
+  gen:
+    cmds:
+      - source .venv/bin/activate && jafgen
+    silent: true
 
   build:
     cmds:
       - dbt deps
       - dbt seed
-      - rm -rf jaffle-data
       - dbt run
       - dbt test
+
+  clean:
+    cmds:
+      - rm -rf jaffle-data
+    silent: true
 
   setup:
     cmds:
       - task: venv
       - task: install
+      - task: gen
       - task: build
+      - task: clean
