@@ -47,7 +47,7 @@ This README will guide you through setting up the project on dbt Cloud. We'll al
 
 1. Create a logical database in your data warehouse for the Jaffle Shop project. We recommend using the name `jaffle_shop` for consistency with the project. This looks different on different platforms (for instance on BigQuery this constitutes creating a new _project_, on Snowflake this is achieved via `create database jaffle_shop;`, and if you're running Postgres locally you can probably skip this). If you're not sure how to do this, we recommend checking out the [Quickstart Guide for your data platform in the dbt Docs](https://docs.getdbt.com/guides).
 
-2. Set up a dbt Cloud account (if you don't have one already, if you do, just create a new project) and follow Step 4 in the [Quickstart Guide for your data platform](https://docs.getdbt.com/guides), to connect your platform to dbt Cloud.
+2. Set up a dbt Cloud account (if you don't have one already, if you do, just create a new project) and follow Step 4 in the [Quickstart Guide for your data platform](https://docs.getdbt.com/guides), to connect your platform to dbt Cloud. Make sure the user you configure for your connections as [adequate database permissions to run dbt](https://docs.getdbt.com/reference/database-permissions/about-database-permissions) in the `jaffle_shop` database.
 
 3. Choose the repo you created in Step 1 of the **Create new repo from template** section as the repository for your dbt Project's codebase.
 
@@ -149,6 +149,33 @@ Once your development platform of choice and dependencies are set up, use the fo
 ## 🌅 Going further
 
 ### ☁️ Setting up dbt Cloud Environments and Jobs
+
+#### 🌍 Creating an Environment
+
+dbt Cloud has a powerful abstraction called an Environment. An Environment in dbt Cloud is a _set of configurations_ that dbt uses when it runs your code. It includes things like what version of dbt to use, what schema to build into, credentials to use, and more. You can set up multiple environments in dbt Cloud, and each environment can have its own set of configurations. This is very useful for _running Jobs_. A Job is a set of dbt commands which run in an Environment. Understanding these two concepts is key for getting those most out of dbt Cloud, especially building a robust deployment workflow. Now that we're able to develop in our project, this section will walk you through setting up an Environment and a Job to deploy our project to production.
+
+1. Go to the Deploy tab in the dbt Cloud nav bar and click `Environments`.
+2. On the Environment page, click `+ Create Environment`.
+3. Name your Environment `Prod` and set it as a `Production` Environment.
+4. Fill out the credentials with your warehouse connection details, in real production you'll want to make a Service Account or similar and only give access to the production schema to that user, so that only dbt Cloud Jobs can build into production. For this demo project, it's okay to just use your account credentials.
+5. Set the schema that this environment builds into to `prod` and the `branch` that it runs on to `main`. This ensures that Jobs configured in this environment always build into the `prod` schema and run on the `main` branch which we've protected as our production branch.
+6. Click `Save`.
+
+#### 🛠️ Creating a Job
+
+Now we'll create a Job to deploy our project to production. This Job will run the `dbt build` command in the `prod` Environment we just created.
+
+1. Go to the `Prod` Environment you just created.
+2. Click `+ Create Job` and choose `Deploy Job` as the Job type.
+3. Name your Job `Production Build`.
+4. You can otherwise leave the defaults in place and just click `Save`.
+5. Click into your newly created Job and click `Run Now` in the top right corner.
+6. This will kick off a Job to build your project in the `prod` Environment, which will build into the `prod` schema in your warehouse.
+7. Go check out the `prod` schema in your `jaffle_shop` database on your warehouse, you should see the project's models built there!
+
+#### 🗺️ Explore your DAG
+
+From here, you should be able to use dbt Explorer (in the `Explore` tab of the dbt Cloud nav bar) to explore your DAG! Explorer is populated with metadata from your designated Production and Staging Environments, so you can see the lineage of your visually, and much more.
 
 ### 🏭 Working with a larger dataset
 
