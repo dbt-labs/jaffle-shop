@@ -2,18 +2,21 @@
 
 This is a sandbox project for exploring the basic functionality and latest features of dbt. It's based on a fictional restaurant called the Jaffle Shop that serves [jaffles](https://en.wikipedia.org/wiki/Pie_iron).
 
-This README will guide you through setting up the project on dbt Cloud. Working through this example should give you a good sense of how dbt Cloud works and what's involved with setting up your own project. We'll also _optionally_ cover some intermediate topics like setting up Environments and Jobs in dbt Cloud, working with a larger dataset, and setting up pre-commit hooks if you'd like. Let's dig in!
+This README will guide you through setting up the project on dbt Cloud. Working through this example should give you a good sense of how dbt Cloud works and what's involved with setting up your own project. We'll also _optionally_ cover some intermediate topics like setting up Environments and Jobs in dbt Cloud, working with a larger dataset, and setting up pre-commit hooks if you'd like.
 
 > [!NOTE]
 > This project is geared towards folks learning dbt Cloud with a cloud warehouse. If you're brand new to dbt, we recommend starting with the [dbt Learn](https://learn.getdbt.com/) platform. It's a free, interactive way to learn dbt, and it's a great way to get started if you're new to the tool. If you just want to try dbt locally as quickly as possible without setting up a data warehouse check out [`jaffle_shop_duckdb`](https://github.com/dbt-labs/jaffle_shop_duckdb).
+
+Ready to go? Grab some water and a nice snack, and let's dig in!
 
 ## Table of contents
 
 1. [Prerequisites](#-prerequisites)
 2. [Create new repo from template](#-create-new-repo-from-template)
 3. [Platform setup](#%EF%B8%8F-platform-setup)
-   1. [dbt Cloud IDE](#%EF%B8%8F-dbt-cloud-ide-most-beginner-friendly)
-   2. [dbt Cloud CLI](#-dbt-cloud-cli-if-you-prefer-to-work-locally)
+   1. [Load the data](#-load-the-data)
+   2. [dbt Cloud IDE](#%EF%B8%8F-dbt-cloud-ide-most-beginner-friendly)
+   3. [dbt Cloud CLI](#-dbt-cloud-cli-if-you-prefer-to-work-locally)
 4. [Project setup](#%EF%B8%8F-project-setup)
    1. [With `task`](#%EF%B8%8F-with-task)
    2. [Manually](#-manually)
@@ -54,6 +57,23 @@ This README will guide you through setting up the project on dbt Cloud. Working 
 
 <img width="500" alt="Repo selection in dbt Cloud" src="https://github.com/dbt-labs/jaffle-shop/assets/91998347/daac5bbc-097c-4d57-9628-0c85d348e4a4">
 
+### 📊 Load the data
+
+There are couple ways to load the data for the project, in order of simplicity:
+
+- If you're working on the command line and [have `pipx` installed](https://pipx.pypa.io/stable/), you can run `pipx run jagen` to generate a year of data without installing anything into the project or setting up a virtual environment. You can then load it via `dbt seed`.
+
+- If you're working on the command line and prefer to use vanilla `pip`, you can follow the instructions here to install `jafgen` in a virtual environment, generate a year of data, then load it via `dbt seed`. This is [covered in detail here](#-manually).
+
+- If you're working via the dbt Cloud IDE and your warehouse's web app interface, you can copy the data from a public S3 bucket to your warehouse into a schema called `raw` in your `jaffle_shop` database. Check out the instructions in the [Quickstart Guides for you platform](https://docs.getdbt.com/guides) for an example of how this works in your warehouse's syntax. The S3 bucket URIs of the tables you want to copy into your `raw` schema are:
+
+  - `raw_customers`: `s3://dbt-labs-dx-public/raw_customers.csv`
+  - `raw_orders`: `s3://dbt-labs-dx-public/raw_orders.csv`
+  - `raw_order_items`: `s3://dbt-labs-dx-public/raw_order_items.csv`
+  - `raw_products`: `s3://dbt-labs-dx-public/raw_products.csv`
+  - `raw_supplies`: `s3://dbt-labs-dx-public/raw_supplies.csv`
+  - `raw_stores`: `s3://dbt-labs-dx-public/raw_stores.csv`
+
 ### 🏁 Checkpoint
 
 The following should now be done:
@@ -61,12 +81,13 @@ The following should now be done:
 - dbt Cloud connected to your warehouse
 - Your copy of this repo set up as the codebase
 - dbt Cloud and the codebase pointed at a fresh database or project in your warehouse to work in
+- Raw data loaded into your warehouse
 
 You're now ready to start developing with dbt Cloud! Choose a path below (either the [dbt Cloud IDE](<#dbt-cloud-ide-(most-beginner-friendly)>) or the [Cloud CLI](<#dbt-cloud-cli-(if-you-prefer-to-work-locally)>) to get started.
 
 ### 😶‍🌫️ dbt Cloud IDE (most beginner friendly)
 
-1. Click `Develop` in the dbt Cloud nav bar. You should be prompted to run a `dbt deps`, which you should do.
+1. Click `Develop` in the dbt Cloud nav bar. You should be prompted to run a `dbt deps`, which you should do. This will install the dbt packages configured in the `packages.yml` file.
 
 > [!TIP]
 > Make sure to turn on the 'Defer to staging/production' toggle once you're set up. This will ensure that only modified code is run when you run commands in the IDE, saving you time and resources!
@@ -82,10 +103,10 @@ You're now ready to start developing with dbt Cloud! Choose a path below (either
 
 2. [Follow the steps on this page](https://cloud.getdbt.com/cloud-cli) to install and set up a dbt Cloud connection with the dbt Cloud CLI.
 
-> [!TIP]
+> [!IMPORTANT]
 > If you're using `task`, once you have dbt Cloud CLI set up, you can run `task setup` to skip all the rest of this and run all the setup commands in one easy command. We recommend it!
 
-3. Set up a virtual environment and activate it. I like to call my virtual environment `.venv` and add it to my `.gitignore` file (we've already done this if you name your virtual environment '`.venv`') so that I don't accidentally commit it to the repository, but you can call it whatever you want, just make sure you `.gitignore` it.
+3. Set up a virtual environment and activate it.[^1] I like to call my virtual environment `.venv` and add it to my `.gitignore` file (we've already done this if you name your virtual environment '`.venv`') so that I don't accidentally commit it to the repository, but you can call it whatever you want, just make sure you `.gitignore` it.
 
    ```shell
    # create a virtual environment
@@ -128,7 +149,7 @@ Once your development platform of choice and dependencies are set up, use the fo
 ### 💪 Manually
 
 > [!NOTE]
-> dbt Cloud CLI has a limit on the size of seed files that can be uploaded to your data warehouse. Seeds are _not_ meant for data loading in production, they're meant for small reference tables, we just use them for convenience here. If you want to generate more than the default 1 year of `jafgen` data, you'll need to use dbt Core to seed the data. [We cover how to do this here](#working-with-a-larger-dataset).
+> dbt Cloud CLI has a limit on the size of seed files that can be uploaded to your data warehouse. Seeds are _not_ meant for data loading in production, they're meant for small reference tables, we just use them for convenience here. If you want to generate more than the default 1 year of `jafgen` data, you'll need to use dbt Core to seed the data. [We cover how to do this here](#-working-with-a-larger-dataset).
 
 1. In your activated virtual environment with dependencies installed, run `jafgen` to generate a year of synthetic data for the Jaffle Shop, no arguments are necessary for the defaults.
 
@@ -241,3 +262,5 @@ At present the following checks are run:
 At present, the popular SQL linter and formatter SQLFluff doesn't play nicely with the dbt Cloud CLI, so we've omitted it from this project _for now_. If you'd like auto-formatting and linting for SQL, check out the dbt Cloud IDE!
 
 We have kept a `.sqlfluff` config file to show what that looks like, and to future proof the repo for when the Cloud CLI support linting and formatting.
+
+[^1]: If you have [pipx installed](https://pipx.pypa.io/stable/), you can run `pipx run jafgen` to generate a year of data without installing anything into the project or setting up a virtual environment. You can then load it via `dbt seed`. You can skip to step 4 of [the manual setup](#-manually) instructions if you take this path.
