@@ -1,4 +1,4 @@
-name: Run dbt Cloud Deploy to Prod
+name: dbt Cloud Deploy Prod
 
 on:
   push:
