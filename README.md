@@ -36,6 +36,8 @@ This is a sandbox project for exploring the basic functionality and latest featu
 
 2. Choose the repo you created in Step 1 of the **Create new repo from template** section as the repository for your dbt Project's codebase.
 
+<img width="500" alt="Screenshot 2024-04-09 at 7 45 50 PM" src="https://github.com/dbt-labs/jaffle-shop/assets/91998347/daac5bbc-097c-4d57-9628-0c85d348e4a4">
+
 ### dbt Cloud IDE (most beginner friendly)
 
 1. Click `Develop` in the dbt Cloud nav bar. You should be prompted to run a `dbt deps`, which you should do.
@@ -43,12 +45,14 @@ This is a sandbox project for exploring the basic functionality and latest featu
 > [!TIP]
 > Make sure to turn on the 'Defer to staging/production' toggle once you're set up. This will ensure that only modified code is run when you run commands in the IDE, saving you time and resources!
 
+<img width="500" alt="Screenshot 2024-04-09 at 7 44 36 PM" src="https://github.com/dbt-labs/jaffle-shop/assets/91998347/9cdba3b0-6c64-4c40-8380-80c0ec619214">
+
 ### dbt Cloud CLI (if you prefer to work locally)
 
 > [!NOTE]
 > If you'd like to use the dbt Cloud CLI, but are a little intimidated by the terminal, we've included configuration for a _task runner_ called, fittingly, `task`. It's a simple way to run the commands you need to get started with dbt. You can install it by following the instructions [here](https://taskfile.dev/#/installation). We'll call out the `task` based alternative to each command below.
 
-1. Run `git clone [new repo name git link]` (or `gh repo clone [repo owner]/[new repo name]` if you prefer GitHub's excellent CLI) to clone your new repo from the first step of the **Create new repo from template** section to your local machine.
+1. Run `git clone [new repo git link]` (or `gh repo clone [repo owner]/[new repo name]` if you prefer GitHub's excellent CLI) to clone your new repo from the first step of the **Create new repo from template** section to your local machine.
 
 2. [Follow the steps on this page](https://cloud.getdbt.com/cloud-cli) to install and set up a dbt Cloud connection with the dbt Cloud CLI.
 
