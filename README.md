@@ -12,7 +12,7 @@ This README will guide you through setting up the project on dbt Cloud. We'll al
 ## Table of contents
 
 1. [Prerequisites](#💾-prerequisites)
-2. [Create new repo from template](#📓-create-new-repo-from-template)
+2. [Create new repo from template](#-create-new-repo-from-template)
 3. [Platform setup](#🏗️-platform-setup)
    1. [dbt Cloud IDE](<#😶‍-dbt-cloud-ide-(most-beginner-friendly)>)
    2. [dbt Cloud CLI](<#💽-dbt-cloud-cli-(if-you-prefer-to-work-locally)>)
