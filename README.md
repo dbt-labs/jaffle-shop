@@ -54,7 +54,7 @@ This README will guide you through setting up the project on dbt Cloud. We'll al
 
 3. Choose the repo you created in Step 1 of the **Create new repo from template** section as the repository for your dbt Project's codebase.
 
-<img width="500" alt="Screenshot 2024-04-09 at 7 45 50 PM" src="https://github.com/dbt-labs/jaffle-shop/assets/91998347/daac5bbc-097c-4d57-9628-0c85d348e4a4">
+<img width="500" alt="Repo selection in dbt Cloud" src="https://github.com/dbt-labs/jaffle-shop/assets/91998347/daac5bbc-097c-4d57-9628-0c85d348e4a4">
 
 ### 🏁 Checkpoint
 
@@ -158,27 +158,51 @@ Once your development platform of choice and dependencies are set up, use the fo
 dbt Cloud has a powerful abstraction called an Environment. An Environment in dbt Cloud is a _set of configurations_ that dbt uses when it runs your code. It includes things like what version of dbt to use, what schema to build into, credentials to use, and more. You can set up multiple environments in dbt Cloud, and each environment can have its own set of configurations. This is very useful for _running Jobs_. A Job is a set of dbt commands which run in an Environment. Understanding these two concepts is key for getting those most out of dbt Cloud, especially building a robust deployment workflow. Now that we're able to develop in our project, this section will walk you through setting up an Environment and a Job to deploy our project to production.
 
 1. Go to the Deploy tab in the dbt Cloud nav bar and click `Environments`.
+
 2. On the Environment page, click `+ Create Environment`.
+
+   <img width="500" alt="create_environment" src="https://github.com/dbt-labs/jaffle-shop/assets/91998347/2fd8039a-8fde-4d7d-84c3-0a30d56fd61f">
+
 3. Name your Environment `Prod` and set it as a `Production` Environment.
+
+   <img width="391" alt="prod_env" src="https://github.com/dbt-labs/jaffle-shop/assets/91998347/845d4a31-5a39-4550-944a-ca5bb7b90e55">
+
 4. Fill out the credentials with your warehouse connection details, in real production you'll want to make a Service Account or similar and only give access to the production schema to that user, so that only dbt Cloud Jobs can build into production. For this demo project, it's okay to just use your account credentials.
-5. Set the schema that this environment builds into to `prod` and the `branch` that it runs on to `main`. This ensures that Jobs configured in this environment always build into the `prod` schema and run on the `main` branch which we've protected as our production branch.
-6. Click `Save`.
+
+5. Set the `branch` that this Environment runs on to `main`, then the schema that this Environment builds into to `prod`. This ensures that Jobs configured in this Environment always build into the `prod` schema and run on the `main` branch which we've protected as our production branch.
+
+   <img width="500" alt="custom_branch_main" src="https://github.com/dbt-labs/jaffle-shop/assets/91998347/163764c6-bc3c-490b-b262-47e6c71553c9">
+
+7. Click `Save`.
 
 #### 🛠️ Creating a Job
 
 Now we'll create a Job to deploy our project to production. This Job will run the `dbt build` command in the `prod` Environment we just created.
 
 1. Go to the `Prod` Environment you just created.
+
 2. Click `+ Create Job` and choose `Deploy Job` as the Job type.
+   
+   <img width="500" alt="create_job" src="https://github.com/dbt-labs/jaffle-shop/assets/91998347/9eda2a35-edac-4ad5-b5f4-d273ab3e5351">
+
 3. Name your Job `Production Build`.
+
 4. You can otherwise leave the defaults in place and just click `Save`.
+
 5. Click into your newly created Job and click `Run Now` in the top right corner.
-6. This will kick off a Job to build your project in the `prod` Environment, which will build into the `prod` schema in your warehouse.
-7. Go check out the `prod` schema in your `jaffle_shop` database on your warehouse, you should see the project's models built there!
+
+   <img width="500" alt="run_now" src="https://github.com/dbt-labs/jaffle-shop/assets/91998347/78cbf863-619a-4213-babe-d26b94363e84">   
+
+7. This will kick off a Job to build your project in the `Prod` Environment, which will build into the `prod` schema in your warehouse.
+
+8. Go check out the `prod` schema in your `jaffle_shop` database on your warehouse, you should see the project's models built there!
 
 #### 🗺️ Explore your DAG
 
-From here, you should be able to use dbt Explorer (in the `Explore` tab of the dbt Cloud nav bar) to explore your DAG! Explorer is populated with metadata from your designated Production and Staging Environments, so you can see the lineage of your visually, and much more.
+From here, you should be able to use dbt Explorer (in the `Explore` tab of the dbt Cloud nav bar) to explore your DAG! Explorer is populated with metadata from your designated Production and Staging Environments, so you can see the lineage of your project visually, and much more.
+
+<img width="991" alt="explorer" src="https://github.com/dbt-labs/jaffle-shop/assets/91998347/68b98e29-0e10-461b-80e5-e7665b010c07">
+
 
 ### 🏭 Working with a larger dataset
 
