@@ -21,6 +21,9 @@ This README will guide you through setting up the project on dbt Cloud. We'll al
    2. [Manually](#-manually)
 5. [Going further](#-going-further)
    1. [Setting up dbt Cloud Environments and Jobs](#%EF%B8%8F-setting-up-dbt-cloud-environments-and-jobs)
+      1. [Creating an Environment](#-creating-an-environment)
+      2. [Creating a Job](#-creating-a-job)
+      3. [Explore your DAG](#-explore-your-dag)
    2. [Working with a larger dataset](#-working-with-a-larger-dataset)
    3. [Pre-commit and SQLFluff](#-pre-commit-and-sqlfluff)
 
