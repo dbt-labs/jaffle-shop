@@ -31,7 +31,7 @@ This README will guide you through setting up the project on dbt Cloud. Working 
 
 - A dbt Cloud account
 - A data warehouse (BigQuery, Snowflake, Redshift, Databricks, or Postgres) with adequate permissions to create a fresh database for this project and run dbt in it
-- _Optional_ Python 3.8 or higher (for generating synthetic data with `jafgen`)
+- _Optional_ Python 3.9 or higher (for generating synthetic data with `jafgen`)
 
 ## 📓 Create new repo from template
 
@@ -173,7 +173,7 @@ dbt Cloud has a powerful abstraction called an Environment. An Environment in db
 
    <img width="500" alt="custom_branch_main" src="https://github.com/dbt-labs/jaffle-shop/assets/91998347/163764c6-bc3c-490b-b262-47e6c71553c9">
 
-7. Click `Save`.
+6. Click `Save`.
 
 #### 🛠️ Creating a Job
 
@@ -182,7 +182,7 @@ Now we'll create a Job to deploy our project to production. This Job will run th
 1. Go to the `Prod` Environment you just created.
 
 2. Click `+ Create Job` and choose `Deploy Job` as the Job type.
-   
+
    <img width="500" alt="create_job" src="https://github.com/dbt-labs/jaffle-shop/assets/91998347/9eda2a35-edac-4ad5-b5f4-d273ab3e5351">
 
 3. Name your Job `Production Build`.
@@ -191,18 +191,17 @@ Now we'll create a Job to deploy our project to production. This Job will run th
 
 5. Click into your newly created Job and click `Run Now` in the top right corner.
 
-   <img width="500" alt="run_now" src="https://github.com/dbt-labs/jaffle-shop/assets/91998347/78cbf863-619a-4213-babe-d26b94363e84">   
+   <img width="500" alt="run_now" src="https://github.com/dbt-labs/jaffle-shop/assets/91998347/78cbf863-619a-4213-babe-d26b94363e84">
 
-7. This will kick off a Job to build your project in the `Prod` Environment, which will build into the `prod` schema in your warehouse.
+6. This will kick off a Job to build your project in the `Prod` Environment, which will build into the `prod` schema in your warehouse.
 
-8. Go check out the `prod` schema in your `jaffle_shop` database on your warehouse, you should see the project's models built there!
+7. Go check out the `prod` schema in your `jaffle_shop` database on your warehouse, you should see the project's models built there!
 
 #### 🗺️ Explore your DAG
 
 From here, you should be able to use dbt Explorer (in the `Explore` tab of the dbt Cloud nav bar) to explore your DAG! Explorer is populated with metadata from your designated Production and Staging Environments, so you can see the lineage of your project visually, and much more.
 
 <img width="991" alt="explorer" src="https://github.com/dbt-labs/jaffle-shop/assets/91998347/68b98e29-0e10-461b-80e5-e7665b010c07">
-
 
 ### 🏭 Working with a larger dataset
 
