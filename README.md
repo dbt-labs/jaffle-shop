@@ -25,29 +25,35 @@ This is a sandbox project for exploring the basic functionality and latest featu
    ![Click 'Use this template'](/.github/static/use-template.gif)
    </details>
 
-2. Follow the steps to create a new repository. You should choose the option to copy all branches. The project is set up with `staging` as the default branch, a best practice we want to model for you. In a setup with a Write-Audit-Publish (WAP) flow, you have a `main` branch that serves production data (like downstream dashboards) and is tied to a Production Environment in dbt Cloud, and a `staging` branch that serves a clone of that data and is tied to a Staging Environment in dbt Cloud. You then branch off of `staging` to add new features or fix bugs, and merge back into `staging` when you're done. When you're ready to deploy to production, you merge `staging` into `main`. Staging is meant to be more-or-less a mirror of production, but safe to test breaking changes, so you can verify changes in a production-like environment before deploying them fully.
+2. Follow the steps to create a new repository. You can choose to only copy the `main` branch for simplicity, or take advantage of the Write-Audit-Publish (WAP) flow we use to maintain the project and copy all branches (which will include `main` and `staging`.
+
+> [!TIP]
+> In a setup that follows a WAP flow, you have a `main` branch that serves production data (like downstream dashboards) and is tied to a Production Environment in dbt Cloud, and a `staging` branch that serves a clone of that data and is tied to a Staging Environment in dbt Cloud. You then branch off of `staging` to add new features or fix bugs, and merge back into `staging` when you're done. When you're ready to deploy to production, you merge `staging` into `main`. Staging is meant to be more-or-less a mirror of production, but safe to test breaking changes, so you can verify changes in a production-like environment before deploying them fully. You _write_ to `staging`, _audit_ in `staging`, and _publish_ to `main`.
 
 ## Platform setup
 
-1. Set up a dbt Cloud account (if you don't have one already, if you do, just create a new project) and follow Step 4 in the [Quickstart instructions for your data platform](https://docs.getdbt.com/quickstarts), to connect your platform to dbt Cloud, then follow one of the two paths below to set up your development environment.
+1. Set up a dbt Cloud account (if you don't have one already, if you do, just create a new project) and follow Step 4 in the [Quickstart instructions for your data platform](https://docs.getdbt.com/quickstarts), to connect your platform to dbt Cloud.
+
+2. Choose the repo you created in Step 1 of the **Create new repo from template** section as the repository for your dbt Project's codebase.
 
 ### dbt Cloud IDE (most beginner friendly)
 
-1. Choose the repo you created in Step 1 as the repository for your dbt Project code.
+1. Click `Develop` in the dbt Cloud nav bar. You should be prompted to run a `dbt deps`, which you should do.
 
-2. Click `Develop` in the top nav, you should be prompted to run a `dbt deps`, which you should do.
+> [!TIP]
+> Make sure to turn on the 'Defer to staging/production' toggle once you're set up. This will ensure that only modified code is run when you run commands in the IDE, saving you time and resources!
 
 ### dbt Cloud CLI (if you prefer to work locally)
 
 > [!NOTE]
 > If you'd like to use the dbt Cloud CLI, but are a little intimidated by the terminal, we've included configuration for a _task runner_ called, fittingly, `task`. It's a simple way to run the commands you need to get started with dbt. You can install it by following the instructions [here](https://taskfile.dev/#/installation). We'll call out the `task` based alternative to each command below.
 
-1. Run `git clone [new repo name]` (or `gh repo clone [repo owner]/[new repo name]` if you prefer GitHub's excellent CLI) to clone your new repo from the first step to your local machine.
+1. Run `git clone [new repo name git link]` (or `gh repo clone [repo owner]/[new repo name]` if you prefer GitHub's excellent CLI) to clone your new repo from the first step of the **Create new repo from template** section to your local machine.
 
 2. [Follow the steps on this page](https://cloud.getdbt.com/cloud-cli) to install and set up a dbt Cloud connection with the dbt Cloud CLI.
 
 > [!TIP]
-> If you're using `task`, once you have dbt Cloud CLI setup, you can run `task setup` to skip all the rest of this and run all the setup commands in one easy command. We recommend it!
+> If you're using `task`, once you have dbt Cloud CLI set up, you can run `task setup` to skip all the rest of this and run all the setup commands in one easy command. We recommend it!
 
 3. Set up a virtual environment and activate it. I like to call my virtual environment `.venv` and add it to my `.gitignore` file (we've already done this if you name your virtual environment '`.venv`') so that I don't accidentally commit it to the repository, but you can call it whatever you want, just make sure you `.gitignore` it.
 
@@ -73,7 +79,7 @@ This is a sandbox project for exploring the basic functionality and latest featu
    task install
    ```
 
-5. Double checkthat your `dbt_project.yml` is set up correctly by running `dbt list`. You should get back a list of models and tests in your project.
+5. Double check that your `dbt_project.yml` is set up correctly by running `dbt list`. You should get back a list of models and tests in your project.
 
 ## Project setup
 
@@ -92,7 +98,7 @@ Once your development platform of choice and dependencies are set up, use the fo
 ### Manually
 
 > [!NOTE]
-> dbt Cloud CLI has a limit on the size of seed files that can be uploaded to your data warehouse. Seeds are _not_ meant for data loading in production, they're meant for small reference tables, we just use them for convenience here. If you want to generate more than the default 1 year of `jafgen` data, you'll need to use dbt Core to seed the data. We'll cover how to do this soon.
+> dbt Cloud CLI has a limit on the size of seed files that can be uploaded to your data warehouse. Seeds are _not_ meant for data loading in production, they're meant for small reference tables, we just use them for convenience here. If you want to generate more than the default 1 year of `jafgen` data, you'll need to use dbt Core to seed the data. [We cover how to do this here](#working-with-a-larger-dataset).
 
 1. In your activated virtual environment with dependencies installed, run `jafgen` to generate a year of synthetic data for the Jaffle Shop, no arguments are necessary for the defaults.
 
@@ -107,6 +113,9 @@ Once your development platform of choice and dependencies are set up, use the fo
    ```
 
 5. Run `dbt build` to build and test the project, make sure you deleted the generated data first or you'll be re-seeding the same data.
+
+> [!TIP]
+> The dbt Cloud CLI will automatically defer unmodified models to the previously built models in your staging or production environment, so you can run `dbt build`, `dbt test`, etc without worrying about running unnecessary code.
 
 ## Advanced options
 
