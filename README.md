@@ -9,6 +9,12 @@ This README will guide you through setting up the project on dbt Cloud. Working 
 
 Ready to go? Grab some water and a nice snack, and let's dig in!
 
+
+
+https://github.com/dbt-labs/jaffle-shop/assets/91998347/4c15011f-5b3d-4401-8962-c8f756c12b57
+
+
+
 ## Table of contents
 
 1. [Prerequisites](#-prerequisites)
