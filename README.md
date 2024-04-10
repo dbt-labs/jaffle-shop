@@ -4,7 +4,7 @@
 
 This is a sandbox project for exploring the basic functionality and latest features of dbt. It's based on a fictional restaurant called the Jaffle Shop that serves [jaffles](https://en.wikipedia.org/wiki/Pie_iron).
 
-This README will guide you through setting up the project on dbt Cloud. We'll also cover some more advanced options like setting up Environments and Jobs in dbt Cloud, working with a larger dataset, and setting up pre-commit hooks.
+This README will guide you through setting up the project on dbt Cloud. Working through this example should give you a good sense of how dbt Cloud works and what's involved with setting up your own project on dbt Cloud. We'll also _optionally_ cover some intermediate topics like setting up Environments and Jobs in dbt Cloud, working with a larger dataset, and setting up pre-commit hooks if you'd like. Let's dig in!
 
 > [!NOTE]
 > This project is geared towards folks learning dbt Cloud with a cloud warehouse. If you're brand new to dbt, we recommend starting with the [dbt Learn](https://learn.getdbt.com/) platform. It's a free, interactive way to learn dbt, and it's a great way to get started if you're new to the tool. If you just want to try dbt locally as quickly as possible without setting up a data warehouse check out [`jaffle_shop_duckdb`](https://github.com/dbt-labs/jaffle_shop_duckdb).
@@ -30,8 +30,8 @@ This README will guide you through setting up the project on dbt Cloud. We'll al
 ## 💾 Prerequisites
 
 - A dbt Cloud account
-- A data warehouse (BigQuery, Snowflake, Redshift, Databricks, or Postgres)
-- _Optional_ Python 3.8 or higher (for generating synthetic data with `jafgen` and running the project locally)
+- A data warehouse (BigQuery, Snowflake, Redshift, Databricks, or Postgres) with adequate permissions to create a fresh database for this project and run dbt in it
+- _Optional_ Python 3.8 or higher (for generating synthetic data with `jafgen`)
 
 ## 📓 Create new repo from template
 
