@@ -1,0 +1,28 @@
+{
+  "name": "python3",
+  "version": "0.0.1",
+  "description": "Python3 for Node - Built with emscripten.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/7scientists/python3-js.git"
+  },
+  "keywords": [
+    "python",
+    "python3",
+    "emscripten",
+    "asm.j",
+    "webassembly",
+    "scripting",
+    "python3.5"
+  ],
+  "author": "7scientists",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/7scientists/python3-js/issues"
+  },
+  "homepage": "https://github.com/7scientists/python3-js#readme"
+}
