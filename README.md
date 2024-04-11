@@ -9,11 +9,7 @@ This README will guide you through setting up the project on dbt Cloud. Working 
 
 Ready to go? Grab some water and a nice snack, and let's dig in!
 
-
-
 https://github.com/dbt-labs/jaffle-shop/assets/91998347/4c15011f-5b3d-4401-8962-c8f756c12b57
-
-
 
 ## Table of contents
 
@@ -73,12 +69,12 @@ There are couple ways to load the data for the project, in order of simplicity:
 
 - If you're working via the dbt Cloud IDE and your warehouse's web app interface, you can copy the data from a public S3 bucket to your warehouse into a schema called `raw` in your `jaffle_shop` database. Check out the instructions in the [Quickstart Guides for you platform](https://docs.getdbt.com/guides) for an example of how this works in your warehouse's syntax. The S3 bucket URIs of the tables you want to copy into your `raw` schema are:
 
-  - `raw_customers`: `s3://dbt-labs-dx-public/raw_customers.csv`
-  - `raw_orders`: `s3://dbt-labs-dx-public/raw_orders.csv`
-  - `raw_order_items`: `s3://dbt-labs-dx-public/raw_order_items.csv`
-  - `raw_products`: `s3://dbt-labs-dx-public/raw_products.csv`
-  - `raw_supplies`: `s3://dbt-labs-dx-public/raw_supplies.csv`
-  - `raw_stores`: `s3://dbt-labs-dx-public/raw_stores.csv`
+  - `raw_customers`: `s3://jaffle-shop-raw/raw_customers.csv`
+  - `raw_orders`: `s3://jaffle-shop-raw/raw_orders.csv`
+  - `raw_order_items`: `s3://jaffle-shop-raw/raw_order_items.csv`
+  - `raw_products`: `s3://jaffle-shop-raw/raw_products.csv`
+  - `raw_supplies`: `s3://jaffle-shop-raw/raw_supplies.csv`
+  - `raw_stores`: `s3://jaffle-shop-raw/raw_stores.csv`
 
 ### 🏁 Checkpoint
 
