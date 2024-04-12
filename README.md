@@ -28,6 +28,8 @@ https://github.com/dbt-labs/jaffle-shop/assets/91998347/4c15011f-5b3d-4401-8962-
       2. [Creating a Job](#%EF%B8%8F-creating-a-job)
       3. [Explore your DAG](#%EF%B8%8F-explore-your-dag)
    2. [Working with a larger dataset](#-working-with-a-larger-dataset)
+      1. [Load the data from S3](#-load-the-data-from-s3)
+      2. [Generate via `jafgen` and seed the data with dbt Core](#-generate-via-jafgen-and-seed-the-data-with-dbt-core)
    3. [Pre-commit and SQLFluff](#-pre-commit-and-sqlfluff)
 
 ## 💾 Prerequisites
@@ -242,7 +244,7 @@ There are two ways to work with a larger dataset than the default one year of da
 
 2. **Generate via `jafgen` and seed the data with dbt Core** which will allow you to generate up to 10 years of data.
 
-#### Load the data from S3
+#### 💾 Load the data from S3
 
 To load the data from S3, consult the [dbt Documentation's Quickstart Guides](https://docs.getdbt.com/guides) for your data platform to see how to copy data from an S3 bucket to your warehouse. The S3 bucket URIs of the tables you want to copy into your `raw` schema are:
 
@@ -253,7 +255,7 @@ To load the data from S3, consult the [dbt Documentation's Quickstart Guides](ht
 - `raw_supplies`: `s3://jaffle-shop-raw/raw_supplies.csv`
 - `raw_stores`: `s3://jaffle-shop-raw/raw_stores.csv`
 
-#### Generate via `jafgen` and seed the data with dbt Core
+#### 🌱 Generate via `jafgen` and seed the data with dbt Core
 
 [`jafgen`](https://github.com/dbt-labs/jaffle-shop-generator) is a simple tool for generating synthetic Jaffle Shop data that is maintained on a volunteer-basis by dbt Labs employees. This project is more interesting with a larger dataset generated and uploaded to your warehouse. 6 years is a nice amount to fully observe trends like growth, seasonality, and buyer personas that exist in the data. Uploading this amount of data requires a few extra steps, but we'll walk you through them. If you have a preferred way of loading CSVs into your warehouse or an S3 bucket, that will also work just fine, the generated data is just CSV files.
 
