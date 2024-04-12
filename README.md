@@ -236,14 +236,39 @@ From here, you should be able to use dbt Explorer (in the `Explore` tab of the d
 
 ### 🏭 Working with a larger dataset
 
+There are two ways to work with a larger dataset than the default one year of data that `jafgen` generates:
+
+1. **Load the data from S3** which will let you access the canonical 6 year dataset the project is tested against.
+
+2. **Generate via `jafgen` and seed the data with dbt Core** which will allow you to generate up to 10 years of data.
+
+#### Load the data from S3
+
+To load the data from S3, consult the [dbt Documentation's Quickstart Guides](https://docs.getdbt.com/guides) for your data platform to see how to copy data from an S3 bucket to your warehouse. The S3 bucket URIs of the tables you want to copy into your `raw` schema are:
+
+- `raw_customers`: `s3://jaffle-shop-raw/raw_customers.csv`
+- `raw_orders`: `s3://jaffle-shop-raw/raw_orders.csv`
+- `raw_order_items`: `s3://jaffle-shop-raw/raw_order_items.csv`
+- `raw_products`: `s3://jaffle-shop-raw/raw_products.csv`
+- `raw_supplies`: `s3://jaffle-shop-raw/raw_supplies.csv`
+- `raw_stores`: `s3://jaffle-shop-raw/raw_stores.csv`
+
+#### Generate via `jafgen` and seed the data with dbt Core
+
 [`jafgen`](https://github.com/dbt-labs/jaffle-shop-generator) is a simple tool for generating synthetic Jaffle Shop data that is maintained on a volunteer-basis by dbt Labs employees. This project is more interesting with a larger dataset generated and uploaded to your warehouse. 6 years is a nice amount to fully observe trends like growth, seasonality, and buyer personas that exist in the data. Uploading this amount of data requires a few extra steps, but we'll walk you through them. If you have a preferred way of loading CSVs into your warehouse or an S3 bucket, that will also work just fine, the generated data is just CSV files.
 
 1. Make sure your virtual environment is activated and you have the dependencies installed, this will install the `jafgen` CLI tool.
+
 2. `pip install dbt-core dbt-[your warehouse adapter]`. For example, if you're using BigQuery, you would run `pip install dbt-core dbt-bigquery`. dbt Core is required temporarily to seed the larger files, we'll uninstall it in the final step to avoid conflicts over the `dbt` command.
+
 3. Because you have an active virtual environment, this new install of `dbt` should take precedence in your [`$PATH`]($PATH`). If you're not familiar with the `PATH` environment variable, just think of this as the order in which your computer looks for commands to run. What's important is that it will look in your active virtual environment first, so when you run `dbt`, it will use the `dbt` you just installed in your virtual environment.
+
 4. Create a `profiles.yml` file in the root of your project. This file is already `.gitignore`d so you can keep your credentials safe. If you'd prefer you can also set up a `profiles.yml` file at the `~/.dbt/profiles.yml` path instead for extra security.
+
 5. [Add a profile for your warehouse connection in this file](https://docs.getdbt.com/docs/core/connect-data-platform/connection-profiles#connecting-to-your-warehouse-using-the-command-line) and add this configuration to your `dbt_project.yml` file as a top-level key called `profile` e.g. `profile: my-profile-name`.
+
 6. Run a `jafgen [integer of years to generate]` e.g. `jafgen 4`, then run a `dbt seed`. Depending on how much data you choose to generate this might take several minutes, we don't recommend generating more than 10 years of data as this is untested and may take a _really_ long time to generate and seed.
+
 7. `pip uninstall dbt-core dbt-[your warehouse adapter]` to remove the dbt Core installation. This is a temporary installation to allow you to seed the data, you don't need it for the rest of the project which will use the dbt Cloud CLI. You can then delete your `profiles.yml` file and the configuration in your `dbt_project.yml` file. If you want to keep your dbt Core installation, you can, but you'll need to be mindful of conflicts between the two installations which both use the `dbt` command.
 
 ### 🔍 Pre-commit and SQLFluff
