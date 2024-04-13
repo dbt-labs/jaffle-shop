@@ -9,7 +9,14 @@ This README will guide you through setting up the project on dbt Cloud. Working 
 
 Ready to go? Grab some water and a nice snack, and let's dig in!
 
-https://github.com/dbt-labs/jaffle-shop/assets/91998347/4c15011f-5b3d-4401-8962-c8f756c12b57
+<div>
+ <a href="https://www.loom.com/share/a90b383eea594a0ea41e91af394b2811?t=0&sid=da832f06-c08e-43e7-acae-a2a3d8d191bd">
+   <p>Welcome to the Jaffle Shop - Watch Intro Video</p>
+ </a>
+ <a href="https://www.loom.com/share/a90b383eea594a0ea41e91af394b2811?t=0&sid=da832f06-c08e-43e7-acae-a2a3d8d191bd">
+   <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/a90b383eea594a0ea41e91af394b2811-with-play.gif">
+ </a>
+</div>
 
 ## Table of contents
 
