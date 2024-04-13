@@ -15,7 +15,7 @@ tasks:
     cmds:
       - source .venv/bin/activate && python3 -m pip install --upgrade pip --progress-bar off > /dev/null
       - source .venv/bin/activate && python3 -m pip install -r requirements.txt --progress-bar off > /dev/null
-      - source .venv/bin/activate && python3 -m pip install dbt-core dbt-{{.DB}}
+      - source .venv/bin/activate && python3 -m pip install dbt-core dbt-{{.DB}} > /dev/null
 
   gen:
     cmds:
@@ -28,7 +28,7 @@ tasks:
   clean:
     cmds:
       - rm -rf jaffle-data
-      - source .venv/bin/activate && python3 -m pip uninstall dbt-core dbt-{{.DB}}
+      - source .venv/bin/activate && python3 -m pip uninstall dbt-core dbt-{{.DB}} -y
 
   load:
     cmds:

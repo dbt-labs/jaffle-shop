@@ -234,6 +234,13 @@ jafgen [number of years to generate] # e.g. jafgen 6
 dbt seed
 ```
 
+**OR**
+
+```bash
+task gen YEARS=[integer of years to generate] # e.g. task gen YEARS=6
+task seed
+```
+
 6. Remove the `jaffle-data` folder, then uninstall the temporary dbt Core installation. Again, this was to allow you to seed the large data files, you don't need it for the rest of the project which will use the dbt Cloud CLI. You can then delete your `profiles.yml` file and the configuration in your `dbt_project.yml` file. You should also delete the `jaffle-data` path from the `seed-paths` list in your `dbt_project.yml`.
 
 ```bash
@@ -241,7 +248,13 @@ rm -rf jaffle-data
 python3 -m pip uninstall dbt-core dbt-[your warehouse adapter] # e.g. dbt-bigquery
 ```
 
-You now have a much more interesting and expansive dataset in your `raw` schema to build with!
+**OR**
+
+```bash
+task clean
+```
+
+You now have a much more interesting and expansive dataset in your `raw` schema to build with! You should now run a `dbt build` to build the project with the new data into your dev schema or trigger your `Production Build` Job in dbt Cloud to build the project in your `prod` schema.
 
 ### 🔍 Pre-commit and SQLFluff
 
