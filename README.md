@@ -61,23 +61,6 @@ https://github.com/dbt-labs/jaffle-shop/assets/91998347/4c15011f-5b3d-4401-8962-
 
 <img width="500" alt="Repo selection in dbt Cloud" src="https://github.com/dbt-labs/jaffle-shop/assets/91998347/daac5bbc-097c-4d57-9628-0c85d348e4a4">
 
-### 📊 Load the data
-
-There are couple ways to load the data for the project, in order of simplicity:
-
-- If you're working on the command line and [have `pipx` installed](https://pipx.pypa.io/stable/), you can run `pipx run jagen` to generate a year of data without installing anything into the project or setting up a virtual environment. You can then load it via `dbt seed`.
-
-- If you're working on the command line and prefer to use vanilla `pip`, you can follow the instructions here to install `jafgen` in a virtual environment, generate a year of data, then load it via `dbt seed`. This is [covered in detail here](#-manually).
-
-- If you're working via the dbt Cloud IDE and your warehouse's web app interface, you can copy the data from a public S3 bucket to your warehouse into a schema called `raw` in your `jaffle_shop` database. Check out the instructions in the [Quickstart Guides for you platform](https://docs.getdbt.com/guides) for an example of how this works in your warehouse's syntax. The S3 bucket URIs of the tables you want to copy into your `raw` schema are:
-
-  - `raw_customers`: `s3://jaffle-shop-raw/raw_customers.csv`
-  - `raw_orders`: `s3://jaffle-shop-raw/raw_orders.csv`
-  - `raw_order_items`: `s3://jaffle-shop-raw/raw_order_items.csv`
-  - `raw_products`: `s3://jaffle-shop-raw/raw_products.csv`
-  - `raw_supplies`: `s3://jaffle-shop-raw/raw_supplies.csv`
-  - `raw_stores`: `s3://jaffle-shop-raw/raw_stores.csv`
-
 ### 🏁 Checkpoint
 
 The following should now be done:
@@ -85,7 +68,6 @@ The following should now be done:
 - dbt Cloud connected to your warehouse
 - Your copy of this repo set up as the codebase
 - dbt Cloud and the codebase pointed at a fresh database or project in your warehouse to work in
-- Raw data loaded into your warehouse
 
 You're now ready to start developing with dbt Cloud! Choose a path below (either the [dbt Cloud IDE](<#dbt-cloud-ide-(most-beginner-friendly)>) or the [Cloud CLI](<#dbt-cloud-cli-(if-you-prefer-to-work-locally)>) to get started.
 
@@ -97,6 +79,25 @@ You're now ready to start developing with dbt Cloud! Choose a path below (either
 > Make sure to turn on the 'Defer to staging/production' toggle once you're set up. This will ensure that only modified code is run when you run commands in the IDE, saving you time and resources!
 
 <img width="500" alt="Screenshot 2024-04-09 at 7 44 36 PM" src="https://github.com/dbt-labs/jaffle-shop/assets/91998347/9cdba3b0-6c64-4c40-8380-80c0ec619214">
+
+#### 📊 Load the data
+
+There are couple ways to load the data for the project:
+
+- Add `"jaffle-data"` to the `seed-paths` config in your `dbt_project.yml` as below. This means that when dbt is scanning folders for `seeds` to load it will look in both the `seeds` folder as is default, but _also_ the `jaffle-data` folder which contains a sample of the project data. Seeds are static data files in CSV format that dbt will upload, usually for reference models, like US zip codes mapped to country regions for example, but in this case the feature is hacked to do some data ingestion. This is not what seeds are meant to be used for (dbt is not a data loading tool), but it's useful for this project to give you some data to get going with quickly. Run a `dbt seed` and when it's done either delete the `jaffle-data` folder, remove `jaffle-data` from the `seed-paths` list, or ideally, both.
+
+```yaml dbt_project.yml
+seed-paths: ["seeds", "jaffle-data"]
+```
+
+- If you're working via the dbt Cloud IDE and your warehouse's web app interface, you can also copy the data from a public S3 bucket to your warehouse into a schema called `raw` in your `jaffle_shop` database. Check out the instructions in the [Quickstart Guides for your platform](https://docs.getdbt.com/guides) for an example of how this works in your warehouse's syntax. The S3 bucket URIs of the tables you want to copy into your `raw` schema are:
+
+  - `raw_customers`: `s3://jaffle-shop-raw/raw_customers.csv`
+  - `raw_orders`: `s3://jaffle-shop-raw/raw_orders.csv`
+  - `raw_order_items`: `s3://jaffle-shop-raw/raw_order_items.csv`
+  - `raw_products`: `s3://jaffle-shop-raw/raw_products.csv`
+  - `raw_supplies`: `s3://jaffle-shop-raw/raw_supplies.csv`
+  - `raw_stores`: `s3://jaffle-shop-raw/raw_stores.csv`
 
 ### 💽 dbt Cloud CLI (if you prefer to work locally)
 
