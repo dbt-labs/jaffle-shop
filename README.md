@@ -9,19 +9,25 @@ This README will guide you through setting up the project on dbt Cloud. Working 
 
 Ready to go? Grab some water and a nice snack, and let's dig in!
 
-https://github.com/dbt-labs/jaffle-shop/assets/91998347/4c15011f-5b3d-4401-8962-c8f756c12b57
+
+<div>
+ <a href="https://www.loom.com/share/a90b383eea594a0ea41e91af394b2811?t=0&sid=da832f06-c08e-43e7-acae-a2a3d8d191bd">
+   <p>Welcome to the Jaffle Shop - Watch Intro Video</p>
+ </a>
+ <a href="https://www.loom.com/share/a90b383eea594a0ea41e91af394b2811?t=0&sid=da832f06-c08e-43e7-acae-a2a3d8d191bd">
+   <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/a90b383eea594a0ea41e91af394b2811-with-play.gif">
+ </a>
+</div>
 
 ## Table of contents
 
 1. [Prerequisites](#-prerequisites)
 2. [Create new repo from template](#-create-new-repo-from-template)
 3. [Platform setup](#%EF%B8%8F-platform-setup)
-   1. [Load the data](#-load-the-data)
-   2. [dbt Cloud IDE](#%EF%B8%8F-dbt-cloud-ide-most-beginner-friendly)
-   3. [dbt Cloud CLI](#-dbt-cloud-cli-if-you-prefer-to-work-locally)
+   1. [dbt Cloud IDE](#%EF%B8%8F-dbt-cloud-ide-most-beginner-friendly)
+   2. [dbt Cloud CLI](#-dbt-cloud-cli-if-you-prefer-to-work-locally)
+   3. [Load the data](#-load-the-data)
 4. [Project setup](#%EF%B8%8F-project-setup)
-   1. [With `task`](#%EF%B8%8F-with-task)
-   2. [Manually](#-manually)
 5. [Going further](#-going-further)
    1. [Setting up dbt Cloud Environments and Jobs](#%EF%B8%8F-setting-up-dbt-cloud-environments-and-jobs)
       1. [Creating an Environment](#-creating-an-environment)
@@ -61,23 +67,6 @@ https://github.com/dbt-labs/jaffle-shop/assets/91998347/4c15011f-5b3d-4401-8962-
 
 <img width="500" alt="Repo selection in dbt Cloud" src="https://github.com/dbt-labs/jaffle-shop/assets/91998347/daac5bbc-097c-4d57-9628-0c85d348e4a4">
 
-### 📊 Load the data
-
-There are couple ways to load the data for the project, in order of simplicity:
-
-- If you're working on the command line and [have `pipx` installed](https://pipx.pypa.io/stable/), you can run `pipx run jagen` to generate a year of data without installing anything into the project or setting up a virtual environment. You can then load it via `dbt seed`.
-
-- If you're working on the command line and prefer to use vanilla `pip`, you can follow the instructions here to install `jafgen` in a virtual environment, generate a year of data, then load it via `dbt seed`. This is [covered in detail here](#-manually).
-
-- If you're working via the dbt Cloud IDE and your warehouse's web app interface, you can copy the data from a public S3 bucket to your warehouse into a schema called `raw` in your `jaffle_shop` database. Check out the instructions in the [Quickstart Guides for you platform](https://docs.getdbt.com/guides) for an example of how this works in your warehouse's syntax. The S3 bucket URIs of the tables you want to copy into your `raw` schema are:
-
-  - `raw_customers`: `s3://jaffle-shop-raw/raw_customers.csv`
-  - `raw_orders`: `s3://jaffle-shop-raw/raw_orders.csv`
-  - `raw_order_items`: `s3://jaffle-shop-raw/raw_order_items.csv`
-  - `raw_products`: `s3://jaffle-shop-raw/raw_products.csv`
-  - `raw_supplies`: `s3://jaffle-shop-raw/raw_supplies.csv`
-  - `raw_stores`: `s3://jaffle-shop-raw/raw_stores.csv`
-
 ### 🏁 Checkpoint
 
 The following should now be done:
@@ -85,7 +74,6 @@ The following should now be done:
 - dbt Cloud connected to your warehouse
 - Your copy of this repo set up as the codebase
 - dbt Cloud and the codebase pointed at a fresh database or project in your warehouse to work in
-- Raw data loaded into your warehouse
 
 You're now ready to start developing with dbt Cloud! Choose a path below (either the [dbt Cloud IDE](<#dbt-cloud-ide-(most-beginner-friendly)>) or the [Cloud CLI](<#dbt-cloud-cli-(if-you-prefer-to-work-locally)>) to get started.
 
@@ -93,90 +81,41 @@ You're now ready to start developing with dbt Cloud! Choose a path below (either
 
 1. Click `Develop` in the dbt Cloud nav bar. You should be prompted to run a `dbt deps`, which you should do. This will install the dbt packages configured in the `packages.yml` file.
 
-> [!TIP]
-> Make sure to turn on the 'Defer to staging/production' toggle once you're set up. This will ensure that only modified code is run when you run commands in the IDE, saving you time and resources!
-
-<img width="500" alt="Screenshot 2024-04-09 at 7 44 36 PM" src="https://github.com/dbt-labs/jaffle-shop/assets/91998347/9cdba3b0-6c64-4c40-8380-80c0ec619214">
-
 ### 💽 dbt Cloud CLI (if you prefer to work locally)
-
-> [!NOTE]
-> If you'd like to use the dbt Cloud CLI, but are a little intimidated by the terminal, we've included configuration for a _task runner_ called, fittingly, `task`. It's a simple way to run the commands you need to get started with dbt. You can install it by following the instructions [here](https://taskfile.dev/#/installation). We'll call out the `task` based alternative to each command below.
 
 1. Run `git clone [new repo git link]` (or `gh repo clone [repo owner]/[new repo name]` if you prefer GitHub's excellent CLI) to clone your new repo from the first step of the **Create new repo from template** section to your local machine.
 
 2. [Follow the steps on this page](https://cloud.getdbt.com/cloud-cli) to install and set up a dbt Cloud connection with the dbt Cloud CLI.
 
-> [!IMPORTANT]
-> If you're using `task`, once you have dbt Cloud CLI set up, you can run `task setup` to skip all the rest of this and run all the setup commands in one easy command. We recommend it!
+### 📊 Load the data
 
-3. Set up a virtual environment and activate it.[^1] I like to call my virtual environment `.venv` and add it to my `.gitignore` file (we've already done this if you name your virtual environment '`.venv`') so that I don't accidentally commit it to the repository, but you can call it whatever you want, just make sure you `.gitignore` it.
+There are couple ways to load the data for the project if you're using the dbt Cloud IDE:
 
-   ```shell
-   # create a virtual environment
-   python3 -m venv .venv
-   # activate the virtual environment
-   source .venv/bin/activate
-   OR
-   # create a virtual environment
-   task venv
-   ```
+- Add `"jaffle-data"` to the `seed-paths` config in your `dbt_project.yml` as below. This means that when dbt is scanning folders for `seeds` to load it will look in both the `seeds` folder as is default, but _also_ the `jaffle-data` folder which contains a sample of the project data. Seeds are static data files in CSV format that dbt will upload, usually for reference models, like US zip codes mapped to country regions for example, but in this case the feature is hacked to do some data ingestion. This is not what seeds are meant to be used for (dbt is not a data loading tool), but it's useful for this project to give you some data to get going with quickly. Run a `dbt seed` and when it's done either delete the `jaffle-data` folder, remove `jaffle-data` from the `seed-paths` list, or ideally, both.
 
-4. Install the project's requirements into your virtual environment.
+```yaml dbt_project.yml
+seed-paths: ["seeds", "jaffle-data"]
+```
 
-   ```shell
-   # upgrade pip (always a good idea to do first!)
-   python3 -m pip install --upgrade pip
-   # install the project's requirements
-   python3 -m pip install -r requirements.txt
-   OR
-   # install the project's requirements
-   task install
-   ```
+```bash
+dbt seed
+```
 
-5. Double check that your `dbt_project.yml` is set up correctly by running `dbt list`. You should get back a list of models and tests in your project.
+- If you'd prefer a larger dataset (6 years instead of 1), you can also copy the data from a public S3 bucket to your warehouse into a schema called `raw` in your `jaffle_shop` database. [This is discussed here](#-load-the-data-from-s3).
 
 ## 👷🏻‍♀️ Project setup
 
 Once your development platform of choice and dependencies are set up, use the following steps to get the project ready for whatever you'd like to do with it.
 
-### 🏎️ With `task`
+1. Ensure that you've deleted the `jaffle-data` folder or removed it from the `seed-paths` list in your `dbt_project.yml` (or, ideally, both) if you used the seed method to load the data. This is important, if you don't do this, `dbt build` will re-run the seeds unnecessarily and things will get messy.
 
-1. Run `task gen` to generate a year of synthetic data for the Jaffle Shop.
-
-2. Run `task build` to seed the generated data into your warehouse and build the project.
-
-3. Run `task clean` to delete the generated data to avoid re-seeding the same data repeatedly for no reason.
-
-#### OR
-
-### 💪 Manually
-
-> [!NOTE]
-> dbt Cloud CLI has a limit on the size of seed files that can be uploaded to your data warehouse. Seeds are _not_ meant for data loading in production, they're meant for small reference tables, we just use them for convenience here. If you want to generate more than the default 1 year of `jafgen` data, you'll need to use dbt Core to seed the data. [We cover how to do this here](#-working-with-a-larger-dataset).
-
-1. In your activated virtual environment with dependencies installed, run `jafgen` to generate a year of synthetic data for the Jaffle Shop, no arguments are necessary for the defaults.
-
-2. Run `dbt deps` to install the dbt packages configured in the `packages.yml` file.
-
-3. Run `dbt seed` to seed the generated data into your warehouse.
-
-4. Delete the generated data to avoid re-seeding the same data repeatedly for no reason, slowing down your build process.
-
-   ```shell
-   rm -rf jaffle-data
-   ```
-
-5. Run `dbt build` to build and test the project, make sure you deleted the generated data first or you'll be re-seeding the same data.
-
-> [!TIP]
-> The dbt Cloud CLI will automatically defer unmodified models to the previously built models in your staging or production environment, so you can run `dbt build`, `dbt test`, etc without worrying about running unnecessary code.
+2. Run a `dbt build` to build the project.
 
 ### 🏁 Checkpoint
 
 The following should now be done:
 
-- A year of synthetic data loaded into your warehouse
+- Synthetic data loaded into your warehouse
 - Development environment set up and ready to go
 - The project built and tested
 
@@ -230,6 +169,14 @@ Now we'll create a Job to deploy our project to production. This Job will run th
 
 7. Go check out the `prod` schema in your `jaffle_shop` database on your warehouse, you should see the project's models built there!
 
+> [!TIP]
+> If you're working in the dbt Cloud IDE, make sure to turn on the 'Defer to staging/production' toggle once you've done this. This will ensure that only modified code is run when you run commands in the IDE, compared against the Production environment you just set up. This will save you significant time and resources!
+
+<img width="500" alt="Screenshot 2024-04-09 at 7 44 36 PM" src="https://github.com/dbt-labs/jaffle-shop/assets/91998347/9cdba3b0-6c64-4c40-8380-80c0ec619214">
+
+> [!TIP]
+> The dbt Cloud CLI will automatically defer unmodified models to the previously built models in your staging or production environment, so you can run `dbt build`, `dbt test`, etc without worrying about running unnecessary code.
+
 #### 🗺️ Explore your DAG
 
 From here, you should be able to use dbt Explorer (in the `Explore` tab of the dbt Cloud nav bar) to explore your DAG! Explorer is populated with metadata from your designated Production and Staging Environments, so you can see the lineage of your project visually, and much more.
@@ -242,7 +189,7 @@ There are two ways to work with a larger dataset than the default one year of da
 
 1. **Load the data from S3** which will let you access the canonical 6 year dataset the project is tested against.
 
-2. **Generate via `jafgen` and seed the data with dbt Core** which will allow you to generate up to 10 years of data.
+2. **Generate via [`jafgen`](https://github.com/dbt-labs/jaffle-shop-generator) and seed the data with dbt Core** which will allow you to generate up to 10 years of data.
 
 #### 💾 Load the data from S3
 
@@ -257,21 +204,65 @@ To load the data from S3, consult the [dbt Documentation's Quickstart Guides](ht
 
 #### 🌱 Generate via `jafgen` and seed the data with dbt Core
 
-[`jafgen`](https://github.com/dbt-labs/jaffle-shop-generator) is a simple tool for generating synthetic Jaffle Shop data that is maintained on a volunteer-basis by dbt Labs employees. This project is more interesting with a larger dataset generated and uploaded to your warehouse. 6 years is a nice amount to fully observe trends like growth, seasonality, and buyer personas that exist in the data. Uploading this amount of data requires a few extra steps, but we'll walk you through them. If you have a preferred way of loading CSVs into your warehouse or an S3 bucket, that will also work just fine, the generated data is just CSV files.
+You'll need to be working on the command line for this option. If you're more comfortable working via web apps, the above method is the path you'll need. [`jafgen`](https://github.com/dbt-labs/jaffle-shop-generator) is a simple tool for generating synthetic Jaffle Shop data that is maintained on a volunteer-basis by dbt Labs employees. This project is more interesting with a larger dataset generated and uploaded to your warehouse. 6 years is a nice amount to fully observe trends like growth, seasonality, and buyer personas that exist in the data. Uploading this amount of data requires a few extra steps, but we'll walk you through them. If you have a preferred way of loading CSVs into your warehouse or an S3 bucket, that will also work just fine, the generated data is just CSV files.
 
-1. Make sure your virtual environment is activated and you have the dependencies installed, this will install the `jafgen` CLI tool.
+> [!TIP]
+> If you'd like to explore further on the command line, but are a little intimidated by the terminal, we've included configuration for a _task runner_ called, fittingly, `task`. It's a simple way to run the commands you need to get started with dbt. You can install it by following the instructions [here](https://taskfile.dev/#/installation). We'll call out the `task` based alternative to each command below that provides an 'easy button'. It's a useful tool to have installed regardless.
 
-2. `pip install dbt-core dbt-[your warehouse adapter]`. For example, if you're using BigQuery, you would run `pip install dbt-core dbt-bigquery`. dbt Core is required temporarily to seed the larger files, we'll uninstall it in the final step to avoid conflicts over the `dbt` command.
+1. Create a `profiles.yml` file in the root of your project. This file is already `.gitignore`d so you can keep your credentials safe. If you'd prefer you can instead set up a `profiles.yml` file at the `~/.dbt/profiles.yml` path instead to be extra sure you don't accidentally commit the file.
 
-3. Because you have an active virtual environment, this new install of `dbt` should take precedence in your [`$PATH`]($PATH`). If you're not familiar with the `PATH` environment variable, just think of this as the order in which your computer looks for commands to run. What's important is that it will look in your active virtual environment first, so when you run `dbt`, it will use the `dbt` you just installed in your virtual environment.
+2. [Add a profile for your warehouse connection in this file](https://docs.getdbt.com/docs/core/connect-data-platform/connection-profiles#connecting-to-your-warehouse-using-the-command-line) and add this configuration to your `dbt_project.yml` file as a top-level key called `profile` e.g. `profile: my-profile-name`.
 
-4. Create a `profiles.yml` file in the root of your project. This file is already `.gitignore`d so you can keep your credentials safe. If you'd prefer you can also set up a `profiles.yml` file at the `~/.dbt/profiles.yml` path instead for extra security.
+> [!IMPORTANT]
+> If you do decide to use `task` there is a super-task (`task load`) that will do all of the below steps for you. Just run `task load YEARS=[integer of years to generate] DB=[name of warehouse]` e.g. `task YEARS=4 DB=bigquery` or `task YEARS=7 DB=redshift` etc to perform all the commands necessary to generate and seed the data once your `profiles.yml` file is set up.
 
-5. [Add a profile for your warehouse connection in this file](https://docs.getdbt.com/docs/core/connect-data-platform/connection-profiles#connecting-to-your-warehouse-using-the-command-line) and add this configuration to your `dbt_project.yml` file as a top-level key called `profile` e.g. `profile: my-profile-name`.
+3. Create a new virtual environment in your project (I like to call mine `.venv`) and activate it, then install the project's dependencies in it. This will install the `jafgen` tool which you can use to generate the larger datasets. Then install `dbt-core` and your warehouse's adapter. We install dbt Core temporarily because by connecting directly to your warehouse, it can upload larger file sizes than the dbt Cloud server[^1]. You can do this manually or with `task`:
 
-6. Run a `jafgen [integer of years to generate]` e.g. `jafgen 4`, then run a `dbt seed`. Depending on how much data you choose to generate this might take several minutes, we don't recommend generating more than 10 years of data as this is untested and may take a _really_ long time to generate and seed.
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install -r requirements.txt
+python3 -m pip install dbt-core dbt-[your warehouse adapter] # e.g. dbt-bigquery
+```
 
-7. `pip uninstall dbt-core dbt-[your warehouse adapter]` to remove the dbt Core installation. This is a temporary installation to allow you to seed the data, you don't need it for the rest of the project which will use the dbt Cloud CLI. You can then delete your `profiles.yml` file and the configuration in your `dbt_project.yml` file. If you want to keep your dbt Core installation, you can, but you'll need to be mindful of conflicts between the two installations which both use the `dbt` command.
+**OR**
+
+```bash
+task venv
+task install DB=[name of warehouse] # e.g. task install DB=bigquery
+```
+
+> [!NOTE]
+> Because you have an active virtual environment, this new install of `dbt` should take precedence in your [`$PATH`]($PATH`). If you're not familiar with the `PATH` environment variable, just think of this as the order in which your computer looks for commands to run. What's important is that it will look in your active virtual environment first, so when you run `dbt`, it will use the `dbt` you just installed in your virtual environment.
+
+5. Add `jaffle-data` to your `seed-paths` config in your `dbt-project.yml` as [detailed here](#-load-the-data), then run `jafgen` and `seed` the data it generates.
+
+```bash
+jafgen [number of years to generate] # e.g. jafgen 6
+dbt seed
+```
+
+**OR**
+
+```bash
+task gen YEARS=[integer of years to generate] # e.g. task gen YEARS=6
+task seed
+```
+
+6. Remove the `jaffle-data` folder, then uninstall the temporary dbt Core installation. Again, this was to allow you to seed the large data files, you don't need it for the rest of the project which will use the dbt Cloud CLI. You can then delete your `profiles.yml` file and the configuration in your `dbt_project.yml` file. You should also delete the `jaffle-data` path from the `seed-paths` list in your `dbt_project.yml`.
+
+```bash
+rm -rf jaffle-data
+python3 -m pip uninstall dbt-core dbt-[your warehouse adapter] # e.g. dbt-bigquery
+```
+
+**OR**
+
+```bash
+task clean
+```
+
+You now have a much more interesting and expansive dataset in your `raw` schema to build with! You should now run a `dbt build` to build the project with the new data into your dev schema or trigger your `Production Build` Job in dbt Cloud to build the project in your `prod` schema.
 
 ### 🔍 Pre-commit and SQLFluff
 
@@ -288,8 +279,8 @@ At present the following checks are run:
 - `end-of-file-fixer` - which ensures all files end with a newline
 - `trailing-whitespace` - which trims trailing whitespace from files
 
-At present, the popular SQL linter and formatter SQLFluff doesn't play nicely with the dbt Cloud CLI, so we've omitted it from this project _for now_. If you'd like auto-formatting and linting for SQL, check out the dbt Cloud IDE!
+At present, the popular SQL linter and formatter SQLFluff doesn't play nicely with the dbt Cloud CLI, so we've omitted it from this project _for now_. We've already built the backend for linting via the Cloud CLI, so this will change very soon! At present if you'd like auto-formatting and linting for SQL, check out the dbt Cloud IDE!
 
 We have kept a `.sqlfluff` config file to show what that looks like, and to future proof the repo for when the Cloud CLI support linting and formatting.
 
-[^1]: If you have [pipx installed](https://pipx.pypa.io/stable/), you can run `pipx run jafgen` to generate a year of data without installing anything into the project or setting up a virtual environment. You can then load it via `dbt seed`. You can skip to step 4 of [the manual setup](#-manually) instructions if you take this path.
+[^1]: Again, I can't emphasize enough that you should not use dbt and seeds for data loading in a production project. This is just for convenience within this learning project.

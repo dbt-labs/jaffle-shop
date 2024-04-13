@@ -1,38 +1,39 @@
 version: "3"
 
+silent: true
+
+vars:
+  YEARS: 6
+  DB: bigquery
+
 tasks:
   venv:
     cmds:
       - python3 -m venv .venv
-    silent: true
 
   install:
     cmds:
       - source .venv/bin/activate && python3 -m pip install --upgrade pip --progress-bar off > /dev/null
       - source .venv/bin/activate && python3 -m pip install -r requirements.txt --progress-bar off > /dev/null
-    silent: true
+      - source .venv/bin/activate && python3 -m pip install dbt-core dbt-{{.DB}} > /dev/null
 
   gen:
     cmds:
-      - source .venv/bin/activate && jafgen
-    silent: true
+      - source .venv/bin/activate && jafgen {{.YEARS}}
 
-  build:
+  seed:
     cmds:
-      - dbt deps
-      - dbt seed
-      - dbt run
-      - dbt test
+      - source .venv/bin/activate && dbt seed
 
   clean:
     cmds:
       - rm -rf jaffle-data
-    silent: true
+      - source .venv/bin/activate && python3 -m pip uninstall dbt-core dbt-{{.DB}} -y
 
-  setup:
+  load:
     cmds:
       - task: venv
       - task: install
       - task: gen
-      - task: build
+      - task: seed
       - task: clean
