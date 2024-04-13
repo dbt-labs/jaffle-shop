@@ -9,7 +9,6 @@ This README will guide you through setting up the project on dbt Cloud. Working 
 
 Ready to go? Grab some water and a nice snack, and let's dig in!
 
-
 <div>
  <a href="https://www.loom.com/share/a90b383eea594a0ea41e91af394b2811?t=0&sid=da832f06-c08e-43e7-acae-a2a3d8d191bd">
    <p>Welcome to the Jaffle Shop - Watch Intro Video</p>
@@ -89,9 +88,9 @@ You're now ready to start developing with dbt Cloud! Choose a path below (either
 
 ### 📊 Load the data
 
-There are couple ways to load the data for the project if you're using the dbt Cloud IDE:
+There are a few ways to load the data for the project:
 
-- Add `"jaffle-data"` to the `seed-paths` config in your `dbt_project.yml` as below. This means that when dbt is scanning folders for `seeds` to load it will look in both the `seeds` folder as is default, but _also_ the `jaffle-data` folder which contains a sample of the project data. Seeds are static data files in CSV format that dbt will upload, usually for reference models, like US zip codes mapped to country regions for example, but in this case the feature is hacked to do some data ingestion. This is not what seeds are meant to be used for (dbt is not a data loading tool), but it's useful for this project to give you some data to get going with quickly. Run a `dbt seed` and when it's done either delete the `jaffle-data` folder, remove `jaffle-data` from the `seed-paths` list, or ideally, both.
+- **Using the sample data in the repo**. Add `"jaffle-data"` to the `seed-paths` config in your `dbt_project.yml` as below. This means that when dbt is scanning folders for `seeds` to load it will look in both the `seeds` folder as is default, but _also_ the `jaffle-data` folder which contains a sample of the project data. Seeds are static data files in CSV format that dbt will upload, usually for reference models, like US zip codes mapped to country regions for example, but in this case the feature is hacked to do some data ingestion. This is not what seeds are meant to be used for (dbt is not a data loading tool), but it's useful for this project to give you some data to get going with quickly. Run a `dbt seed` and when it's done either delete the `jaffle-data` folder, remove `jaffle-data` from the `seed-paths` list, or ideally, both.
 
 ```yaml dbt_project.yml
 seed-paths: ["seeds", "jaffle-data"]
@@ -101,7 +100,9 @@ seed-paths: ["seeds", "jaffle-data"]
 dbt seed
 ```
 
-- If you'd prefer a larger dataset (6 years instead of 1), you can also copy the data from a public S3 bucket to your warehouse into a schema called `raw` in your `jaffle_shop` database. [This is discussed here](#-load-the-data-from-s3).
+- **Load the data via S3**. If you'd prefer a larger dataset (6 years instead of 1), and are working via the dbt Cloud IDE and your platform's web interface, you can also copy the data from a public S3 bucket to your warehouse into a schema called `raw` in your `jaffle_shop` database. [This is discussed here](#-load-the-data-from-s3).
+
+- **Generate a larger dataset on the command line**. If you're working with the dbt Cloud CLI and comfortable with command line basics, you can generate as many years of data as you'd like (up to 10) to load into your warehouse. [This is discussed here](#-generate-via-jafgen-and-seed-the-data-with-dbt-core).
 
 ## 👷🏻‍♀️ Project setup
 
@@ -185,7 +186,7 @@ From here, you should be able to use dbt Explorer (in the `Explore` tab of the d
 
 ### 🏭 Working with a larger dataset
 
-There are two ways to work with a larger dataset than the default one year of data that `jafgen` generates:
+There are two ways to work with a larger dataset than the default one year of data that comes with the project:
 
 1. **Load the data from S3** which will let you access the canonical 6 year dataset the project is tested against.
 
