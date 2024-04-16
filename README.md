@@ -124,6 +124,9 @@ You're free to explore the Jaffle Shop from here, or if you want to learn more a
 
 ## 🌅 Going further
 
+> [!NOTE]
+> 🐉 Here be dragons! The following sections are for folks who are comfortable with the basics and want to explore more advanced topics. If you're just getting started, it's okay to skip these for now and come back later.
+
 ### ☁️ Setting up dbt Cloud Environments and Jobs
 
 #### 🌍 Creating an Environment
