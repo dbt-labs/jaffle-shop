@@ -4,7 +4,7 @@ models:
     columns:
       - name: location_id
         description: The unique key for each location.
-        tests:
+        data_tests:
           - not_null
           - unique
 

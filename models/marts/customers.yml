@@ -1,13 +1,13 @@
 models:
   - name: customers
     description: Customer overview data mart, offering key details for each unique customer. One row per customer.
-    tests:
+    data_tests:
       - dbt_utils.expression_is_true:
           expression: "lifetime_spend_pretax + lifetime_tax_paid = lifetime_spend"
     columns:
       - name: customer_id
         description: The unique key of the orders mart.
-        tests:
+        data_tests:
           - not_null
           - unique
       - name: customer_name
@@ -26,7 +26,7 @@ models:
         description: The sum of all the order totals (including tax) that a customer has ever placed.
       - name: customer_type
         description: Options are 'new' or 'returning', indicating if a customer has ordered more than once or has only placed their first order to date.
-        tests:
+        data_tests:
           - accepted_values:
               values: ["new", "returning"]
 

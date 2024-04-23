@@ -4,12 +4,12 @@ models:
     columns:
       - name: order_item_id
         description: The unique key for each order item.
-        tests:
+        data_tests:
           - not_null
           - unique
       - name: order_id
         description: The corresponding order each order item belongs to
-        tests:
+        data_tests:
           - not_null
           - relationships:
               to: ref('stg_orders')
