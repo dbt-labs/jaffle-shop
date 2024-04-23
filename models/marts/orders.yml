@@ -1,7 +1,7 @@
 models:
   - name: orders
     description: Order overview data mart, offering key details for each order inlcluding if it's a customer's first order and a food vs. drink item breakdown. One row per order.
-    tests:
+    data_tests:
       - dbt_utils.expression_is_true:
           expression: "order_items_subtotal = subtotal"
       - dbt_utils.expression_is_true:
@@ -9,12 +9,12 @@ models:
     columns:
       - name: order_id
         description: The unique key of the orders mart.
-        tests:
+        data_tests:
           - not_null
           - unique
       - name: customer_id
         description: The foreign key relating to the customer who placed the order.
-        tests:
+        data_tests:
           - relationships:
               to: ref('stg_customers')
               field: customer_id

@@ -4,6 +4,6 @@ models:
     columns:
       - name: customer_id
         description: The unique key for each customer.
-        tests:
+        data_tests:
           - not_null
           - unique
