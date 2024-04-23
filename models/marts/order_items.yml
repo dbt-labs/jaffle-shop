@@ -179,3 +179,4 @@ saved_queries:
       - name: revenue_metrics
         config:
           export_as: table
+          schema: dbt_winnie
