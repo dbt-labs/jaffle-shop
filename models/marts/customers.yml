@@ -1,0 +1,22 @@
+models:
+  - name: customers
+    description: This model provides a comprehensive summary of customer data, including their order history and spending behavior.
+    columns:
+      - name: customer_id
+        description: The unique identifier for each customer.
+      - name: customer_name
+        description: The name of the customer.
+      - name: count_lifetime_orders
+        description: The total number of orders the customer has placed.
+      - name: first_ordered_at
+        description: The timestamp of the customer's first order.
+      - name: last_ordered_at
+        description: The timestamp of the customer's most recent order.
+      - name: lifetime_spend_pretax
+        description: The total amount spent by the customer before taxes.
+      - name: lifetime_tax_paid
+        description: The total amount of tax paid by the customer on all orders.
+      - name: lifetime_spend
+        description: The total amount spent by the customer, including taxes.
+      - name: customer_type
+        description: Indicates if the customer is 'new' or 'returning' based on their order history.
