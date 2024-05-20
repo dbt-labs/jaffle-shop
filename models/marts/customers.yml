@@ -4,6 +4,9 @@ models:
     columns:
       - name: customer_id
         description: The unique identifier for each customer.
+        tests:
+          - unique
+          - not_null
       - name: customer_name
         description: The name of the customer.
       - name: count_lifetime_orders
