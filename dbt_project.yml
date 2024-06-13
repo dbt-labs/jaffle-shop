@@ -34,3 +34,11 @@ models:
       +materialized: view
     marts:
       +materialized: table
+
+unit_tests:
+  jaffle_shop:
+    +expected_sql: "This also is identified as unused!"
+    marts:
+      order_items:
+        test_supply_costs_sum_correctly:
+          expected_sql: "Oh no, identified as unused!"
