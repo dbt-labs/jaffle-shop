@@ -33,4 +33,5 @@ models:
     staging:
       +materialized: view
     marts:
+      +enabled: false
       +materialized: table
