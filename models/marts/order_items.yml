@@ -75,11 +75,11 @@ semantic_models:
       - name: food_revenue
         description: The revenue generated for each order item. Revenue is calculated as a sum of revenue associated with each product in an order.
         agg: sum
-        expr: case when is_food_item = 1 then product_price else 0 end
+        expr: case when is_food_item is true then product_price else 0 end
       - name: drink_revenue
         description: The revenue generated for each order item. Revenue is calculated as a sum of revenue associated with each product in an order.
         agg: sum
-        expr: case when is_drink_item = 1 then product_price else 0 end
+        expr: case when is_drink_item is true then product_price else 0 end
       - name: median_revenue
         description: The median revenue generated for each order item.
         agg: median
