@@ -1,0 +1,153 @@
+models:
+  - name: orders
+    description: Order overview data mart, offering key details for each order inlcluding if it's a customer's first order and a food vs. drink item breakdown. One row per order.
+    columns:
+      - name: order_id
+        description: The unique key of the orders mart.
+        tests:
+          - not_null
+          - unique
+      - name: customer_id
+        description: The foreign key relating to the customer who placed the order.
+        tests:
+          - relationships:
+              to: ref('stg_customers')
+              field: customer_id
+      - name: location_id
+        description: The foreign key relating to the location the order was placed at.
+      - name: order_total
+        description: The total amount of the order in USD including tax.
+      - name: ordered_at
+        description: The timestamp the order was placed at.
+      - name: count_food_items
+        description: The number of individual food items ordered.
+      - name: count_drink_items
+        description: The number of individual drink items ordered.
+      - name: count_items
+        description: The total number of both food and drink items ordered.
+      - name: subtotal_food_items
+        description: The sum of all the food item prices without tax.
+      - name: subtotal_drink_items
+        description: The sum of all the drink item prices without tax.
+      - name: subtotal
+        description: The sum total of both food and drink item prices without tax.
+      - name: order_cost
+        description: The sum of supply expenses to fulfill the order.
+      - name: location_name
+        description: The full location name of where this order was placed. Denormalized from `stg_locations`.
+      - name: is_first_order
+        description: A boolean indicating if this order is from a new customer placing their first order.
+      - name: is_food_order
+        description: A boolean indicating if this order included any food items.
+      - name: is_drink_order
+        description: A boolean indicating if this order included any drink items.
+
+semantic_models:
+  - name: orders
+    defaults:
+      agg_time_dimension: ordered_at
+    description: |
+      Order fact table. This table is at the order grain with one row per order.
+    model: ref('orders')
+    entities:
+      - name: order_id
+        type: primary
+      - name: location
+        type: foreign
+        expr: location_id
+      - name: customer
+        type: foreign
+        expr: customer_id
+    dimensions:
+      - name: ordered_at
+        expr: ordered_at
+        type: time
+        type_params:
+          time_granularity: day
+      - name: ordered_at_test
+        expr: ordered_at
+        type: time
+        type_params:
+          time_granularity: day
+      - name: order_total_dim
+        type: categorical
+        expr: order_total
+      - name: is_food_order
+        type: categorical
+      - name: is_drink_order
+        type: categorical
+    measures:
+      - name: order_total
+        description: The total amount for each order including taxes.
+        agg: sum
+      - name: order_count
+        expr: 1
+        agg: sum
+      - name: tax_paid
+        description: The total tax paid on each order.
+        agg: sum
+      - name: customers_with_orders
+        description: Distinct count of customers placing orders
+        agg: count_distinct
+        expr: customer_id
+      - name: locations_with_orders
+        description: Distinct count of locations with order
+        expr: location_id
+        agg: count_distinct
+      - name: order_cost
+        description: The cost for each order item. Cost is calculated as a sum of the supply cost for each order item.
+        agg: sum
+
+metrics:
+  - name: order_total
+    description: Sum of total order amonunt. Includes tax + revenue.
+    type: simple
+    label: Order Total
+    type_params:
+      measure: order_total
+  - name: large_order
+    description: "Count of orders with order total over 20."
+    type: simple
+    label: "Large Orders"
+    type_params:
+      measure: order_count
+    filter: |
+      {{ Dimension('order_id__order_total_dim') }} >= 20
+  - name: orders
+    description: Count of orders.
+    label: Orders
+    type: simple
+    type_params:
+      measure: order_count
+  - name: orders_fill_nulls_with_zero
+    description: Example metric colaescing null to zero. 
+    label: Orders (Fill nulls with 0)
+    type: simple
+    type_params:
+      measure: 
+        name: order_count
+        fill_nulls_with: 0
+        join_to_timespine: true
+  - name: twice_orders_fill_nulls_with_0
+    description: Example derived metric.
+    label: Twice Orders
+    type: derived
+    type_params:
+      expr: 2 * orders_fill_nulls_with_zero
+      metrics:
+        - orders_fill_nulls_with_zero
+  - name: food_orders
+    description: Count of orders that contain food order items
+    label: Food Orders
+    type: simple
+    type_params:
+      measure: order_count
+    filter: |
+      {{ Dimension('order_id__is_food_order') }} = true
+  - name: orders_last_7_days
+    description: Count of orders.
+    label: orders last 7 days
+    type: cumulative
+    type_params:
+      measure: order_count
+      window: 7 days

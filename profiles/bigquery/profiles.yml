@@ -1,0 +1,9 @@
+jaffle_shop:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      project: turntable-test
+      dataset: dbt_sl_test
+      method: oauth
+      

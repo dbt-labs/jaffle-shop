@@ -1,36 +1,49 @@
+# Name your project! Project names should contain only lowercase characters
+# and underscores. A good package name should reflect your organization's
+# name or the intended use of these models
+name: "jaffle_shop"
+version: "1.0.0"
 config-version: 2
 
-name: "jaffle_shop"
-version: "3.0.0"
-require-dbt-version: ">=1.5.0"
+# This setting configures which "profile" dbt uses for this project.
+profile: "jaffle_shop"
+require-dbt-version: [">=1.7.0", "<1.8.0"]
 
-dbt-cloud:
-  project-id: 275557 # Put your project id here
-
-profile: default # Put your profile here
-
+# These configurations specify where dbt should look for different types of files.
+# The `model-paths` config, for example, states that models in this project can be
+# found in the "models/" directory. You probably won't need to change these!
 model-paths: ["models"]
 analysis-paths: ["analyses"]
-test-paths: ["data-tests"]
-seed-paths: ["seeds"]
+test-paths: ["tests"]
+seed-paths: ["jaffle-data"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
 
-target-path: "target"
-clean-targets:
+target-path: "target" # directory which will store compiled SQL files
+clean-targets: # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
 
 vars:
+  truncate_timespan_to: "{{ current_timestamp() }}"
   "dbt_date:time_zone": "America/Los_Angeles"
 
-seeds:
-  jaffle_shop:
-    +schema: raw
+# Configuring models
+# Full documentation: https://docs.getdbt.com/docs/configuring-models
+
+# In this example config, we tell dbt to build all models in the example/ directory
+# as tables. These settings can be overridden in the individual model files
+# using the `{{ config(...) }}` macro.
 
 models:
   jaffle_shop:
     staging:
       +materialized: view
+      +tags: bronze
     marts:
       +materialized: table
+      +tags: gold
+
+saved-queries:
+  +cache:
+    enabled: true

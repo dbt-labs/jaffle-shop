@@ -1,0 +1,98 @@
+models:
+  - name: customers
+    description: Customer overview data mart, offering key details for each unique customer. One row per customer.
+    columns:
+      - name: customer_id
+        description: The unique key of the orders mart.
+        tests:
+          - not_null
+          - unique
+      - name: customer_name
+        description: Customers' full name.
+      - name: count_lifetime_orders
+        description: Total number of orders a customer has ever placed.
+      - name: first_ordered_at
+        description: The timestamp when a customer placed their first order.
+      - name: last_ordered_at
+        description: The timestamp of a customer's most recent order.
+      - name: lifetime_spend_pretax
+        description: The sum of all the pre-tax subtotals of every order a customer has placed.
+      - name: lifetime_spend
+        description: The sum of all the order totals (including tax) that a customer has ever placed.
+      - name: customer_type
+        description: Options are 'new' or 'returning', indicating if a customer has ordered more than once or has only placed their first order to date.
+        tests:
+          - accepted_values:
+              values: ["new", "returning"]
+
+semantic_models:
+  - name: customers
+    defaults:
+      agg_time_dimension: first_ordered_at
+    description: |
+      Customer grain mart.
+    model: ref('customers')
+    entities:
+      - name: customer
+        expr: customer_id
+        type: primary
+    dimensions:
+      - name: customer_name
+        type: categorical
+      - name: customer_type
+        type: categorical
+      - name: first_ordered_at
+        type: time
+        type_params:
+          time_granularity: day
+      - name: last_ordered_at
+        type: time
+        type_params:
+          time_granularity: day
+    measures:
+      - name: count_lifetime_orders
+        description: Total count of orders per customer.
+        agg: sum
+      - name: lifetime_spend_pretax
+        description: Customer lifetime spend before taxes.
+        agg: sum
+      - name: lifetime_spend
+        agg: sum
+        description: Gross customer lifetime spend inclusive of taxes.
+
+metrics:
+  # Simple metrics
+  - name: customers_with_orders
+    description: "Distict count of customers placing orders"
+    type: simple
+    label: Customers w/ Orders
+    type_params:
+      measure: customers_with_orders
+  - name: new_customer
+    description: Unique count of new customers.
+    label: New Customers
+    type: simple
+    type_params:
+      measure: customers_with_orders
+    filter: |
+      {{ Dimension('customer__customer_type') }}  = 'new'
+
+saved_queries:
+  - name: new_customer_orders
+    description: New customer orders by name and time
+    query_params:
+      metrics:
+        - orders
+      group_by:
+        - Dimension('customer__customer_name')
+        - TimeDimension('metric_time', 'day')
+      where:
+        - "{{ Dimension('customer__customer_type') }}  = 'new'"
+    exports:
+      - name: new_customer_orders
+        config:
+          export_as: table
+      - name: new_customer_orders_view
+        config:
+          export_as: view
+          alias: new_customer_orders_export_alias

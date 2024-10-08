@@ -3,6 +3,8 @@ with
 source as (
 
     select * from {{ source('ecom', 'raw_orders') }}
+    -- if you generate a larger dataset, you can limit the timespan to the current time with the following line
+    -- where ordered_at <= {{ var('truncate_timespan_to') }}
 
 ),
 
@@ -16,15 +18,11 @@ renamed as (
         customer as customer_id,
 
         ---------- numerics
-        subtotal as subtotal_cents,
-        tax_paid as tax_paid_cents,
-        order_total as order_total_cents,
-        {{ cents_to_dollars('subtotal') }} as subtotal,
-        {{ cents_to_dollars('tax_paid') }} as tax_paid,
-        {{ cents_to_dollars('order_total') }} as order_total,
+        (order_total / 100.0) as order_total,
+        (tax_paid / 100.0) as tax_paid,
 
         ---------- timestamps
-        {{ dbt.date_trunc('day','ordered_at') }} as ordered_at
+        {{dbt.date_trunc('day','ordered_at')}} as ordered_at
 
     from source
 

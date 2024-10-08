@@ -1,0 +1,13 @@
+jaffle_shop:
+  target: dev
+  outputs:
+    dev:
+      type: redshift
+      method: database
+      host: "{{ env_var('REDSHIFT_0_HOST') }}"
+      user: "{{ env_var('REDSHIFT_0_USER')}}"
+      password: "{{ env_var('REDSHIFT_0_PASSWORD') }}"
+      port: "{{ env_var('REDSHIFT_0_PORT') | as_number }}"
+      dbname: mydb
+      schema: dbt_sl_test
+      sslmode: disable

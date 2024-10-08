@@ -4,40 +4,31 @@ models:
     columns:
       - name: location_id
         description: The unique key for each location.
-        data_tests:
+        tests:
           - not_null
           - unique
 
-unit_tests:
-  - name: test_does_location_opened_at_trunc_to_date
-    description: "Check that opened_at timestamp is properly truncated to a date."
-    model: stg_locations
-    given:
-      - input: source('ecom', 'raw_stores')
-        rows:
-          - {
-              id: 1,
-              name: "Vice City",
-              tax_rate: 0.2,
-              opened_at: "2016-09-01T00:00:00",
-            }
-          - {
-              id: 2,
-              name: "San Andreas",
-              tax_rate: 0.1,
-              opened_at: "2079-10-27T23:59:59.9999",
-            }
-    expect:
-      rows:
-        - {
-            location_id: 1,
-            location_name: "Vice City",
-            tax_rate: 0.2,
-            opened_date: "2016-09-01",
-          }
-        - {
-            location_id: 2,
-            location_name: "San Andreas",
-            tax_rate: 0.1,
-            opened_date: "2079-10-27",
-          }
+semantic_models:
+  - name: locations
+    description: |
+      Location dimension table. The grain of the table is one row per location.
+    model: ref('stg_locations')
+    defaults:
+      agg_time_dimension: opened_at
+    entities:
+      - name: location
+        type: primary
+        expr: location_id
+    dimensions:
+      - name: location_name
+        type: categorical
+      - name: opened_at
+        expr: opened_at
+        type: time
+        type_params:
+          time_granularity: day
+    measures:
+      - name: average_tax_rate
+        description: Average tax rate.
+        expr: tax_rate
+        agg: average
