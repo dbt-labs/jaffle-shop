@@ -5,7 +5,7 @@ source as (
     select * from {{ source('ecom', 'raw_customers') }}
 
 ),
-
+-- no comment
 renamed as (
 
     select
