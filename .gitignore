@@ -6,7 +6,7 @@ env
 target/
 dbt_packages/
 logs/
-jaffle-data/*
+jaffle-data/
 profiles.yml
 
 .DS_Store
