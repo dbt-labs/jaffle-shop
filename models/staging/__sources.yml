@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: ecom
-    schema: raw
+    schema: ds_jaffle_shop
     description: E-commerce data for the Jaffle Shop
     freshness:
       warn_after:
