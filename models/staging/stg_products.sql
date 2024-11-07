@@ -10,19 +10,15 @@ renamed as (
 
     select
 
-        ----------  ids
         sku as product_id,
 
-        ---------- text
         name as product_name,
         type as product_type,
         description as product_description,
 
 
-        ---------- numerics
         (price / 100.0) as product_price,
 
-        ---------- booleans
         case
             when type = 'jaffle' then 1
             else 0
