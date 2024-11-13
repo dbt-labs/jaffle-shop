@@ -5,5 +5,11 @@ models:
   columns:
   - name: customer_id
     description: ''
-  - name: customer_name
+  - name: name
+    description: ''
+  - name: is_repeating_customer
+    description: ''
+  - name: life_time_value
+    description: ''
+  - name: average_order_value
     description: ''

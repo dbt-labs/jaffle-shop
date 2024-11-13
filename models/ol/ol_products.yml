@@ -13,3 +13,5 @@ models:
     description: ''
   - name: price
     description: ''
+  - name: amount_supplies
+    description: ''
