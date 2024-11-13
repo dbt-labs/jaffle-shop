@@ -1,0 +1,15 @@
+version: 2
+models:
+- name: cl_products
+  description: ''
+  columns:
+  - name: product_id
+    description: ''
+  - name: product_name
+    description: ''
+  - name: product_type
+    description: ''
+  - name: product_description
+    description: ''
+  - name: product_price_cents
+    description: ''

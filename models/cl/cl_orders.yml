@@ -1,0 +1,19 @@
+version: 2
+models:
+- name: cl_orders
+  description: ''
+  columns:
+  - name: order_id
+    description: ''
+  - name: location_id
+    description: ''
+  - name: customer_id
+    description: ''
+  - name: ordered_at
+    description: ''
+  - name: subtotal_cents
+    description: ''
+  - name: tax_paid_cents
+    description: ''
+  - name: order_total_cents
+    description: ''

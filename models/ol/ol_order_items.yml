@@ -1,0 +1,11 @@
+version: 2
+models:
+- name: ol_order_items
+  description: ''
+  columns:
+  - name: order_item_id
+    description: ''
+  - name: order_id
+    description: ''
+  - name: product_id
+    description: ''

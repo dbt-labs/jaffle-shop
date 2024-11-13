@@ -1,0 +1,9 @@
+version: 2
+models:
+- name: cl_items
+  description: ''
+  columns:
+  - name: order_item_id
+    description: ''
+  - name: product_id
+    description: ''

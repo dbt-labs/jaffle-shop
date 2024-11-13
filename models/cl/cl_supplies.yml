@@ -1,0 +1,17 @@
+version: 2
+models:
+- name: cl_supplies
+  description: ''
+  columns:
+  - name: supply_id
+    description: ''
+  - name: supply_type_id
+    description: ''
+  - name: product_id
+    description: ''
+  - name: supply_type_name
+    description: ''
+  - name: is_perishable
+    description: ''
+  - name: supply_cost_cents
+    description: ''

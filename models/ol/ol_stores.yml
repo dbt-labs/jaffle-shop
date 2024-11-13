@@ -1,0 +1,13 @@
+version: 2
+models:
+- name: ol_stores
+  description: ''
+  columns:
+  - name: store_id
+    description: ''
+  - name: opened_date
+    description: ''
+  - name: location
+    description: ''
+  - name: location_tax_rate
+    description: ''

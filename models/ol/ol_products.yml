@@ -1,0 +1,15 @@
+version: 2
+models:
+- name: ol_products
+  description: ''
+  columns:
+  - name: product_id
+    description: ''
+  - name: name
+    description: ''
+  - name: type
+    description: ''
+  - name: description
+    description: ''
+  - name: price
+    description: ''

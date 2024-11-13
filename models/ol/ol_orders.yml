@@ -1,0 +1,19 @@
+version: 2
+models:
+- name: ol_orders
+  description: ''
+  columns:
+  - name: order_id
+    description: ''
+  - name: location_id
+    description: ''
+  - name: customer_id
+    description: ''
+  - name: ordered_at
+    description: ''
+  - name: subtotal
+    description: ''
+  - name: tax_paid
+    description: ''
+  - name: order_total
+    description: ''

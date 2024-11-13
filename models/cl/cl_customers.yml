@@ -1,0 +1,9 @@
+version: 2
+models:
+- name: cl_customers
+  description: ''
+  columns:
+  - name: customer_id
+    description: ''
+  - name: customer_name
+    description: ''
