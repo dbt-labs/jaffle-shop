@@ -4,7 +4,7 @@ name: "jaffle_shop"
 version: "3.0.0"
 require-dbt-version: ">=1.5.0"
 
-profile: analytics_engineering_course # Put your profile here
+profile: analytics_engineering_course
 
 model-paths: ["models"]
 analysis-paths: ["analyses"]
@@ -30,4 +30,10 @@ models:
     staging:
       +materialized: view
     marts:
+      +materialized: table
+    cl:
+      +materialized: table
+    ol:
+      +materialized: table
+    bl:
       +materialized: table

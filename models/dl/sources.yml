@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: dl
+    tables:
+      - name: customers
+      - name: stores
+      - name: items
+      - name: orders
+      - name: products
+      - name: supplies
