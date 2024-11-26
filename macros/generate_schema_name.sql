@@ -1,23 +1,23 @@
-{% macro generate_schema_name(custom_schema_name, node) %}
+{% macro generate_schema_name(custom_schema_name=none, node=none) -%}
+  {%- set default_schema = target.schema -%}
+  {%- if custom_schema_name is none and target.name in ('prod') -%}
+        {# Check if the model does not contain a subfolder (e.g, models created at the MODELS root folder) #}
+        {% if node.fqn[1:-1]|length == 0 %}
+            {{ default_schema }}    
+        {% else %}
+            {# Concat the subfolder(s) name #}
+            {% set prefix = node.fqn[1:-1]|join('_') %}
+            {{ prefix | trim }}
+        {% endif %}
 
-    {% set default_schema = target.schema %}
+    {%- elif custom_schema_name is not none -%}
 
-    {# seeds go in a global `raw` schema #}
-    {% if node.resource_type == 'seed' %}
         {{ custom_schema_name | trim }}
 
-    {# non-specified schemas go to the default target schema #}
-    {% elif custom_schema_name is none %}
-        {{ default_schema }}
+    {%- else -%}
 
+        {{ target.schema | trim }}
 
-    {# specified custom schema names go to the schema name prepended with the the default schema name in prod (as this is an example project we want the schemas clearly labeled) #}
-    {% elif target.name == 'prod' %}
-        {{ default_schema }}_{{ custom_schema_name | trim }}
+    {%- endif -%}
 
-    {# specified custom schemas go to the default target schema for non-prod targets #}
-    {% else %}
-        {{ default_schema }}
-    {% endif %}
-
-{% endmacro %}
+{%- endmacro %}
