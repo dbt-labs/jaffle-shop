@@ -201,7 +201,7 @@ To load the data from S3, consult the [dbt Documentation's Quickstart Guides](ht
 
 - `raw_customers`: `s3://jaffle-shop-raw/raw_customers.csv`
 - `raw_orders`: `s3://jaffle-shop-raw/raw_orders.csv`
-- `raw_order_items`: `s3://jaffle-shop-raw/raw_order_items.csv`
+- `raw_items`: `s3://jaffle-shop-raw/raw_items.csv`
 - `raw_products`: `s3://jaffle-shop-raw/raw_products.csv`
 - `raw_supplies`: `s3://jaffle-shop-raw/raw_supplies.csv`
 - `raw_stores`: `s3://jaffle-shop-raw/raw_stores.csv`
