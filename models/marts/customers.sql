@@ -1,3 +1,9 @@
+{{ config(meta = {
+    'favorite_food': 'pizza'
+}) }}
+
+select 1 as id
+
 with
 
 customers as (

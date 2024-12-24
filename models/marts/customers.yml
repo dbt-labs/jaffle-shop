@@ -1,5 +1,8 @@
 models:
   - name: customers
+    config:
+      meta:
+        favorite_food: "pizza"
     description: Customer overview data mart, offering key details for each unique customer. One row per customer.
     data_tests:
       - dbt_utils.expression_is_true:
@@ -75,6 +78,9 @@ metrics:
     type: simple
     type_params:
       measure: lifetime_spend_pretax
+    config:
+      meta: 
+        owner: "finance_team" 
   - name: count_lifetime_orders
     description: Count of lifetime orders
     label: Count Lifetime Orders
@@ -93,6 +99,8 @@ metrics:
 
 saved_queries:
   - name: customer_order_metrics
+    config:
+      tags: ['santi']
     query_params:
       metrics:
         - count_lifetime_orders
@@ -104,3 +112,4 @@ saved_queries:
       - name: customer_order_metrics
         config:
           export_as: table
+          tags: ['santi']
