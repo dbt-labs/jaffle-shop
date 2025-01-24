@@ -36,6 +36,7 @@ order_items_summary as (
     from order_items
 
     group by 1
+    limit 10
 
 ),
 
@@ -75,3 +76,5 @@ customer_order_count as (
 )
 
 select * from customer_order_count
+
+limit 10

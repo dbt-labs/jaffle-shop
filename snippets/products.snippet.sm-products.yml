@@ -1,26 +1,26 @@
-# :snippet-start: sm-supplies
 semantic_models:
   #The name of the semantic model.
-  - name: supplies
+  - name: products
     description: |
-      Supplies dimension table. The grain of the table is one row per supply and product combination.
+      Product dimension table. The grain of the table is one row per product.
     #The name of the dbt model and schema
-    model: ref('supplies')
+    model: ref('products')
     #Entities. These usually corespond to keys in the table.
     entities:
-      - name: supply
+      - name: product
         type: primary
-        expr: supply_uuid
+        expr: product_id
     #Dimensions. Either categorical or time. These add additonal context to metrics. The typical querying pattern is Metric by Dimension.
     dimensions:
-      - name: supply_id
+      - name: product_name
         type: categorical
-      - name: product_id
+      - name: product_type
         type: categorical
-      - name: supply_name
+      - name: product_description
         type: categorical
-      - name: supply_cost
+      - name: is_food_item
         type: categorical
-      - name: is_perishable_supply
+      - name: is_drink_item
         type: categorical
-# :snippet-end:
+      - name: product_price
+        type: categorical

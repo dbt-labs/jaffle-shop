@@ -6,6 +6,7 @@ require-dbt-version: ">=1.5.0"
 
 dbt-cloud:
   project-id: 283328 # Put your project id here
+  defer-env-id: '303267'
 
 profile: default # Put your profile here
 

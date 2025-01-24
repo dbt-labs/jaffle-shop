@@ -1,4 +1,3 @@
-# :snippet-start: sm-locations
 semantic_models:
   - name: locations
     description: |
@@ -23,4 +22,3 @@ semantic_models:
         description: Average tax rate.
         expr: tax_rate
         agg: average
-# :snippet-end:

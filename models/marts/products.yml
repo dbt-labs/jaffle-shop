@@ -1,3 +1,4 @@
+# :snippet-start: sm-products
 semantic_models:
   #The name of the semantic model.
   - name: products
@@ -24,3 +25,4 @@ semantic_models:
         type: categorical
       - name: product_price
         type: categorical
+# :snippet-end:
