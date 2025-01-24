@@ -1,6 +1,6 @@
 models:
   - name: stg_orders
-    description: Order data with basic cleaning and transformation applied, one row per order.
+    description: Order data with basic cleaning and transformation applied, one row per order. add test here
     data_tests:
       - dbt_utils.expression_is_true:
           expression: "order_total - tax_paid = subtotal"
