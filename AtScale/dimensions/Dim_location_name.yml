@@ -1,0 +1,17 @@
+unique_name: Dim_location_name
+object_type: dimension
+label: Dim location_name
+hierarchies:
+  - unique_name: location_name_Hierarchy
+    label: location_name_Hierarchy
+    folder: Locations
+    levels:
+      - unique_name: location_name
+is_degenerate: true
+level_attributes:
+  - unique_name: location_name
+    label: location_name
+    dataset: locations_dataset
+    key_columns:
+      - LOCATION_NAME
+    name_column: LOCATION_NAME

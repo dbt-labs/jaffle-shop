@@ -1,0 +1,9 @@
+unique_name: average_tax_rate
+object_type: metric
+label: average_tax_rate
+description: Average tax rate.
+calculation_method: average
+column: AVERAGE_TAX_RATE
+dataset: locations_dataset
+folder: Locations
+unrelated_dimensions_handling: repeat

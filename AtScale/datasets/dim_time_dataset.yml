@@ -1,0 +1,78 @@
+unique_name: dim_time_dataset
+object_type: dataset
+label: dim_time_dataset
+columns:
+  - name: NAME
+    data_type: string
+  - name: PK_DATE
+    data_type: datetime
+  - name: DATEKEY
+    data_type: int
+  - name: DATE_NAME
+    data_type: string
+  - name: YEAR
+    data_type: string
+  - name: YEAR_NAME
+    data_type: string
+  - name: HALF_YEAR
+    data_type: date
+  - name: HALF_YEAR_NAME
+    data_type: string
+  - name: QUARTER
+    data_type: date
+  - name: QUARTER_NAME
+    data_type: string
+  - name: MONTH
+    data_type: date
+  - name: MONTH_NAME
+    data_type: string
+  - name: WEEK
+    data_type: date
+  - name: WEEK_NAME
+    data_type: string
+  - name: DAY_OF_YEAR
+    data_type: int
+  - name: DAY_OF_YEAR_NAME
+    data_type: string
+  - name: DAY_OF_WEEK
+    data_type: int
+  - name: DAY_OF_WEEK_NAME
+    data_type: string
+  - name: WEEK_OF_YEAR
+    data_type: int
+  - name: WEEK_OF_YEAR_NAME
+    data_type: string
+  - name: MONTH_OF_YEAR
+    data_type: int
+  - name: MONTH_OF_YEAR_NAME
+    data_type: string
+  - name: QUARTER_OF_YEAR
+    data_type: int
+  - name: QUARTER_OF_YEAR_NAME
+    data_type: string
+connection_id: dbt_connection_snowflake
+sql: |-
+  SELECT DATE_DAY::TIMESTAMP as PK_DATE,
+            cast(to_char(DATE_DAY, '%Y%m%d') as decimal) as DATEKEY,
+            to_char(DATE_DAY, '%A, %B %d, %Y') as DATE_NAME,
+            CAST(EXTRACT(YEAR from DATE_DAY) AS STRING) as YEAR,
+            concat('Calendar ',to_char(DATE_DAY, '%Y')) as YEAR_NAME,
+            IFF(EXTRACT(QUARTER FROM DATE_DAY) < 3, DATE_TRUNC('year', DATE_DAY), DATEADD('quarter', 2, DATE_TRUNC('year', DATE_DAY))) as HALF_YEAR,
+            IFF(EXTRACT(QUARTER FROM DATE_DAY) < 3, concat('Semester 1, ',to_char(DATE_DAY, '%Y')), concat('Semester 2, ', to_char(DATE_DAY, '%Y')))as HALF_YEAR_NAME,
+            DATE_TRUNC('quarter', DATE_DAY) as QUARTER,
+            concat('Quarter ', EXTRACT(QUARTER from DATE_DAY), ', ', EXTRACT(YEAR from DATE_DAY)) as QUARTER_NAME,
+            DATE_TRUNC('month', DATE_DAY) as MONTH,
+            to_char(DATE_DAY, '%B %Y') as MONTH_NAME,
+            DATE_TRUNC('week', DATE_DAY) as WEEK,
+            concat('Week ', EXTRACT(WEEK from DATE_DAY), to_char(DATE_DAY, ', %Y')) as WEEK_NAME,
+            EXTRACT(DAYOFYEAR from DATE_DAY) as DAY_OF_YEAR,
+            concat('Day ', EXTRACT(DAYOFYEAR from DATE_DAY)) as DAY_OF_YEAR_NAME,
+            EXTRACT(DAYOFWEEK from DATE_DAY) as DAY_OF_WEEK,
+            DAYNAME(DATE_DAY) as DAY_OF_WEEK_NAME,
+            EXTRACT(WEEK from DATE_DAY) as WEEK_OF_YEAR,
+            concat('Week ', EXTRACT(WEEK from DATE_DAY)) as WEEK_OF_YEAR_NAME,
+            EXTRACT(MONTH from DATE_DAY) as MONTH_OF_YEAR,
+            MONTHNAME(DATE_DAY) as MONTH_OF_YEAR_NAME,
+            EXTRACT(QUARTER from DATE_DAY) as QUARTER_OF_YEAR,
+            concat('Quarter ', EXTRACT(QUARTER from DATE_DAY)) as QUARTER_OF_YEAR_NAME
+            FROM DBT_DB.DBT_ANALYTICS.METRICFLOW_TIME_SPINE

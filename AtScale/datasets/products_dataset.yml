@@ -1,0 +1,21 @@
+unique_name: products_dataset
+object_type: dataset
+label: products_dataset
+columns:
+  - name: PRODUCT
+    data_type: string
+    sql: PRODUCT_ID
+  - name: PRODUCT_NAME
+    data_type: string
+  - name: PRODUCT_TYPE
+    data_type: string
+  - name: PRODUCT_DESCRIPTION
+    data_type: string
+  - name: IS_FOOD_ITEM
+    data_type: boolean
+  - name: IS_DRINK_ITEM
+    data_type: boolean
+  - name: PRODUCT_PRICE
+    data_type: string
+connection_id: dbt_connection_snowflake
+table: PRODUCTS

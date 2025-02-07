@@ -1,0 +1,19 @@
+unique_name: supplies_dataset
+object_type: dataset
+label: supplies_dataset
+columns:
+  - name: SUPPLY
+    data_type: string
+    sql: SUPPLY_UUID
+  - name: SUPPLY_ID
+    data_type: string
+  - name: PRODUCT_ID
+    data_type: string
+  - name: SUPPLY_NAME
+    data_type: string
+  - name: SUPPLY_COST
+    data_type: string
+  - name: IS_PERISHABLE_SUPPLY
+    data_type: boolean
+connection_id: dbt_connection_snowflake
+table: SUPPLIES

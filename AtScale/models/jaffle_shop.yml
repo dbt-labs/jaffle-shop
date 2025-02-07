@@ -1,0 +1,18 @@
+unique_name: jaffle_shop
+object_type: model
+label: jaffle_shop
+dimensions:
+  - Dim_location_name
+metrics:
+  - unique_name: average_tax_rate
+    folder: Locations
+relationships:
+  - unique_name: locations_dataset_Date Dimension_opened_at
+    from:
+      dataset: locations_dataset
+      join_columns:
+        - OPENED_AT
+    role_play: opened_at {0}
+    to:
+      dimension: Date Dimension
+      level: DayMonth

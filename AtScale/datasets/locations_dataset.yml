@@ -1,0 +1,16 @@
+unique_name: locations_dataset
+object_type: dataset
+label: locations_dataset
+columns:
+  - name: LOCATION
+    data_type: string
+    sql: LOCATION_ID
+  - name: LOCATION_NAME
+    data_type: string
+  - name: OPENED_AT
+    data_type: datetime
+  - name: AVERAGE_TAX_RATE
+    data_type: decimal
+    sql: TAX_RATE
+connection_id: dbt_connection_snowflake
+table: LOCATIONS

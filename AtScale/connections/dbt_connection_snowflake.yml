@@ -1,0 +1,6 @@
+unique_name: dbt_connection_snowflake
+object_type: connection
+label: DBT snowflake Connection snowflake
+as_connection: snowflake
+database: DBT_DB
+schema: DBT_ANALYTICS
