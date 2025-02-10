@@ -1,3 +1,4 @@
+# comment abc123
 models:
   - name: stg_customers
     description: Customer data with basic cleaning and transformation applied, one row per customer.
