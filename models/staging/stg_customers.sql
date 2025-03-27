@@ -1,3 +1,7 @@
+
+
+{% set reproduce_var = var("reproduce_test") %}
+
 with
 
 source as (
