@@ -32,5 +32,6 @@ models:
   jaffle_shop:
     staging:
       +materialized: view
+      +invalid-config: tru
     marts:
       +materialized: table
