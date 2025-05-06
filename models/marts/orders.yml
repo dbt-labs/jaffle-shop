@@ -1,6 +1,6 @@
 models:
   - name: orders
-    description: Order overview data mart, offering key details for each order inlcluding if it's a customer's first order and a food vs. drink item breakdown. One row per order.
+    description: Order overview data mart, offering key details for each order inlcluding if it's a customer's first order and a food vs. drink item breakdown. One row per order.c
     data_tests:
       - dbt_utils.expression_is_true:
           expression: "order_items_subtotal = subtotal"
@@ -36,44 +36,17 @@ unit_tests:
     given:
       - input: ref('order_items')
         rows:
-          - {
-              order_id: 1,
-              order_item_id: 1,
-              is_drink_item: false,
-              is_food_item: true,
-            }
-          - {
-              order_id: 1,
-              order_item_id: 2,
-              is_drink_item: true,
-              is_food_item: false,
-            }
-          - {
-              order_id: 2,
-              order_item_id: 3,
-              is_drink_item: false,
-              is_food_item: true,
-            }
+          - {order_id: 1, order_item_id: 1, is_drink_item: false, is_food_item: true}
+          - {order_id: 1, order_item_id: 2, is_drink_item: true, is_food_item: false}
+          - {order_id: 2, order_item_id: 3, is_drink_item: false, is_food_item: true}
       - input: ref('stg_orders')
         rows:
-          - { order_id: 1 }
-          - { order_id: 2 }
+          - {order_id: 1}
+          - {order_id: 2}
     expect:
       rows:
-        - {
-            order_id: 1,
-            count_food_items: 1,
-            count_drink_items: 1,
-            is_drink_order: true,
-            is_food_order: true,
-          }
-        - {
-            order_id: 2,
-            count_food_items: 1,
-            count_drink_items: 0,
-            is_drink_order: false,
-            is_food_order: true,
-          }
+        - {order_id: 1, count_food_items: 1, count_drink_items: 1, is_drink_order: true, is_food_order: true}
+        - {order_id: 2, count_food_items: 1, count_drink_items: 0, is_drink_order: false, is_food_order: true}
 
 semantic_models:
   - name: orders
