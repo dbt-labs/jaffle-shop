@@ -1,5 +1,5 @@
 models:
-  - name: order_items
+  - name: order_itemss
     columns:
       - name: order_item_id
         data_tests:
@@ -14,7 +14,7 @@ models:
 unit_tests:
   - name: test_supply_costs_sum_correctly
     description: "Test that the counts of drinks and food orders convert to booleans properly."
-    model: order_items
+    model: order_itemss
     given:
       - input: ref('stg_supplies')
         rows:
@@ -46,7 +46,7 @@ semantic_models:
       agg_time_dimension: ordered_at
     description: |
       Items contatined in each order. The grain of the table is one row per order item.
-    model: ref('order_items')
+    model: ref('order_itemss')
     entities:
       - name: order_item
         type: primary
