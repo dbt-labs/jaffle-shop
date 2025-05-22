@@ -4,10 +4,6 @@ sources:
   - name: ecom
     schema: raw
     description: E-commerce data for the Jaffle Shop
-    freshness:
-      warn_after:
-        count: 24
-        period: hour
     tables:
       - name: raw_customers
         description: One record per person who has purchased one or more items
