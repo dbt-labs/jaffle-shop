@@ -1,5 +1,4 @@
 SELECT
-    o.order_date,
     o.status,
     c.customer_id,
     SUM(o.amount) as total_amount
