@@ -1,0 +1,53 @@
+# this file contains semantic models and metrics definitions for dbt
+semantic_models:
+
+  # NOTE: This semantic model must be named 'metricflow_time_spine' explicitly for dbt 1.7 compatibility.
+  # In dbt 1.9+, this naming is no longer required.
+  - name: metricflow_time_spine
+    model: ref('metricflow_time_spine')
+    description: Time spine model required for semantic layer.
+    primary_entity: date_day
+
+    dimensions:
+      - name: date_day
+        type: time
+        type_params:
+          time_granularity: day
+        expr: date_day
+
+  - name: agg_orders
+    model: ref('agg_orders')
+    description: A model for order-level data with campaign links.
+
+    entities:
+      - name: date_status_customer_key
+        type: primary
+        expr: synthetic_key
+      - name: customer_id
+        type: foreign
+        expr: customer_id
+
+    measures:
+      - name: total_amount
+        description: Sum of order amounts.
+        agg: sum
+        expr: total_amount
+        agg_time_dimension: order_date
+
+    dimensions:
+      - name: order_date
+        type: time
+        type_params:
+          time_granularity: day
+        expr: order_date
+
+# see https://docs.getdbt.com/docs/build/metrics-overview
+metrics:
+  - name: total_amount
+    description: Sum of order revenue.
+    type: cumulative
+    type_params:
+      measure:
+        name: total_amount
+        join_to_timespine: true
+    label: Total Amount
