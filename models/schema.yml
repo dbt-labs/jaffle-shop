@@ -24,14 +24,6 @@ models:
         tests:
           - not_null
 
-  - name: metricflow_time_spine
-    time_spine:
-      standard_granularity_column: date_day # column for the standard grain of your table
-    columns:
-      - name: date_day
-        granularity: day # set granularity at column-level for standard_granularity_column
-
-
   - name: customers
     description: This table has basic information about a customer, as well as some derived facts based on a customer's orders
 
