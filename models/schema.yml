@@ -10,8 +10,6 @@ models:
         description: Date (UTC) of the order
         tests:
           - not_null
-      - name: status
-        description: Order status
       - name: customer_id
         description: Foreign key to the customers table
         tests:
@@ -19,7 +17,9 @@ models:
           - relationships:
               to: ref('customers')
               field: customer_id
-      - name: total_amount
-        description: Sum of the order amounts
-        tests:
-          - not_null
+      - name: total_order_cost
+        description: Sum of all order cost
+      - name: total_order_items_subtotal
+        description: Sum of all order items subtotal
+      - name: total_order_items_count
+        description: Sum of all order items count
