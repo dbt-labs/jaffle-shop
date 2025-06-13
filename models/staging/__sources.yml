@@ -2,19 +2,47 @@ version: 2
 
 sources:
   - name: ecom
-    schema: raw
+    database: raw
+    schema: ecom
     description: E-commerce data for the Jaffle Shop
     tables:
       - name: raw_customers
         description: One record per person who has purchased one or more items
+        freshness:
+          warn_after: { count: 20, period: day }
+          error_after: { count: 366, period: day }
+        loaded_at_field: created_at
+
       - name: raw_orders
         description: One record per order (consisting of one or more order items)
-        loaded_at_field: ordered_at
+        freshness:
+          warn_after: { count: 20, period: day }
+          error_after: { count: 366, period: day }
+        loaded_at_field: created_at
+
       - name: raw_items
         description: Items included in an order
+        freshness:
+          warn_after: { count: 20, period: day }
+          error_after: { count: 366, period: day }
+        loaded_at_field: created_at
+
       - name: raw_stores
-        loaded_at_field: opened_at
+        freshness:
+          warn_after: { count: 20, period: day }
+          error_after: { count: 366, period: day }
+        loaded_at_field: created_at
+
       - name: raw_products
         description: One record per SKU for items sold in stores
+        freshness:
+          warn_after: { count: 20, period: day }
+          error_after: { count: 366, period: day }
+        loaded_at_field: created_at
+
       - name: raw_supplies
         description: One record per supply per SKU of items sold in stores
+        freshness:
+          warn_after: { count: 20, period: day }
+          error_after: { count: 366, period: day }
+        loaded_at_field: created_at
