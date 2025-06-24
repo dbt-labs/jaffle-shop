@@ -95,12 +95,6 @@ metrics:
     type: simple
     type_params:
       measure: order_cost
-  - name: median_revenue
-    description: The median revenue for each order item. Excludes tax.
-    type: simple
-    label: Median Revenue
-    type_params:
-      measure: median_revenue
   - name: food_revenue
     description: The revenue from food in each order
     label: Food Revenue
