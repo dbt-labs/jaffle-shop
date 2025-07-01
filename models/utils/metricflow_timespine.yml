@@ -1,0 +1,15 @@
+models: 
+  - name: time_spine_hourly 
+    description: an hourly time spine
+    time_spine:
+      standard_granularity_column: date_hour 
+    columns:
+      - name: date_hour
+        granularity: hour 
+
+  - name: time_spine_daily
+    time_spine:
+      standard_granularity_column: date_day 
+    columns:
+      - name: date_day
+        granularity: day 
