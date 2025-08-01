@@ -1,0 +1,40 @@
+models:
+  - name: store_performance
+    description: Store performance overview data mart, offering key metrics for each store location. One row per store.
+    columns:
+      - name: location_id
+        description: The unique key of the store performance mart.
+        data_tests:
+          - not_null
+          - unique
+      - name: location_name
+        description: Name of the store location.
+      - name: tax_rate
+        description: Tax rate applicable at this store location.
+      - name: opened_date
+        description: The date when the store location was opened.
+      - name: total_orders
+        description: Total number of orders processed at this store.
+      - name: unique_customers
+        description: Count of unique customers who have placed orders at this store.
+      - name: total_revenue_pretax
+        description: Total revenue generated before tax at this store.
+      - name: total_tax_collected
+        description: Total tax amount collected at this store.
+      - name: total_revenue
+        description: Total revenue including tax generated at this store.
+      - name: avg_order_value
+        description: Average order value at this store.
+      - name: total_items_sold
+        description: Total number of individual items sold at this store.
+      - name: avg_item_price
+        description: Average price per item sold at this store.
+      - name: first_order_date
+        description: Date of the first order placed at this store.
+      - name: last_order_date
+        description: Date of the most recent order placed at this store.
+      - name: store_category
+        description: Performance category based on order volume (high_volume, medium_volume, low_volume, no_orders).
+        data_tests:
+          - accepted_values:
+              values: ["high_volume", "medium_volume", "low_volume", "no_orders"] 
