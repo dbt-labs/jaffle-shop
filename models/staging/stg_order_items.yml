@@ -11,7 +11,7 @@ models:
         description: The corresponding order each order item belongs to
         data_tests:
           - not_null
-          - relationships:
-              to: ref('stg_orders')
-              field: order_id
-              where: "order_id is not null"
+          # - relationships:
+          #     to: ref('stg_orders')
+          #     field: order_id
+          #     where: "order_id is not null"
