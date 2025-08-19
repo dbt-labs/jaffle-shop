@@ -1,0 +1,7 @@
+models:
+  - name: stg_locations #name1 of one of your parent's model here
+    description: Location mode
+    access: public
+  - name: stg_products #name2 of one of your parent's model here
+    description: Product model
+    access: public
