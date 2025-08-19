@@ -16,4 +16,6 @@ renamed as (
 
 )
 
-select * from renamed
+select *
+from renamed
+where order_id is not null
