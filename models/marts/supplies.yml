@@ -1,3 +1,15 @@
+version: 2
+
+models:
+  - name: supplies
+    description: "Supplies dimension table. The grain of the table is one row per supply and product combination."
+    columns:
+      - name: supply_uuid
+        description: "Primary key of the supplies table."
+        tests:
+          - not_null
+          - unique
+
 semantic_models:
   #The name of the semantic model.
   - name: supplies
