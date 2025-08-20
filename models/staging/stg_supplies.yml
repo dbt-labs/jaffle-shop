@@ -7,9 +7,6 @@ models:
     columns:
       - name: supply_uuid
         description: The unique key of our supplies per cost.
-        data_tests:
-          - not_null
-          - unique
         tests:
           - not_null
           - unique
