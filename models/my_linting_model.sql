@@ -5,7 +5,7 @@ with cte_example as (
         a.column3
     from
         schema.table_a as a
-    join
+    inner join
         schema.table_b as b
         on a.id = b.id
     where
