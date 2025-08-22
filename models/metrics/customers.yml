@@ -1,0 +1,16 @@
+semantic_models:
+  - name: customers
+    model: ref('customers')
+    entities:
+      - name: customer
+        expr: customer_id
+        type: primary
+    dimensions:
+      - name: last_ordered_at
+        type: time
+        type_params:
+          time_granularity: day
+    measures:
+      - name: min_order_value
+        agg: min
+        expr: order_total
