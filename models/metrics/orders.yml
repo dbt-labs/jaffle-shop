@@ -1,0 +1,34 @@
+semantic_models:
+  - name: orders
+    model: ref('orders')
+    entities:
+      - name: order
+        expr: order_id
+        type: primary
+    dimensions:
+      - name: is_drink_order
+        type: categorical
+    measures:
+      - name: median_revenue
+        description: the median revenue generated for each order item
+        agg: median
+        expr: product_price
+  
+metrics:
+  - name: "order_count"
+    label: "order_count"
+    description: the number of orders placed
+    type: simple
+    type_params: 
+      measure: ???
+  - name: "order_gross_profit"
+    description: "Gross profit from each order."
+    type: derived
+    label: "order_gross_profit"
+    type_params:
+      expr: revenue - cost
+      metrics:
+      - name: order_total
+        alias: revenue
+      - name: order_amount
+        alias: cost
