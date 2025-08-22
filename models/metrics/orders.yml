@@ -21,10 +21,10 @@ metrics:
     type: simple
     type_params: 
       measure: ???
-  - name: "order_gross_profit"
+  - name: "order_gross_profitt"
     description: "Gross profit from each order."
     type: derived
-    label: "order_gross_profit"
+    label: "order_gross_profitt"
     type_params:
       expr: revenue - cost
       metrics:
