@@ -120,6 +120,9 @@ metrics:
     label: Order Total
     type_params:
       measure: order_total
+    config:
+      meta:
+        owner: "finance_team"
   - name: large_orders
     description: "Count of orders with order total over 20."
     type: simple

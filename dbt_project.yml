@@ -37,3 +37,6 @@ models:
       +materialized: view
     marts:
       +materialized: table
+
+flags:
+  require_yaml_configuration_for_mf_time_spines: False
