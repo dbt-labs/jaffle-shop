@@ -1,0 +1,41 @@
+models:
+  - name: time_spine_daily
+    description: A time spine with one row per day.
+    time_spine:
+      standard_granularity_column: date_day
+    columns:
+      - name: date_day
+        granularity: day
+
+  - name: time_spine_yearly
+    description: time spine one row per house
+    time_spine:
+      standard_granularity_column: date_year
+    columns:
+      - name: date_year
+        granularity: year
+
+  - name: time_spine_minutest
+    description: time spine one row per house
+    time_spine:
+      standard_granularity_column: date_minute
+    columns:
+      - name: date_minute
+        granularity: minute
+
+  - name: fiscal_calendar
+    description: A custom fiscal calendar with fiscal year and fiscal week granularities.
+    time_spine:
+      standard_granularity_column: date_day
+      custom_granularities:
+        - name: fiscal_year
+          column_name: fiscal_year
+        - name: fiscal_week
+          column_name: fiscal_week
+    columns:
+      - name: date_day
+        granularity: day
+      - name: fiscal_year
+        description: "Custom fiscal year starting in October"
+      - name: fiscal_week
+        description: "Fiscal week, shifted by 1 week from standard calendar"

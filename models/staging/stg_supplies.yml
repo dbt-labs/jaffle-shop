@@ -4,9 +4,13 @@ models:
       List of our supply expenses data with basic cleaning and transformation applied.
 
       One row per supply cost, not per supply. As supply costs fluctuate they receive a new row with a new UUID. Thus there can be multiple rows per supply_id.
+    config:
+      tags: ['santi']
     columns:
       - name: supply_uuid
         description: The unique key of our supplies per cost.
+        tags: ['santi']
         data_tests:
           - not_null
-          - unique
+          - unique:
+              tags: ['santi']
