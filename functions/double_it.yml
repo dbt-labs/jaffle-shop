@@ -1,0 +1,10 @@
+functions:
+  - name: double_it
+    description: doubles the number you give it
+    arguments:
+      - name: value
+        data_type: float
+        description: a number
+    returns:
+      data_type: float
+      description: The doubled value
