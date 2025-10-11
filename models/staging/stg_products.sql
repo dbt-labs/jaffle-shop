@@ -20,7 +20,7 @@ renamed as (
 
 
         ---------- numerics
-        {{ cents_to_dollars('price') }} as product_price,
+        {{ function('cents_to_dollars') }}(price) as product_price,
 
         ---------- booleans
         coalesce(type = 'jaffle', false) as is_food_item,

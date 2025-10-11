@@ -1,0 +1,1 @@
+SELECT {{ cents_to_dollars('cents') }}
