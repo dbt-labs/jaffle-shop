@@ -26,8 +26,6 @@ vars:
 
 seeds:
   +schema: raw
-  jaffle-data:
-    +enabled: "{{ var('load_source_data', false) }}"
 
 models:
   jaffle_shop:
