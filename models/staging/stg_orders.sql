@@ -24,7 +24,8 @@ renamed as (
         {{ cents_to_dollars('order_total') }} as order_total,
 
         ---------- timestamps
-        {{ dbt.date_trunc('day','ordered_at') }} as ordered_at
+        {{ dbt.date_trunc('day','ordered_at') }} as ordered_at,
+        {{ function("add_days") }}(ordered_at, 7) as estimated_delivery_date
 
     from source
 

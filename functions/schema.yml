@@ -1,0 +1,12 @@
+functions:
+  - name: add_days
+    description: calculates a date by adding the specified number of days
+    arguments:
+      - name: datetime
+        data_type: timestamp
+        description: the datetime to add days to
+      - name: days
+        data_type: integer
+        description: the number of days to add
+    returns:
+      data_type: timestamp
