@@ -1,0 +1,1 @@
+SELECT CAST(ROUND({{ cents_to_dollars('cents') }}) AS numeric(16, 2))

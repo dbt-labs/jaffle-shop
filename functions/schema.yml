@@ -20,3 +20,13 @@ functions:
     returns:
       data_type: numeric(16, 2)
       description: the amount in dollars
+
+  - name: cents_to_dollars_rounded
+    description: converts a currency value in cents to dollars and rounds to the nearest dollar
+    arguments:
+      - name: cents
+        data_type: int
+        description: the amount in cents
+    returns:
+      data_type: numeric(16, 2)
+      description: the amount in dollars
