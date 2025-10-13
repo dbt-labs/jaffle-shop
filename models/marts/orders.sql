@@ -1,8 +1,20 @@
 with
 
 orders as (
-
-    select * from {{ ref('stg_orders') }}
+    -- We were having an issue with * in this model so we're doing it manually.
+    select
+        order_id,
+        location_id,
+        customer_id,
+        subtotal_cents,
+        tax_paid_cents,
+        order_total_cents,
+        subtotal,
+        tax_paid,
+        order_total,
+        ordered_at,
+        estimated_delivery_date
+    from {{ ref('stg_orders') }}
 
 ),
 
