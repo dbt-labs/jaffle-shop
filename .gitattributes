@@ -1,0 +1,6 @@
+seeds/jaffle-data/raw_items.csv filter=lfs diff=lfs merge=lfs -text
+seeds/jaffle-data/raw_orders.csv filter=lfs diff=lfs merge=lfs -text
+seeds/jaffle-data/raw_products.csv filter=lfs diff=lfs merge=lfs -text
+seeds/jaffle-data/raw_stores.csv filter=lfs diff=lfs merge=lfs -text
+seeds/jaffle-data/raw_supplies.csv filter=lfs diff=lfs merge=lfs -text
+seeds/jaffle-data/raw_customers.csv filter=lfs diff=lfs merge=lfs -text

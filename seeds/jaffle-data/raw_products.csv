@@ -1,11 +1,3 @@
-sku,name,type,price,description
-JAF-001,nutellaphone who dis?,jaffle,1199,nutella and banana jaffle
-JAF-002,doctor stew,jaffle,1199,house-made beef stew jaffle
-JAF-003,the krautback,jaffle,1229,lamb and pork bratwurst with house-pickled cabbage sauerkraut and mustard
-JAF-004,flame impala,jaffle,1449,"pulled pork and pineapple al pastor marinated in ghost pepper sauce, kevin parker's favorite! "
-JAF-005,mel-bun,jaffle,1279,"melon and minced beef bao, in a jaffle, savory and sweet"
-BEV-001,tangaroo,beverage,699,mango and tangerine smoothie
-BEV-002,chai and mighty,beverage,599,oatmilk chai latte with protein boost
-BEV-003,vanilla ice,beverage,699,iced coffee with house-made french vanilla syrup
-BEV-004,for richer or pourover ,beverage,749,daily selection of single estate beans for a delicious hot pourover
-BEV-005,adele-ade,beverage,499,"a kiwi and lime agua fresca, hello from the other side of thirst"
+version https://git-lfs.github.com/spec/v1
+oid sha256:888956a17cbba796fa3313c0b71235260b3886e5d4f62aa5d93bf510e041eff5
+size 923
