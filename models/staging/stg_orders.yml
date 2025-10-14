@@ -1,5 +1,7 @@
 models:
   - name: stg_orders
+    config:
+      event_time: ordered_at
     description: Order data with basic cleaning and transformation applied, one row per order.
     data_tests:
       - dbt_utils.expression_is_true:

@@ -1,5 +1,7 @@
 models:
   - name: order_items
+    config:
+      event_time: ordered_at
     columns:
       - name: order_item_id
         data_tests:
