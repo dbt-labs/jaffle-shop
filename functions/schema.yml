@@ -2,8 +2,8 @@ functions:
   - name: is_positive_int # required
     description: My UDF that determines if a string represents a positive (+) integer # required
     config:
-      schema: udf_schema
-      database: udf_db
+      schema: dbt_mwong
+      database: analytics
     arguments: # optional
       - name: a_string # required if arguments is specified
         data_type: string # required if arguments is specified
