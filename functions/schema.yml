@@ -1,11 +1,11 @@
 functions:
-    - name: is_positive_int
-      description: Returns 1 if a_string matches ^[0-9]+$, else 0
-      config:
-        runtime_version: "3.11"   # required
-        entry_point: main         # required
-      arguments:
-        - name: a_string
-          data_type: string
-      returns:
-        data_type: integer
+  - name: is_positive_int
+    description: Returns 1 if a_string matches ^[0-9]+$, else 0
+    config:
+      runtime_version: "3.11"    # required
+      entry_point: main          # required: points to the function above
+    arguments:
+      - name: a_string
+        data_type: string
+    returns:
+      data_type: integer
