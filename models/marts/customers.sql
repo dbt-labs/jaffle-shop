@@ -1,15 +1,11 @@
 with
 
 customers as (
-
     select * from {{ ref('stg_customers') }}
-
 ),
 
 orders as (
-
     select * from {{ ref('orders') }}
-
 ),
 
 customer_orders_summary as (
@@ -50,7 +46,7 @@ joined as (
 
     from customers
 
-    left join customer_orders_summary
+    join customer_orders_summary
         on customers.customer_id = customer_orders_summary.customer_id
 
 )

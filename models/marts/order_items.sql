@@ -1,11 +1,8 @@
 with
 
 order_items as (
-
-    select * from {{ ref('stg_order_items') }}
-
+    select * from {{ref ('stg_order_items') }}
 ),
-
 
 orders as (
 
@@ -19,6 +16,7 @@ products as (
 
 ),
 
+
 supplies as (
 
     select * from {{ ref('stg_supplies') }}
@@ -30,7 +28,7 @@ order_supplies_summary as (
     select
         product_id,
 
-        sum(supply_cost) as supply_cost
+        sum(distinct supply_cost) as supply_cost
 
     from supplies
 
@@ -63,4 +61,5 @@ joined as (
 
 )
 
-select * from joined
+select *,123 as new_column from joined
+where is_drink_item=true

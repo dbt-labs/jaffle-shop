@@ -1,12 +1,15 @@
 functions:
-  - name: is_positive_int # required
-    description: My UDF that determines if a string represents a positive (+) integer # required
-    config:
-      schema: dbt_mwong
-      database: analytics
-    arguments: # optional
-      - name: a_string # required if arguments is specified
-        data_type: string # required if arguments is specified
-        description: The string that I want to check if it's representing a positive integer (like "10") 
-    returns: # required
-      data_type: boolean # required
+    - name: is_positive_int # required
+      description: My UDF that returns 1 if a string represents a naked positive integer (like "10", "+8" is not allowed). # optional
+      config:
+        runtime_version: "3.11"   # required
+        entry_point: main         # required
+        schema: udf_schema
+        database: udf_db
+        volatility: deterministic  
+      arguments:                   # optional
+        - name: a_string           # required if arguments is specified
+          data_type: string        # required if arguments is specified
+          description: The string that I want to check if it's representing a positive integer (like "10") 
+      returns:                    # required
+        data_type: integer        # required
