@@ -5,9 +5,9 @@ version: "3.0.0"
 require-dbt-version: ">=1.5.0"
 
 dbt-cloud:
-  project-id: 275557 # Put your project id here
+  project-id: 70437463662187 # Put your project id here
 
-profile: default # Put your profile here
+profile: ben-moser # Put your profile here
 
 model-paths: ["models"]
 analysis-paths: ["analyses"]
@@ -22,7 +22,7 @@ clean-targets:
   - "dbt_packages"
 
 vars:
-  "dbt_date:time_zone": "America/Los_Angeles"
+  "dbt_date:time_zone": "America/New_York"
 
 seeds:
   jaffle_shop:
