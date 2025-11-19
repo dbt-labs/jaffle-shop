@@ -26,6 +26,8 @@ customer_orders_summary as (
         sum(orders.order_total) as lifetime_spend
 
     from orders
+    where orders.customer_id is not null
+    and orders.order_id is not null
 
     group by 1
 
