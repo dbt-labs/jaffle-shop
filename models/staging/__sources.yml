@@ -2,19 +2,26 @@ version: 2
 
 sources:
   - name: ecom
+    database: jaffle_shop
     schema: raw
     description: E-commerce data for the Jaffle Shop
     tables:
       - name: raw_customers
+        # identifier: customers
         description: One record per person who has purchased one or more items
       - name: raw_orders
+        # identifier: orders
         description: One record per order (consisting of one or more order items)
         loaded_at_field: ordered_at
       - name: raw_items
+        # identifier: items
         description: Items included in an order
       - name: raw_stores
+        # identifier: stores
         loaded_at_field: opened_at
       - name: raw_products
+        # identifier: products
         description: One record per SKU for items sold in stores
       - name: raw_supplies
+        # identifier: supplies
         description: One record per supply per SKU of items sold in stores
