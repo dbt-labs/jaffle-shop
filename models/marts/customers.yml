@@ -94,6 +94,8 @@ metrics:
 
 saved_queries:
   - name: customer_order_metrics
+    description: Order metrics
+    label: Customer Order Metrics
     query_params:
       metrics:
         - count_lifetime_orders
