@@ -2,7 +2,7 @@ with
 
 supplies as (
 
-    select * from {{ ref('stg_supplies') }}
+    select * from {{ ref('stg_supplies') }} limit 1000000
 
 )
 
