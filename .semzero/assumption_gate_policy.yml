@@ -1,0 +1,10 @@
+# SemZero Assumption Gate starter policy
+mode: shadow
+# Keep this focused: dbt Assumption Gate first. Future adapters should plug into
+# the same receipt/finding/node model, but are intentionally not enabled here.
+require_review_on:
+  - temporal_bucket
+  - incremental_filter
+  - join_cardinality
+  - enum_domain_closure
+  - null_default_fallback

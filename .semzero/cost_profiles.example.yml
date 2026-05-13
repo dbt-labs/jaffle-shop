@@ -1,0 +1,5 @@
+# Optional. Used only for cost/exposure context.
+default:
+  engine: snowflake
+  estimated_cost_per_gb_scanned_usd: 0.02
+  monthly_run_count: 30

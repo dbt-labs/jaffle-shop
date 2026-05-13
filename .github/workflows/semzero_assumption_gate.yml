@@ -1,0 +1,131 @@
+name: SemZero Assumption Gate
+
+on:
+  pull_request:
+    paths:
+      - 'models/**/*.sql'
+      - 'models/**/*.yml'
+      - 'models/**/*.yaml'
+      - 'macros/**/*.sql'
+      - 'snapshots/**/*.sql'
+      - 'seeds/**/*'
+      - 'dbt_project.yml'
+      - 'packages.yml'
+      - '.semzero/**'
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: semzero-assumption-gate-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: true
+
+env:
+  SEMZERO_ARTIFACT_DIR: data/semzero_assumption_gate
+
+jobs:
+  assumption-gate:
+    name: dbt PR Assumption Gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install SemZero and optional project dependencies
+        env:
+          SEMZERO_PACKAGE_SPEC: ${{ vars.SEMZERO_PACKAGE_SPEC }}
+        run: |
+          python -m pip install --upgrade pip
+
+          if [ -n "$SEMZERO_PACKAGE_SPEC" ]; then
+            pip install "$SEMZERO_PACKAGE_SPEC"
+          elif [ -f semzero/cli.py ] && grep -q "init-assumption-ci" semzero/cli.py; then
+            echo "SEMZERO_PACKAGE_SPEC not set; detected local SemZero source checkout."
+            pip install -e .
+          else
+            echo "::error::SemZero is not installed and SEMZERO_PACKAGE_SPEC is not configured."
+            echo "Set repository variable SEMZERO_PACKAGE_SPEC to a SemZero package source."
+            echo "Example: git+https://github.com/hiteshsundraaa/semzero-public-alpha-launch.git@main"
+            exit 1
+          fi
+
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          if [ -n "${{ vars.SEMZERO_EXTRA_PIP_PACKAGES }}" ]; then
+            pip install ${{ vars.SEMZERO_EXTRA_PIP_PACKAGES }}
+          fi
+
+      - name: Build dbt manifest when missing
+        run: |
+          if [ ! -f target/manifest.json ] && [ -f dbt_project.yml ]; then
+            if command -v dbt >/dev/null 2>&1; then
+              dbt deps || true
+              dbt compile || true
+            else
+              echo "dbt executable not found; skipping automatic manifest build."
+            fi
+          fi
+          if [ ! -f target/manifest.json ]; then
+            echo "::error::SemZero could not find target/manifest.json."
+            echo "Run dbt compile in CI, commit/provide a manifest artifact, or install the dbt adapter via SEMZERO_EXTRA_PIP_PACKAGES."
+            exit 1
+          fi
+
+      - name: Run SemZero Assumption Gate in shadow mode
+        run: |
+          OPTIONAL_FLAGS=""
+          if [ -f target/catalog.json ]; then OPTIONAL_FLAGS="$OPTIONAL_FLAGS --dbt-catalog target/catalog.json"; fi
+          if [ -f target/run_results.json ]; then OPTIONAL_FLAGS="$OPTIONAL_FLAGS --dbt-run-results target/run_results.json"; fi
+          if [ -f .semzero/cost_profiles.yml ]; then OPTIONAL_FLAGS="$OPTIONAL_FLAGS --cost-profiles .semzero/cost_profiles.yml"; fi
+          if [ -f .semzero/warehouse_history.csv ]; then OPTIONAL_FLAGS="$OPTIONAL_FLAGS --warehouse-history .semzero/warehouse_history.csv"; fi
+          if [ -f .semzero/business_criticality.yml ]; then OPTIONAL_FLAGS="$OPTIONAL_FLAGS --criticality-registry .semzero/business_criticality.yml"; fi
+          if [ -f .semzero/replay_fixtures.json ]; then OPTIONAL_FLAGS="$OPTIONAL_FLAGS --replay-fixtures .semzero/replay_fixtures.json"; fi
+          if [ -f .semzero/assumption_exceptions.jsonl ]; then OPTIONAL_FLAGS="$OPTIONAL_FLAGS --exceptions-file .semzero/assumption_exceptions.jsonl"; fi
+
+          semzero assumption-ci             --dbt-manifest target/manifest.json             --base-ref origin/${{ github.base_ref }}             --mode shadow             --project-dir .             --output-dir "$SEMZERO_ARTIFACT_DIR"             $OPTIONAL_FLAGS
+
+      - name: Upload SemZero evidence
+        if: ${{ always() && hashFiles('data/semzero_assumption_gate/**') != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: semzero-assumption-gate-${{ github.event.pull_request.number || github.sha }}
+          path: data/semzero_assumption_gate/
+          if-no-files-found: ignore
+
+      - name: Comment on PR with sticky SemZero review
+        if: ${{ always() && github.event_name == 'pull_request' && hashFiles('data/semzero_assumption_gate/comment.md') != '' }}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = fs.readFileSync('data/semzero_assumption_gate/comment.md', 'utf8');
+            const marker = '<!-- semzero-assumption-gate -->';
+            const artifactNote = '\n\n---\nSemZero ran in **shadow mode**. Evidence artifacts are attached to this workflow run.';
+            const finalBody = `${marker}\n${body}${artifactNote}`;
+            const comments = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              per_page: 100,
+            });
+            const existing = comments.data.find(c => c.body && c.body.includes(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body: finalBody,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: finalBody,
+              });
+            }

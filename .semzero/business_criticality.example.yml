@@ -1,0 +1,7 @@
+# Optional. Map dbt resources/exposures to business criticality.
+exposure.executive_revenue_dashboard:
+  severity: BOARD_CRITICAL
+  owner: finance
+model.finance_daily_revenue:
+  severity: HIGH
+  owner: finance
