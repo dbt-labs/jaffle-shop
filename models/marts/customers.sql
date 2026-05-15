@@ -56,3 +56,4 @@ joined as (
 )
 
 select * from joined
+-- SemZero dogfood no-op model change
