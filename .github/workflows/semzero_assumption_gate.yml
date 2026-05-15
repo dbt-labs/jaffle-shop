@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: hiteshsundraaa/semzero-public-alpha-launch@286d17e7cc96a9dad4e01a2b53c006744dce270d
+      - uses: hiteshsundraaa/semzero-public-alpha-launch@1cab3f7be8d632a73ce4b5e961c8ed364580667a
         with:
           mode: shadow
           run-dbt-compile: "true"
