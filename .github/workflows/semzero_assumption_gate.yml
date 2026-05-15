@@ -23,7 +23,7 @@ concurrency:
 
 env:
   SEMZERO_ARTIFACT_DIR: data/semzero_assumption_gate
-  DBT_PROFILES_DIR: .
+  DBT_PROFILES_DIR: .semzero
 
 jobs:
   assumption-gate:
