@@ -1,0 +1,8 @@
+{
+  "temporal_bucket": {
+    "rows": [
+      {"before_bucket": "2026-05-01", "after_bucket": "2026-04-30"},
+      {"before_bucket": "2026-05-01", "after_bucket": "2026-05-01"}
+    ]
+  }
+}

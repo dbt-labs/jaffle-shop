@@ -1,0 +1,9 @@
+# Minimal dbt profile for SemZero CI dogfooding.
+# Uses DuckDB so public/sample repos can compile without warehouse credentials.
+default:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: semzero_ci.duckdb
+      threads: 4

@@ -1,0 +1,26 @@
+name: SemZero Assumption Gate
+
+on:
+  pull_request:
+  push:
+    branches:
+      - semzero-dogfood-test
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  semzero:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hiteshsundraaa/semzero-public-alpha-launch@83a2332cdc2670a48e306f901a4db7d599f51350
+        with:
+          mode: shadow
+          run-dbt-compile: "true"
+          extra-pip-packages: "dbt-core dbt-duckdb"
+          dbt-profiles-dir: ".semzero"
+# trigger 20260516065354
