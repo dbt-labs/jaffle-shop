@@ -2,13 +2,10 @@ name: SemZero Assumption Gate
 
 on:
   pull_request:
-    paths:
-      - "models/**/*.sql"
-      - "models/**/*.yml"
-      - "models/**/*.yaml"
-      - "macros/**/*.sql"
-      - "dbt_project.yml"
-      - ".semzero/**"
+  push:
+    branches:
+      - semzero-dogfood-test
+  workflow_dispatch:
 
 permissions:
   contents: read
