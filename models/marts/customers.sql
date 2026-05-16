@@ -1,3 +1,6 @@
+
+with semzero_base_customers as (
+
 with
 
 customers as (
@@ -57,3 +60,30 @@ joined as (
 
 select * from joined
 -- SemZero dogfood no-op model change
+
+),
+
+semzero_customer_order_risk_features as (
+
+    select
+        *,
+        case
+            when count_lifetime_orders >= 3 then 'high_frequency'
+            when count_lifetime_orders = 2 then 'repeat'
+            when count_lifetime_orders = 1 then 'new'
+            else 'unknown'
+        end as semzero_customer_order_segment,
+
+        case
+            when lifetime_spend >= 100 then true
+            else false
+        end as semzero_high_value_customer_flag,
+
+        coalesce(lifetime_spend, 0) - coalesce(lifetime_tax_paid, 0) as semzero_lifetime_spend_after_tax
+
+    from semzero_base_customers
+
+)
+
+select *
+from semzero_customer_order_risk_features
