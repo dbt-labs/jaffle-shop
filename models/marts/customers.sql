@@ -87,3 +87,4 @@ semzero_customer_order_risk_features as (
 
 select *
 from semzero_customer_order_risk_features
+-- trigger SemZero model-change check 20260516050656
