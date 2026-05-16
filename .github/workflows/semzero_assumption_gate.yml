@@ -23,3 +23,4 @@ jobs:
           run-dbt-compile: "true"
           extra-pip-packages: "dbt-core dbt-duckdb"
           dbt-profiles-dir: ".semzero"
+# trigger 20260516065354
