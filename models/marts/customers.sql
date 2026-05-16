@@ -89,3 +89,4 @@ select *
 from semzero_customer_order_risk_features
 -- trigger SemZero model-change check 20260516050656
 -- trigger SemZero action check 20260516053224
+-- trigger correct fork PR SemZero check 20260516070716
