@@ -1,0 +1,38 @@
+models:
+  - name: sample_model
+    description: Sample model selecting all columns from the `seed` seed file.
+    columns:
+      - name: Article_ID
+        description: Unique identifier for the article.
+        data_tests:
+          - not_null
+      - name: Journal_Type
+        description: Publishing access type for the journal (e.g. Open Access, Subscription, Hybrid).
+      - name: Region
+        description: Region associated with the article.
+      - name: Submission_Date
+        description: Date the article was submitted.
+      - name: Review_Start_Date
+        description: Date the review started.
+      - name: Review_End_Date
+        description: Date the review ended.
+      - name: Production_Start_Date
+        description: Date production started.
+      - name: Production_End_Date
+        description: Date production ended.
+      - name: Publication_Date
+        description: Date the article was published.
+      - name: Reviewer_Count
+        description: Number of reviewers assigned to the article.
+      - name: Article_Type
+        description: Type/category of the article (e.g. Case Study, Research, Review, Editorial).
+      - name: Submission_to_review
+        description: Days between `Submission_Date` and `Review_Start_Date`.
+      - name: Review_duration
+        description: Days between `Review_Start_Date` and `Review_End_Date`.
+      - name: Review_to_production
+        description: Days between `Review_End_Date` and `Production_Start_Date`.
+      - name: Production_duration
+        description: Days between `Production_Start_Date` and `Production_End_Date`.
+      - name: Submission_to_publication
+        description: Days between `Submission_Date` and `Publication_Date`.
