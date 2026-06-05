@@ -13,7 +13,7 @@ unit_tests:
     description: "Check that opened_at timestamp is properly truncated to a date."
     model: stg_locations
     given:
-      - input: source('ecom', 'raw_stores')
+      - input: source('ecom', 'stores')
         rows:
           - {
               id: 1,
