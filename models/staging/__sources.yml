@@ -2,7 +2,8 @@ version: 2
 
 sources:
   - name: ecom
-    schema: raw
+    # This tells dbt to look in your dev dataset (dbt_mmaster) instead of a fixed "raw" dataset
+    schema: "{{ target.schema }}"
     description: E-commerce data for the Jaffle Shop
     tables:
       - name: raw_customers

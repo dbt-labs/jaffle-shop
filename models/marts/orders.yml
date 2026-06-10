@@ -28,6 +28,9 @@ models:
         description: A boolean indicating if this order included any food items.
       - name: is_drink_order
         description: A boolean indicating if this order included any drink items.
+      - name: is_large_order
+        description: A boolean indicating if this order total is at least 20 USD.
+
 
 unit_tests:
   - name: test_order_items_compute_to_bools_correctly
