@@ -50,7 +50,8 @@ compute_booleans as (
         order_items_summary.count_drink_items,
         order_items_summary.count_order_items,
         order_items_summary.count_food_items > 0 as is_food_order,
-        order_items_summary.count_drink_items > 0 as is_drink_order
+        order_items_summary.count_drink_items > 0 as is_drink_order,
+        orders.order_total >= 20 as is_large_order
 
     from orders
 
