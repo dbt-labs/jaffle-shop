@@ -29,6 +29,7 @@ seeds:
     +schema: raw
 
 models:
+  +static_analysis: strict
   jaffle_shop:
     staging:
       +materialized: view
