@@ -1,0 +1,9 @@
+models:
+  - name: metricflow_time_spine
+    description: Daily time spine for MetricFlow and semantic layer time-based joins and aggregations.
+    time_spine:
+      standard_granularity_column: date_day
+    columns:
+      - name: date_day
+        description: Base date column for daily granularity.
+        granularity: day
