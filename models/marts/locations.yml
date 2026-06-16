@@ -4,7 +4,7 @@ models:
       enabled: true
     description: |
       Location dimension table. The grain of the table is one row per location.
-    agg_time_dimension: opened_at
+    agg_time_dimension: opened_date
     columns:
       - name: location_id
         entity:
@@ -13,7 +13,7 @@ models:
       - name: location_name
         dimension:
           type: categorical
-      - name: opened_at
+      - name: opened_date
         dimension:
           type: time
         granularity: day

@@ -54,13 +54,18 @@ models:
         label: Food Revenue
         type: simple
         agg: sum
-        expr: case when is_food_item is true then product_price else 0 end
+        expr: product_price
+        filter: |
+          {{ Dimension('order_item__is_food_item') }} = true
       - name: drink_revenue
         description: The revenue from drinks in each order
         label: Drink Revenue
         type: simple
         agg: sum
-        expr: case when is_drink_item is true then product_price else 0 end
+        expr: product_price
+        filter: |
+          {{ Dimension('order_item__is_drink_item') }} = true
+
       - name: food_revenue_pct
         description: The % of order revenue from food.
         label: Food Revenue %
@@ -102,27 +107,27 @@ unit_tests:
     given:
       - input: ref('stg_supplies')
         rows:
-          - {product_id: 1, supply_cost: 4.50}
-          - {product_id: 2, supply_cost: 3.50}
-          - {product_id: 2, supply_cost: 5.00}
+          - { product_id: 1, supply_cost: 4.50 }
+          - { product_id: 2, supply_cost: 3.50 }
+          - { product_id: 2, supply_cost: 5.00 }
       - input: ref('stg_products')
         rows:
-          - {product_id: 1}
-          - {product_id: 2}
+          - { product_id: 1 }
+          - { product_id: 2 }
       - input: ref('stg_order_items')
         rows:
-          - {order_id: 1, product_id: 1}
-          - {order_id: 2, product_id: 2}
-          - {order_id: 2, product_id: 2}
+          - { order_id: 1, product_id: 1 }
+          - { order_id: 2, product_id: 2 }
+          - { order_id: 2, product_id: 2 }
       - input: ref('stg_orders')
         rows:
-          - {order_id: 1}
-          - {order_id: 2}
+          - { order_id: 1 }
+          - { order_id: 2 }
     expect:
       rows:
-        - {order_id: 1, product_id: 1, supply_cost: 4.50}
-        - {order_id: 2, product_id: 2, supply_cost: 8.50}
-        - {order_id: 2, product_id: 2, supply_cost: 8.50}
+        - { order_id: 1, product_id: 1, supply_cost: 4.50 }
+        - { order_id: 2, product_id: 2, supply_cost: 8.50 }
+        - { order_id: 2, product_id: 2, supply_cost: 8.50 }
 
 metrics:
   # Simple metrics
@@ -136,9 +141,11 @@ metrics:
       - name: order_cost
         alias: cost
 
-  #Cumulative Metrics
 saved_queries:
   - name: revenue_metrics
+    config:
+      cache:
+        enabled: false
     query_params:
       metrics:
         - revenue
@@ -150,3 +157,4 @@ saved_queries:
       - name: revenue_metrics
         config:
           export_as: table
+
