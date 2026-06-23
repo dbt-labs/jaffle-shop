@@ -3,7 +3,7 @@ models:
     columns:
       - name: order_item_id
         data_tests:  
-          - not_null
+          - not_null 
           - unique
         entity:
           type: primary
