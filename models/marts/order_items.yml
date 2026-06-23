@@ -158,3 +158,16 @@ saved_queries:
         config:
           export_as: table
 
+exposures:
+
+  - name: weekly_jaffle_orders
+    type: dashboard
+    maturity: high
+    url: https://bi.tool/dashboards/1
+    description: "Did someone say exponential growth?"
+    depends_on:
+      - ref('order_items')
+    owner:
+      name: Callum McData
+      email: data@jaffleshop.com
+
