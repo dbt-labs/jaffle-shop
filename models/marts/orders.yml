@@ -1,6 +1,11 @@
 models:
   - name: orders
-    description: "Order overview data mart, offering key details for each order inlcluding if it's a customer's first order and a food vs. drink item breakdown. One row per order. Order fact table. This table is at the order grain with one row per order.\n"
+    description: >
+      Order-level fact model with one row per order. Enriches `stg_orders` with
+      item-level rollups from `order_items`, including supply cost, item counts,
+      food vs. drink flags, and the customer's order sequence number. Use this
+      model for order-level reporting and metrics where the grain should stay at
+      one record per order.
     data_tests:
       - dbt_utils.expression_is_true:
           arguments:
@@ -10,14 +15,14 @@ models:
             expression: "order_total = subtotal + tax_paid"
     columns:
       - name: order_id
-        description: The unique key of the orders mart.
+        description: Primary key for the order record.
         data_tests:
           - not_null
           - unique
         entity:
           type: primary
       - name: customer_id
-        description: The foreign key relating to the customer who placed the order.
+        description: Foreign key to the customer who placed the order.
         data_tests:
           - relationships:
               arguments:
@@ -27,31 +32,32 @@ models:
           type: foreign
           name: customer
       - name: order_total
-        description: The total amount of the order in USD including tax.
+        description: Total order amount in USD, including subtotal and tax.
         dimension:
           type: categorical
           name: order_total_dim
       - name: ordered_at
-        description: The timestamp the order was placed at.
+        description: Timestamp when the order was placed.
         dimension:
           type: time
         granularity: day
       - name: order_cost
-        description: The sum of supply expenses to fulfill the order.
+        description: Total supply-side fulfillment cost for all items in the order.
       - name: is_food_order
-        description: A boolean indicating if this order included any food items.
+        description: True when the order contains at least one food item.
         dimension:
           type: categorical
       - name: is_drink_order
-        description: A boolean indicating if this order included any drink items.
-
+        description: True when the order contains at least one drink item.
         dimension:
           type: categorical
       - name: location_id
+        description: Foreign key to the store or location where the order was placed.
         entity:
           type: foreign
           name: location
       - name: customer_order_number
+        description: Sequential number of this order for the customer, ordered by `ordered_at` ascending.
         dimension:
           type: categorical
     semantic_model:
@@ -104,7 +110,6 @@ models:
         type: simple
         filter: |
           {{ Dimension('order_id__is_drink_order') }} = true
-
         agg: sum
         expr: 1
       - name: tax_paid
