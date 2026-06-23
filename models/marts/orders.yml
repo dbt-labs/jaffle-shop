@@ -29,6 +29,20 @@ models:
       - name: is_drink_order
         description: A boolean indicating if this order included any drink items.
 
+exposures:
+  - name: orders_dashboard
+    label: Orders Dashboard
+    type: dashboard
+    maturity: medium
+    description: >
+      Downstream dashboard built on the orders mart for order volume, revenue,
+      and order mix reporting.
+    depends_on:
+      - ref('orders')
+    owner:
+      name: Analytics Engineering
+      email: analytics@example.com
+
 unit_tests:
   - name: test_order_items_compute_to_bools_correctly
     description: "Test that the counts of drinks and food orders convert to booleans properly."
