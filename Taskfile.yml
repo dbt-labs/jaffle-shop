@@ -19,11 +19,12 @@ tasks:
 
   gen:
     cmds:
-      - source .venv/bin/activate && jafgen {{.YEARS}}
+      - source .venv/bin/activate && jafgen {{.YEARS}} && rm -rf seeds/jaffle-data && mv jaffle-data seeds
 
   seed:
     cmds:
-      - source .venv/bin/activate && dbt seed
+      - >
+        source .venv/bin/activate && dbt seed --full-refresh --vars '{"load_source_data": true}'
 
   clean:
     cmds:

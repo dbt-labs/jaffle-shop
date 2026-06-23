@@ -4,20 +4,22 @@ models:
       enabled: true
     description: |
       Location dimension table. The grain of the table is one row per location.
-    agg_time_dimension: opened_date
-    columns:
-      - name: location_id
-        entity:
-          type: primary
-          name: location
+    model: ref('locations')
+    defaults:
+      agg_time_dimension: opened_date
+    entities:
+      - name: location
+        type: primary
+        expr: location_id
+    dimensions:
       - name: location_name
-        dimension:
-          type: categorical
+        type: categorical
       - name: opened_date
-        dimension:
-          type: time
-        granularity: day
-    metrics:
+        expr: opened_date
+        type: time
+        type_params:
+          time_granularity: day
+    measures:
       - name: average_tax_rate
         description: Average tax rate.
         expr: tax_rate
