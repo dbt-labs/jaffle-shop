@@ -7,7 +7,7 @@ on:
 jobs:
   run_snowflake:
     name: dbt Cloud PR CI Snowflake
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     env:
       DBT_ACCOUNT_ID: 188483
@@ -32,7 +32,7 @@ jobs:
 
   run_bigquery:
     name: dbt Cloud PR CI BigQuery
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     env:
       DBT_ACCOUNT_ID: 188483
@@ -57,7 +57,7 @@ jobs:
 
   run_postgres:
     name: dbt Cloud PR CI Postgres
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     env:
       DBT_ACCOUNT_ID: 188483

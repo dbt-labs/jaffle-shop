@@ -1,6 +1,6 @@
 models:
   - name: orders
-    description: Order overview data mart, offering key details for each order inlcluding if it's a customer's first order and a food vs. drink item breakdown. One row per order.
+    description: Order overview data mart, offering key details for each order including if it's a customer's first order and a food vs. drink item breakdown. One row per order.
     data_tests:
       - dbt_utils.expression_is_true:
           expression: "order_items_subtotal = subtotal"
@@ -122,7 +122,7 @@ semantic_models:
 
 metrics:
   - name: order_total
-    description: Sum of total order amonunt. Includes tax + revenue.
+    description: Sum of total order amount. Includes tax + revenue.
     type: simple
     label: Order Total
     type_params:
