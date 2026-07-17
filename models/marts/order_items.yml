@@ -13,7 +13,7 @@ models:
 
 unit_tests:
   - name: test_supply_costs_sum_correctly
-    description: "Test that the counts of drinks and food orders convert to booleans properly."
+    description: "Test that supply costs sum correctly for each order item."
     model: order_items
     given:
       - input: ref('stg_supplies')
