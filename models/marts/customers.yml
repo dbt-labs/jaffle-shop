@@ -30,6 +30,89 @@ models:
           - accepted_values:
               values: ["new", "returning"]
 
+unit_tests:
+  - name: test_customer_type_and_lifetime_totals
+    description: >
+      Test the three customer shapes the mart has to handle: a customer with no
+      orders at all, a customer with exactly one order, and a repeat customer.
+
+      The single-order case pins the boundary in is_repeat_buyer
+      (count(distinct order_id) > 1), and the no-order case pins the left join
+      to customer_orders_summary. Neither shape is reachable from the existing
+      data tests: accepted_values on customer_type passes for any labelling as
+      long as both labels are spelled correctly, and the warehouse currently
+      holds no customer with zero orders, so an inner join here would produce
+      identical output today and silently drop those customers the first time
+      one exists.
+    model: customers
+    given:
+      - input: ref('stg_customers')
+        rows:
+          - { customer_id: "1", customer_name: "Never Ordered" }
+          - { customer_id: "2", customer_name: "Single Order" }
+          - { customer_id: "3", customer_name: "Repeat Buyer" }
+      - input: ref('orders')
+        rows:
+          - {
+              order_id: "a",
+              customer_id: "2",
+              ordered_at: "2024-01-05 10:00:00",
+              subtotal: 10.00,
+              tax_paid: 1.00,
+              order_total: 11.00,
+            }
+          - {
+              order_id: "b",
+              customer_id: "3",
+              ordered_at: "2024-01-10 10:00:00",
+              subtotal: 20.00,
+              tax_paid: 2.00,
+              order_total: 22.00,
+            }
+          - {
+              order_id: "c",
+              customer_id: "3",
+              ordered_at: "2024-02-20 10:00:00",
+              subtotal: 30.00,
+              tax_paid: 3.00,
+              order_total: 33.00,
+            }
+    expect:
+      rows:
+        - {
+            customer_id: "1",
+            customer_name: "Never Ordered",
+            count_lifetime_orders: null,
+            first_ordered_at: null,
+            last_ordered_at: null,
+            lifetime_spend_pretax: null,
+            lifetime_tax_paid: null,
+            lifetime_spend: null,
+            customer_type: "new",
+          }
+        - {
+            customer_id: "2",
+            customer_name: "Single Order",
+            count_lifetime_orders: 1,
+            first_ordered_at: "2024-01-05 10:00:00",
+            last_ordered_at: "2024-01-05 10:00:00",
+            lifetime_spend_pretax: 10.00,
+            lifetime_tax_paid: 1.00,
+            lifetime_spend: 11.00,
+            customer_type: "new",
+          }
+        - {
+            customer_id: "3",
+            customer_name: "Repeat Buyer",
+            count_lifetime_orders: 2,
+            first_ordered_at: "2024-01-10 10:00:00",
+            last_ordered_at: "2024-02-20 10:00:00",
+            lifetime_spend_pretax: 50.00,
+            lifetime_tax_paid: 5.00,
+            lifetime_spend: 55.00,
+            customer_type: "returning",
+          }
+
 semantic_models:
   - name: customers
     defaults:
