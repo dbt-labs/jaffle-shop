@@ -2,28 +2,11 @@ models:
   - name: products
     description: |
       Product dimension table. The grain of the table is one row per product.
-    semantic_model:
-      enabled: true
     columns:
       - name: product_id
-        entity:
-          type: primary
-          name: product
       - name: product_name
-        dimension:
-          type: categorical
       - name: product_type
-        dimension:
-          type: categorical
       - name: product_description
-        dimension:
-          type: categorical
       - name: is_food_item
-        dimension:
-          type: categorical
       - name: is_drink_item
-        dimension:
-          type: categorical
       - name: product_price
-        dimension:
-          type: categorical
