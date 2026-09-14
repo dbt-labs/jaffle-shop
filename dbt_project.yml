@@ -4,22 +4,13 @@ name: "jaffle_shop"
 version: "3.0.0"
 require-dbt-version: ">=1.12.0"
 
-dbt-cloud:
-  project-id: 275557 # Put your project id here
-
-profile: default # Put your profile here
+profile: jaffle_shop # Put your profile here
 
 model-paths: ["models"]
-analysis-paths: ["analyses"]
 test-paths: ["data-tests"]
 seed-paths: ["seeds"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
-
-target-path: "target"
-clean-targets:
-  - "target"
-  - "dbt_packages"
 
 seeds:
   jaffle_shop:
@@ -33,6 +24,3 @@ models:
       +materialized: view
     marts:
       +materialized: table
-
-flags:
-  require_generic_test_arguments_property: true
