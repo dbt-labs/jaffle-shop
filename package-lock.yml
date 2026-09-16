@@ -1,8 +1,8 @@
 packages:
-  - name: dbt_utils
-    package: dbt-labs/dbt_utils
-    version: 1.4.1
-  - git: https://github.com/dbt-labs/dbt-audit-helper.git
-    name: audit_helper
-    revision: 71817f0a7fa3df9f63adb90db0cf28f7423f720b
-sha1_hash: 3aaf3e8342baafa6224dab0ec91f82afe12cbaa5
+- git: https://github.com/dbt-labs/dbt-audit-helper.git
+  name: audit_helper
+  revision: 71817f0a7fa3df9f63adb90db0cf28f7423f720b
+- package: dbt-labs/dbt_utils
+  name: dbt_utils
+  version: 1.4.1
+sha1_hash: 3c011ae362899296aff7f9147e2c1078a1f85d45

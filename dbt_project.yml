@@ -2,7 +2,7 @@ config-version: 2
 
 name: "jaffle_shop"
 version: "3.0.0"
-require-dbt-version: ">=1.12.0"
+require-dbt-version: ">=2.0.0"
 
 dbt-cloud:
   project-id: 275557 # Put your project id here
@@ -33,6 +33,3 @@ models:
       +materialized: view
     marts:
       +materialized: table
-
-flags:
-  require_generic_test_arguments_property: true
