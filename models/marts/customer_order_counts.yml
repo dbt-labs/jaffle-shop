@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: customer_order_counts
+    description: "Number of orders and total spend per customer."
+    columns:
+      - name: customer_id
+        description: "Unique customer identifier."
+        tests:
+          - unique
+          - not_null
+      - name: order_count
+        description: "Total orders placed by the customer."
+        tests:
+          - not_null
