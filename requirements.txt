@@ -16,9 +16,10 @@ filelock==3.13.4
     # via virtualenv
 identify==2.5.35
     # via pre-commit
-idna==3.6
+idna==3.7
     # via requests
 jafgen==0.4.12
+    # via -r requirements.in
 markdown-it-py==3.0.0
     # via rich
 mdurl==0.1.2
@@ -30,6 +31,7 @@ numpy==1.26.4
 platformdirs==4.2.0
     # via virtualenv
 pre-commit==3.7.0
+    # via -r requirements.in
 pygments==2.17.2
     # via rich
 python-dateutil==2.9.0.post0
@@ -37,10 +39,9 @@ python-dateutil==2.9.0.post0
 pyyaml==6.0.1
     # via pre-commit
 requests==2.31.0
+    # via -r requirements.in
 rich==13.7.1
     # via typer
-setuptools==69.2.0
-    # via nodeenv
 shellingham==1.5.4
     # via typer
 six==1.16.0
