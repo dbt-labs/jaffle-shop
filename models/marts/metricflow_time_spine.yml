@@ -1,0 +1,8 @@
+models:
+  - name: metricflow_time_spine
+    description: Time spine model used by MetricFlow for temporal joins and aggregations.
+    time_spine:
+      standard_granularity_column: date_day
+    columns:
+      - name: date_day
+        granularity: day
