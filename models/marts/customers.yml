@@ -6,7 +6,6 @@ models:
     agg_time_dimension: first_ordered_at
     data_tests:
       - dbt_utils.expression_is_true:
-          arguments:
             expression: "lifetime_spend_pretax + lifetime_tax_paid = lifetime_spend"
     columns:
       - name: customer_id
