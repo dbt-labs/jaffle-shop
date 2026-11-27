@@ -1,0 +1,25 @@
+name: Snowflake connection test
+
+on:
+  workflow_dispatch:      
+  push:
+    branches: [main]
+
+jobs:
+  test-connection:
+    runs-on: ubuntu-latest
+    environment: prod
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: snowflakedb/snowflake-cli-action@v3
+        with:
+          use-oidc: true
+      - run: snow connection test -x
+        env:
+          SNOWFLAKE_ACCOUNT: ${{ vars.SNOWFLAKE_ACCOUNT }}
+          SNOWFLAKE_USER: ${{ vars.SNOWFLAKE_USER }}
+          SNOWFLAKE_ROLE: ${{ vars.SNOWFLAKE_ROLE }}
+          SNOWFLAKE_WAREHOUSE: ${{ vars.SNOWFLAKE_WAREHOUSE }}
