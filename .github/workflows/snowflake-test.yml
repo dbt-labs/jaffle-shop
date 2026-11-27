@@ -1,25 +1,39 @@
-name: Snowflake connection test
+name: dbt deploy and build
 
 on:
-  workflow_dispatch:      
+  workflow_dispatch:
   push:
     branches: [main]
 
 jobs:
-  test-connection:
+  deploy:
     runs-on: ubuntu-latest
     environment: prod
     permissions:
       id-token: write
       contents: read
+    env:
+      SNOWFLAKE_ACCOUNT: ${{ vars.SNOWFLAKE_ACCOUNT }}
+      SNOWFLAKE_USER: ${{ vars.SNOWFLAKE_USER }}
+      SNOWFLAKE_ROLE: ${{ vars.SNOWFLAKE_ROLE }}
+      SNOWFLAKE_WAREHOUSE: ${{ vars.SNOWFLAKE_WAREHOUSE }}
+      SNOWFLAKE_DATABASE: ${{ vars.SNOWFLAKE_DATABASE }}
+      SNOWFLAKE_SCHEMA: ${{ vars.SNOWFLAKE_SCHEMA }}
     steps:
       - uses: actions/checkout@v5
+
       - uses: snowflakedb/snowflake-actions@v3
         with:
           use-oidc: true
-      - run: snow connection test -x
-        env:
-          SNOWFLAKE_ACCOUNT: ${{ vars.SNOWFLAKE_ACCOUNT }}
-          SNOWFLAKE_USER: ${{ vars.SNOWFLAKE_USER }}
-          SNOWFLAKE_ROLE: ${{ vars.SNOWFLAKE_ROLE }}
-          SNOWFLAKE_WAREHOUSE: ${{ vars.SNOWFLAKE_WAREHOUSE }}
+
+      - name: Test connection
+        run: snow connection test -x
+
+      - name: Deploy dbt project
+        run: snow dbt deploy PLK_DBT --source . -x
+
+      - name: Load source data (seeds)
+        run: snow dbt execute -x PLK_DBT seed --vars '{"load_source_data": true}'
+
+      - name: Build models and run tests
+        run: snow dbt execute -x PLK_DBT build
