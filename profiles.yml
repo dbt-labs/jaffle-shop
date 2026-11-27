@@ -1,0 +1,11 @@
+default:
+  target: prod
+  outputs:
+    prod:
+      type: snowflake
+      account: not_needed
+      user: not_needed
+      role: PLK_POC_ROLE
+      warehouse: POWERLINK_WH
+      database: POWERLINK
+      schema: PUBLIC
