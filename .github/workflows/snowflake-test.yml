@@ -29,6 +29,15 @@ jobs:
       - name: Test connection
         run: snow connection test -x
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dbt packages
+        run: |
+          pip install dbt-core==1.9.4 dbt-snowflake~=1.9.0
+          dbt deps
+
       - name: Deploy dbt project
         run: snow dbt deploy PLK_DBT --source . -x
 
