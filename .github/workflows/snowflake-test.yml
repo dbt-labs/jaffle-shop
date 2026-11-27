@@ -41,9 +41,5 @@ jobs:
       - name: Deploy dbt project
         run: snow dbt deploy PLK_DBT --source . -x
 
-      - name: Load source data (seeds)
-        run: |
-          snow dbt execute -x PLK_DBT seed --vars '{"load_source_data": true}'
-
       - name: Build models and run tests
         run: snow dbt execute -x PLK_DBT build
