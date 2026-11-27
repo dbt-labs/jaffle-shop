@@ -16,7 +16,6 @@ models:
       - name: order_id
         data_tests:
           - relationships:
-              arguments:
                 to: ref('orders')
                 field: order_id
         entity:
