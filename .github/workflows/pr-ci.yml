@@ -1,0 +1,48 @@
+name: Incoming PR
+run-name: PR opened by ${{ github.actor }}
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    branches: [main]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  test-pr:
+    name: Build and test PR
+    runs-on: ubuntu-latest
+    environment: prod
+    env:
+      SNOWFLAKE_ACCOUNT: ${{ vars.SNOWFLAKE_ACCOUNT }}
+      SNOWFLAKE_USER: ${{ vars.SNOWFLAKE_USER }}
+      SNOWFLAKE_ROLE: ${{ vars.SNOWFLAKE_ROLE }}
+      SNOWFLAKE_WAREHOUSE: ${{ vars.SNOWFLAKE_WAREHOUSE }}
+      SNOWFLAKE_DATABASE: ${{ vars.SNOWFLAKE_DATABASE }}
+      SNOWFLAKE_SCHEMA: ${{ vars.SNOWFLAKE_SCHEMA }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: snowflakedb/snowflake-actions@v3
+        with:
+          use-oidc: true
+
+      - name: Test connection
+        run: snow connection test -x
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dbt packages
+        run: |
+          pip install dbt-core==1.9.4 dbt-snowflake~=1.9.0
+          dbt deps
+
+      - name: Deploy test dbt project
+        run: snow dbt deploy PLK_DBT_PR_TEST --source . -x
+
+      - name: Build and test in DEV
+        run: snow dbt execute -x PLK_DBT_PR_TEST build --target dev
