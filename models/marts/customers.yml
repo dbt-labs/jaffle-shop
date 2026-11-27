@@ -43,7 +43,6 @@ models:
         description: Options are 'new' or 'returning', indicating if a customer has ordered more than once or has only placed their first order to date.
         data_tests:
           - accepted_values:
-              arguments:
                 values: ["new", "returning"]
         dimension:
           type: categorical
