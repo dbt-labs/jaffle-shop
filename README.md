@@ -4,6 +4,7 @@ This is a sandbox project for exploring the basic functionality and latest featu
 
 This README will guide you through setting up the project on dbt Cloud. Working through this example should give you a good sense of how dbt Cloud works and what's involved with setting up your own project. We'll also _optionally_ cover some intermediate topics like setting up Environments and Jobs in dbt Cloud, working with a larger dataset, and setting up pre-commit hooks if you'd like.
 
+
 > [!NOTE]
 > **The `main` branch requires dbt v2.0.0 and higher** (`require-dbt-version: ">=2.0.0"` in `dbt_project.yml`). It uses the latest Semantic Layer YAML spec, with semantic models embedded in model YAML files, `type: simple` metrics replacing measures, and `type_params` promoted to top-level keys. If you're looking for the legacy project using the legacy YAML semantic layer spec, check out the [`jaffle-shop-old`](../../tree/jaffle-shop-old) branch.
 
